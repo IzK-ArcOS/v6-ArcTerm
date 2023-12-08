@@ -3,7 +3,7 @@ import { ARCOS_MODE } from "$ts/metadata";
 import { setAuthcode } from "$ts/server/authcode";
 import { addServer, getServer } from "$ts/server/multi";
 import { testConnection } from "$ts/server/test";
-import { Authenticate, doRememberedLogin } from "$ts/server/user/auth";
+import { Authenticate, doRememberedAuth } from "$ts/server/user/auth";
 import { UserName } from "$ts/stores/user";
 import { sleep } from "$ts/util";
 import { get } from "svelte/store";
@@ -18,7 +18,7 @@ export async function authPrompt(term: ArcTerm, usr = "", keep = false) {
 
   if (!api) api = await serverConnect(term);
 
-  await doRememberedLogin();
+  await doRememberedAuth();
 
   await sleep(250);
 
