@@ -1,4 +1,4 @@
-import { Wallpapers } from "../../userlogic/wallpapers/store";
+import { Wallpapers } from "$ts/stores/wallpaper";
 import type { Command } from "../interface";
 
 export const BgCommand: Command = {

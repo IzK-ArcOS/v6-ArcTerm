@@ -1,5 +1,5 @@
-import { getAuthcode } from "../../api/authcode";
-import { getAllServers } from "../../api/server";
+import { getAuthcode } from "$ts/server/authcode";
+import { getAllServers } from "$ts/server/multi";
 import type { Command } from "../interface";
 
 export const Servers: Command = {

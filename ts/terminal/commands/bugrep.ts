@@ -1,5 +1,5 @@
-import type { ReportOptions } from "../../reporting/interface";
-import { sendReport } from "../../reporting/main";
+import { sendReport } from "$ts/bugrep";
+import { ReportOptions } from "$types/bugrep";
 import { switchExists } from "../argv";
 import type { Command } from "../interface";
 

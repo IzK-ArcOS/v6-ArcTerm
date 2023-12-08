@@ -24,7 +24,7 @@ export const SoundBusCommand: Command = {
     term.std.writeColor("[play] - Plays the specified sound.", "aqua");
     term.std.writeColor("[stop] - Stops the current playing sound.", "aqua");
     term.std.writeColor("[list] - Lists playable sounds.\n\n", "aqua");
-    term.std.writeColor("Example: [soundbus] play ...", "blue")
+    term.std.writeColor("Example: [soundbus] play ...", "blue");
   },
   syntax: "SOUNDBUS <[subcommand]> <...[arguments]>",
 };

@@ -1,0 +1,28 @@
+div.app > div#target.terminal-renderer {
+  background-color: #000;
+  --fg: #ccc;
+  --clr-red-fg: #ff7e7e;
+  --clr-green-fg: #82ff80;
+  --clr-yellow-fg: #ffe073;
+  --clr-orange-fg: #ffad32;
+  --clr-blue-fg: #96d3ff;
+  --clr-aqua-fg: #79ffd0;
+  --clr-purple-fg: #d597ff;
+  --clr-gray-fg: #999;
+  padding: 5px;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+div.app > div#target.terminal-renderer::after {
+  background-color: var(--terminal-accent);
+  content: " ";
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  opacity: 0.15;
+  pointer-events: none;
+  transition: unset;
+}

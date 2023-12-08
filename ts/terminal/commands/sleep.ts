@@ -1,4 +1,4 @@
-import sleep from "../../sleep";
+import { sleep } from "$ts/util";
 import type { Command } from "../interface";
 
 export const SleepCommand: Command = {

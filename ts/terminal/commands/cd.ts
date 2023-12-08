@@ -1,5 +1,5 @@
-import { getDirectory } from "../../api/fs/directory";
-import type { UserDirectory } from "../../api/interface";
+import { readDirectory } from "$ts/server/fs/dir";
+import { UserDirectory } from "$types/fs";
 import type { Command } from "../interface";
 import type { ArcTerm } from "../main";
 
@@ -8,13 +8,13 @@ export const Cd: Command = {
   async exec(cmd, argv, term) {
     const path = `${term.path}/${argv.join(" ")}`;
 
-    const req = await getDirectory(path);
+    const directory = await readDirectory(path);
 
-    if (req == false) {
+    if (!directory) {
       return err(term, path);
     }
 
-    const dir = req as UserDirectory;
+    const dir = directory as UserDirectory;
 
     if (dir.scopedPath.includes("..")) return err(term, path);
 

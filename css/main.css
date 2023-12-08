@@ -1,0 +1,118 @@
+@import url("./arctermonly.css");
+
+div.terminal-renderer {
+  margin: 0;
+  white-space: break-spaces;
+  width: 100%;
+  height: 100%;
+  font-family: "Source Code Pro", monospace;
+  color: var(--fg);
+  font-size: 14px;
+}
+div.terminal-renderer,
+div.terminal-renderer * {
+  cursor: var(--cur-beam) !important;
+}
+
+div.terminal-renderer * {
+  margin: 0 !important;
+  padding: 0 !important;
+  background-color: transparent !important;
+  border: none !important;
+  font-family: "Source Code Pro", monospace;
+  font-size: 14px;
+}
+
+div.terminal-renderer div.userinput {
+  display: flex;
+}
+
+div.terminal-renderer div.userinput,
+div.terminal-renderer div.userinput * {
+  white-space: pre !important;
+}
+
+div.terminal-renderer div.userinput input {
+  width: unset;
+  min-width: unset;
+}
+
+div.terminal-renderer input {
+  color: var(--fg);
+}
+
+div.terminal-renderer div.part {
+  display: block; /* 
+  min-height: 17px; */
+}
+div.terminal-renderer div.part.inline {
+  display: inline-block;
+}
+
+div.terminal-renderer div.prompt {
+  width: 100%;
+  display: flex;
+}
+
+div.terminal-renderer div.prompt input {
+  margin-top: auto !important;
+  display: block;
+}
+
+div.terminal-renderer div.prompt input:focus {
+  color: var(--fg) !important;
+}
+div.terminal-renderer div.prompt input:disabled {
+  opacity: 1 !important;
+  color: var(--fg) !important;
+}
+
+div.terminal-renderer div.prompt div.inner {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  height: inherit;
+}
+
+div.terminal-renderer .clr-red {
+  color: var(--clr-red-fg);
+}
+div.terminal-renderer .clr-green {
+  color: var(--clr-green-fg);
+}
+div.terminal-renderer .clr-orange {
+  color: var(--clr-orange-fg);
+}
+div.terminal-renderer .clr-yellow {
+  color: var(--clr-yellow-fg);
+}
+div.terminal-renderer .clr-blue {
+  color: var(--clr-blue-fg);
+}
+div.terminal-renderer .clr-aqua {
+  color: var(--clr-aqua-fg);
+}
+div.terminal-renderer .clr-purple {
+  color: var(--clr-purple-fg);
+}
+
+div.terminal-renderer .clr-gray {
+  color: var(--clr-gray-fg);
+}
+
+div.app.fullscreen.rotate {
+  animation: rotation 600s infinite linear;
+  position: fixed;
+}
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+div.app {
+  overflow: hidden;
+}

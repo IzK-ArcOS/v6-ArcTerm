@@ -1,4 +1,4 @@
-import { fromBase64 } from "../../base64";
+import { fromBase64 } from "$ts/base64";
 import type { Command } from "../interface";
 
 export const Err: Command = {

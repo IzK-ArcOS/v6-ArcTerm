@@ -1,6 +1,4 @@
-import { get } from "svelte/store";
-import { previouslyLoaded } from "../../desktop/main";
-import { applyState } from "../../state/main";
+import { PrimaryState } from "$ts/states";
 import { getSwitches } from "../argv";
 import type { Command } from "../interface";
 
@@ -10,12 +8,12 @@ export const Desktop: Command = {
     if (term.app)
       return term.std.Error("You already are in the ArcOS desktop!");
 
-    if (get(previouslyLoaded) && !getSwitches(argv)["force"])
+    if (/* get(previouslyLoaded) &&  */ !getSwitches(argv)["force"])
       return term.std.Error(
         "The desktop may not be initialized twice in one instance. Please use [RESTART]."
       );
 
-    applyState("desktop");
+    PrimaryState.navigate("desktop");
   },
   description: "Switch to Desktop",
 };

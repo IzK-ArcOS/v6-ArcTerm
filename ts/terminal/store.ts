@@ -1,6 +1,6 @@
-import { AppList } from "./commands/applist";
+// import { AppList } from "./commands/applist";
 import { ArcFetch } from "./commands/arcfetch";
-import { ATConf } from "./commands/atconf";
+// import { ATConf } from "./commands/atconf";
 import { BgCommand } from "./commands/bg";
 import { BugRep } from "./commands/bugrep";
 import { Cd } from "./commands/cd";
@@ -13,35 +13,35 @@ import { Echo } from "./commands/echo";
 import { End } from "./commands/end";
 import { Err } from "./commands/err";
 import { Exec } from "./commands/exec";
-import { Exit } from "./commands/exit";
+// import { Exit } from "./commands/exit";
 import { Goose } from "./commands/goose";
 import { Goto } from "./commands/goto";
 import { Help } from "./commands/help";
 import { History } from "./commands/history";
 import { If } from "./commands/if";
 import { InDesktop } from "./commands/indesktop";
-import { Kill } from "./commands/kill";
+// import { Kill } from "./commands/kill";
 import { LogDump } from "./commands/logdump";
 import { Logout } from "./commands/logout";
 import { Ls } from "./commands/ls";
 import { Mkdir } from "./commands/mkdir";
-import { oa } from "./commands/oa";
-import { Open } from "./commands/open";
-import { Poke } from "./commands/poke";
+// import { oa } from "./commands/oa";
+// import { Open } from "./commands/open";
+// import { Poke } from "./commands/poke";
 import { Read } from "./commands/read";
 import { Reload } from "./commands/reload";
 import { RepInfo } from "./commands/repinfo";
 import { Reset } from "./commands/reset";
-import { Restart } from "./commands/restart";
+// import { Restart } from "./commands/restart";
 import { Rf } from "./commands/rf";
 import { Ri } from "./commands/ri";
 import { Rm } from "./commands/rm";
-import { Run } from "./commands/run";
+// import { Run } from "./commands/run";
 import { Servers } from "./commands/servers";
 import { Set } from "./commands/set";
-import { Shutdown } from "./commands/shutdown";
+// import { Shutdown } from "./commands/shutdown";
 import { SleepCommand } from "./commands/sleep";
-import { SoundBusCommand } from "./commands/soundbus";
+// import { SoundBusCommand } from "./commands/soundbus";
 import { StateCommand } from "./commands/state";
 import { SUD } from "./commands/sud";
 import { UDD } from "./commands/udd";
@@ -59,7 +59,7 @@ export const arcCommands: CommandStore = [
   Dir,
   Echo,
   Vars,
-  Exit,
+  //Exit,
   Help,
   History,
   Logout,
@@ -67,8 +67,8 @@ export const arcCommands: CommandStore = [
   Mkdir,
   Rm,
   Reload,
-  Restart,
-  Shutdown,
+  // Restart,
+  // Shutdown,
   InDesktop,
   Ver,
   Reset,
@@ -77,7 +77,7 @@ export const arcCommands: CommandStore = [
   Users,
   Read,
   Set,
-  SoundBusCommand,
+  // SoundBusCommand,
   Config,
   Exec,
   Verbose,
@@ -113,12 +113,11 @@ export const gooseBumpsCommands: CommandStore = [
 ];
 
 export const desktopSpecific: CommandStore = [
-  AppList,
-  ATConf,
-  Kill,
-  oa,
-  Open,
-  Run,
-
-  Poke,
+  // AppList,
+  // ATConf,
+  // Kill,
+  // oa,
+  // Open,
+  // Run,
+  // Poke,
 ];

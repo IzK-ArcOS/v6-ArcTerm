@@ -1,9 +1,9 @@
 import { get } from "svelte/store";
-import { writeFile } from "../../api/fs/file";
-import { LogStore } from "../../console";
-import { createReport } from "../../reporting/main";
 import { switchExists } from "../argv";
 import type { Command } from "../interface";
+import { createReport } from "$ts/bugrep";
+import { writeFile } from "$ts/server/fs/file";
+import { LogStore } from "$ts/console";
 
 export const RepInfo: Command = {
   keyword: "repinfo",
@@ -32,7 +32,7 @@ export const RepInfo: Command = {
     }
 
     data.userdata = "UserData {...}";
-    data.log = `LogStore {${get(LogStore).length}}`;
+    data.log = `LogStore {${LogStore.get().length}}`;
 
     const entries = Object.entries(data);
 

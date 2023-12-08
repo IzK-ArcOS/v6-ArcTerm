@@ -1,11 +1,10 @@
-import { restart } from "../../desktop/power";
-import { UserName } from "../../userlogic/interfaces";
+import { UserName } from "$ts/stores/user";
 import type { Command } from "../interface";
 
 export const Logout: Command = {
   keyword: "logout",
   exec(cmd, argv, term) {
-    if (term.app) return restart(true);
+    if (term.app) throw "Not Implemented: restarting from desktop"; // FIXME
 
     localStorage.removeItem("arcos-remembered-token");
     UserName.set(undefined);

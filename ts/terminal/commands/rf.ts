@@ -1,7 +1,7 @@
-import { getDirectory } from "../../api/fs/directory";
-import { readFile } from "../../api/fs/file";
-import { arrayToText } from "../../api/fs/file/conversion";
-import type { UserDirectory } from "../../api/interface";
+import { arrayToText } from "$ts/server/fs/convert";
+import { readDirectory } from "$ts/server/fs/dir";
+import { readFile } from "$ts/server/fs/file";
+import { UserDirectory } from "$types/fs";
 import type { Command } from "../interface";
 
 export const Rf: Command = {
@@ -9,22 +9,22 @@ export const Rf: Command = {
   async exec(cmd, argv, term) {
     const path = term.path as string;
     const fn = argv.join(" ").trim();
-    const dir = (await getDirectory(path)) as UserDirectory;
+    const dir = (await readDirectory(path)) as UserDirectory;
 
     if (!dir) return term.std.Error("Could not read the current directory!");
 
     for (let i = 0; i < dir.files.length; i++) {
-      const file = dir.files[i];
+      const partial = dir.files[i];
 
-      if (file.filename == fn) {
-        const contents = await readFile(file.scopedPath);
+      if (partial.filename == fn) {
+        const file = await readFile(partial.scopedPath);
 
-        if (!contents) return term.std.Error("Could not read the file.");
+        if (!file) return term.std.Error("Could not read the file.");
 
-        if (!file.mime.includes("text/"))
+        if (!partial.mime.includes("text/"))
           return term.std.Error("Not attempting to read non-text file.");
 
-        const d = arrayToText(contents);
+        const d = arrayToText(file.data);
 
         term.std.writeLine(d);
 

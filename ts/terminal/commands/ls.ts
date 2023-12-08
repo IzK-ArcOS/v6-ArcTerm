@@ -1,6 +1,6 @@
-import { getDirectory, sortDirectories } from "../../api/fs/directory";
-import { sortFiles } from "../../api/fs/file";
-import type { UserDirectory } from "../../api/interface";
+import { readDirectory } from "$ts/server/fs/dir";
+import { sortDirectories, sortFiles } from "$ts/server/fs/sort";
+import { UserDirectory } from "$types/fs";
 import type { Command } from "../interface";
 import type { ArcTerm } from "../main";
 
@@ -8,7 +8,7 @@ export const Ls: Command = {
   keyword: "ls",
   async exec(cmd, argv, term) {
     const path = term.path as string;
-    const dir = (await getDirectory(path)) as UserDirectory;
+    const dir = (await readDirectory(path)) as UserDirectory;
 
     if (argv[0]) return specific(argv[0], path, term);
     all(dir, term);
@@ -43,7 +43,7 @@ async function specific(path: string, currentPath: string, term: ArcTerm) {
     path = currentPath + "/" + path;
   }
 
-  const dir = (await getDirectory(path)) as UserDirectory;
+  const dir = (await readDirectory(path)) as UserDirectory;
   const subdirs = sortDirectories(dir.directories);
   const files = sortFiles(dir.files);
 

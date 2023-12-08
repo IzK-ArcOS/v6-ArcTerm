@@ -1,16 +1,16 @@
 import dayjs from "dayjs";
-import { getDirectory, sortDirectories } from "../../api/fs/directory";
-import { sortFiles } from "../../api/fs/file";
-import { formatBytes } from "../../api/fs/sizes";
-import type { UserDirectory } from "../../api/interface";
 import type { Command } from "../interface";
 import type { ArcTerm } from "../main";
+import { readDirectory } from "$ts/server/fs/dir";
+import { UserDirectory } from "$types/fs";
+import { sortFiles, sortDirectories } from "$ts/server/fs/sort";
+import { formatBytes } from "$ts/bytes";
 
 export const Dir: Command = {
   keyword: "dir",
   async exec(cmd, argv, term) {
     const path = term.path as string;
-    const dir = (await getDirectory(path)) as UserDirectory;
+    const dir = (await readDirectory(path)) as UserDirectory;
 
     if (argv[0]) return specific(argv[0], path, term);
     all(dir, term);
@@ -53,7 +53,7 @@ async function specific(path: string, currentPath: string, term: ArcTerm) {
     path = currentPath + "/" + path;
   }
 
-  const dir = (await getDirectory(path)) as UserDirectory;
+  const dir = (await readDirectory(path)) as UserDirectory;
   const subdirs = sortDirectories(dir.directories);
   const files = sortFiles(dir.files);
 

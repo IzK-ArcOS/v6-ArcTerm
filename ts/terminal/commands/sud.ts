@@ -1,7 +1,7 @@
 import { get } from "svelte/store";
-import { UserData } from "../../userlogic/interfaces";
 import type { Command } from "../interface";
-import { getJsonHierarchy, setJsonHierarchy } from "../../hierarchy";
+import { UserDataStore } from "$ts/stores/user";
+import { getJsonHierarchy } from "$ts/hierarchy";
 
 const BANNED = ["acc.enabled", "acc.admin", "devmode", "valid", "statusCode"];
 
@@ -19,7 +19,7 @@ export const SUD: Command = {
     if (BANNED.join("|").includes(hierarchy))
       return term.std.Error(`Not permitted to change data of [${hierarchy}]`);
 
-    const udata = get(UserData);
+    const udata = UserDataStore.get();
 
     const currentValue = getJsonHierarchy(udata, hierarchy);
 

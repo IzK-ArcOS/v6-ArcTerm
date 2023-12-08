@@ -1,7 +1,7 @@
-import { getDirectory } from "../../api/fs/directory";
-import { readFile } from "../../api/fs/file";
-import { arrayToBlob } from "../../api/fs/file/conversion";
-import type { UserDirectory } from "../../api/interface";
+import { arrayToBlob } from "$ts/server/fs/convert";
+import { readDirectory } from "$ts/server/fs/dir";
+import { readFile } from "$ts/server/fs/file";
+import { UserDirectory } from "$types/fs";
 import { getSwitches } from "../argv";
 import type { Command } from "../interface";
 import type { ArcTerm } from "../main";
@@ -44,17 +44,17 @@ export const Ri: Command = {
 async function displayFile(term: ArcTerm, fn: string, height: number) {
   const path = term.path as string;
 
-  const dir = (await getDirectory(path)) as UserDirectory;
+  const dir = (await readDirectory(path)) as UserDirectory;
 
   for (let i = 0; i < dir.files.length; i++) {
-    const file = dir.files[i];
+    const partial = dir.files[i];
 
-    if (file.filename == fn) {
-      const contents = await readFile(file.scopedPath);
+    if (partial.filename == fn) {
+      const file = await readFile(partial.scopedPath);
 
-      if (!contents) return term.std.Error("Could not read the file.");
+      if (!file) return term.std.Error("Could not read the file.");
 
-      const blob = arrayToBlob(contents, file.mime);
+      const blob = arrayToBlob(file.data, partial.mime);
 
       const url = URL.createObjectURL(blob);
 

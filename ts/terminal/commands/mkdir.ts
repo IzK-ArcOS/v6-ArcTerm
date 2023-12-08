@@ -1,4 +1,4 @@
-import { createDirectory } from "../../api/fs/directory";
+import { createDirectory } from "$ts/server/fs/dir";
 import type { Command } from "../interface";
 
 export const Mkdir: Command = {

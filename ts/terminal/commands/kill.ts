@@ -1,5 +1,3 @@
-import { closeWindow } from "../../applogic/events";
-import { getWindow } from "../../applogic/store";
 import type { Command } from "../interface";
 
 export const Kill: Command = {

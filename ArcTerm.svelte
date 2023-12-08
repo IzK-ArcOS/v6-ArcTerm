@@ -1,7 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import "../../css/arctermonly.css";
-  import "../../css/terminal/main.css";
+  import "./css/main.css";
   import { ArcTerm } from "./ts/terminal/main";
   import { arcTermModeIntro } from "./ts/terminal/mode";
   import { arcCommands } from "./ts/terminal/store";

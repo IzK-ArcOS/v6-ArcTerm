@@ -1,6 +1,6 @@
 import { get } from "svelte/store";
-import { applyState, CurrentState } from "../../state/main";
 import type { Command } from "../interface";
+import { PrimaryState } from "$ts/states";
 
 export const StateCommand: Command = {
   keyword: "state",
@@ -8,7 +8,7 @@ export const StateCommand: Command = {
     const state = argv.join(" ");
 
     if (!state) {
-      const s = CurrentState;
+      const s = PrimaryState.current.get();
 
       return term.std.writeColor(
         `Current state: [${s.name}] (ArcOS.state.[${s.key}])`,
@@ -16,7 +16,7 @@ export const StateCommand: Command = {
       );
     }
 
-    applyState(state, false);
+    PrimaryState.navigate(state);
   },
   syntax: "<[stateId]>",
   description: "for debugging -- forcefully change the state",

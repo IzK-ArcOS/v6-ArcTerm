@@ -1,12 +1,10 @@
-import { get } from "svelte/store";
-import { shutdown } from "../../desktop/power";
-import { applyState, CurrentState } from "../../state/main";
+import { PrimaryState } from "$ts/states";
 import type { Command } from "../interface";
 
 export const Shutdown: Command = {
   keyword: "shutdown",
   exec(cmd, argv, term) {
-    if (CurrentState.key == "desktop") return shutdown();
+    if (PrimaryState.current.get().key == "desktop") return shutdown();
 
     term.std.writeColor("[SHUTDOWN]: Terminating NOW.", "green");
 

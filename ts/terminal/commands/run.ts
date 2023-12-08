@@ -1,16 +1,14 @@
 import { get } from "svelte/store";
-import { getDirectory } from "../../api/fs/directory";
-import { openUserFile, openWithDialog } from "../../api/fs/open/main";
-import type { UserDirectory, PartialArcFile } from "../../api/interface";
-import { WindowStore } from "../../applogic/store";
 import type { Command } from "../interface";
+import { readDirectory } from "$ts/server/fs/dir";
+import { PartialArcFile, UserDirectory } from "$types/fs";
 
 export const Run: Command = {
   keyword: "run",
   async exec(cmd, argv, term) {
     const path = term.path as string;
     const fn = argv.join(" ").trim();
-    const dir = (await getDirectory(path)) as UserDirectory;
+    const dir = (await readDirectory(path)) as UserDirectory;
 
     for (let i = 0; i < dir.files.length; i++) {
       const file = dir.files[i];

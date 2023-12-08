@@ -1,5 +1,5 @@
-import { getDirectory } from "../../api/fs/directory";
-import type { UserDirectory } from "../../api/interface";
+import { readDirectory } from "$ts/server/fs/dir";
+import { UserDirectory } from "$types/fs";
 import type { Command } from "../interface";
 
 export const Exec: Command = {
@@ -7,7 +7,7 @@ export const Exec: Command = {
   async exec(cmd, argv, term) {
     const path = term.path as string;
     const fn = argv.join(" ").trim();
-    const dir = (await getDirectory(path)) as UserDirectory;
+    const dir = (await readDirectory(path)) as UserDirectory;
 
     for (let i = 0; i < dir.files.length; i++) {
       const file = dir.files[i];

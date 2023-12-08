@@ -1,13 +1,13 @@
 import { get } from "svelte/store";
-import { formatBytes } from "../../api/fs/sizes";
-import { getServer } from "../../api/server";
-import { isDesktop } from "../../desktop/app";
-import { getDeviceInfo } from "../../device/main";
-import { minArcAPI } from "../../env/main";
-import { CurrentState } from "../../state/main";
-import { UserName } from "../../userlogic/interfaces";
 import { Color, colors, Command } from "../interface";
 import type { ArcTerm } from "../main";
+import { getDeviceInfo } from "$ts/device";
+import { isDesktop } from "$ts/metadata/desktop";
+import { getServer } from "$ts/server/multi";
+import { formatBytes } from "$ts/bytes";
+import { UserName } from "$ts/stores/user";
+import { minArcAPI } from "$ts/env";
+import { PrimaryState } from "$ts/states";
 
 export const ArcFetch: Command = {
   keyword: "arcfetch",
@@ -30,11 +30,13 @@ async function getItems(a: ArcTerm) {
 
   return Object.entries({
     Server: `${getServer()} @ rev ${minArcAPI}`,
-    Username: get(UserName),
+    Username: UserName.get(),
     Processor: `${info.cpu.cores} cores`,
     GPU: `${info.gpu.vendor} ${info.gpu.model}`,
     Memory: `~ ${formatBytes(info.mem.kb)}`,
-    Mode: (desktop ? `Desktop` : `Browser`) + ` (state ${CurrentState.key})`,
+    Mode:
+      (desktop ? `Desktop` : `Browser`) +
+      ` (state ${PrimaryState.current.get().key})`,
     Reference: a.referenceId,
   });
 }

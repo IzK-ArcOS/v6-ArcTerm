@@ -1,4 +1,4 @@
-import { isDesktop } from "../../desktop/app";
+import { isDesktop } from "$ts/metadata/desktop";
 import type { Command } from "../interface";
 
 export const InDesktop: Command = {

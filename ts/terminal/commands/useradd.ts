@@ -1,4 +1,4 @@
-import { createUser } from "../../userlogic/mutate";
+import { createUser } from "$ts/server/user/mutate";
 import type { Command } from "../interface";
 
 export const UserAdd: Command = {
