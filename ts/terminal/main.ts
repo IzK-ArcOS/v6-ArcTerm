@@ -38,15 +38,15 @@ export class ArcTerm {
   onload: (term: ArcTerm) => void;
 
   constructor(
-    t: HTMLDivElement,
-    cS: CommandStore,
-    a: App,
-    cb?: (term: ArcTerm) => void
+    target: HTMLDivElement,
+    store: CommandStore,
+    app: App,
+    callback?: (term: ArcTerm) => void
   ) {
-    this.target = t;
-    this.commands = cS;
-    this.app = a;
-    this.onload = cb;
+    this.target = target;
+    this.commands = store;
+    this.app = app;
+    this.onload = callback;
 
     this.initialize();
   }
