@@ -54,7 +54,7 @@ async function displayFile(term: ArcTerm, fn: string, height: number) {
 
       if (!file) return term.std.Error("Could not read the file.");
 
-      const blob = arrayToBlob(file.data, partial.mime);
+      const blob = file.data;
 
       const url = URL.createObjectURL(blob);
 
