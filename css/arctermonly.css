@@ -1,5 +1,5 @@
-div.app > div#target.terminal-renderer {
-  background-color: #000;
+div.app div#target.terminal-renderer {
+  /* background-color: #000; */
   --fg: #ccc;
   --clr-red-fg: #ff7e7e;
   --clr-green-fg: #82ff80;
@@ -14,7 +14,7 @@ div.app > div#target.terminal-renderer {
   overflow-y: scroll;
 }
 
-div.app > div#target.terminal-renderer::after {
+div.app div#target.terminal-renderer::before {
   background-color: var(--terminal-accent);
   content: " ";
   position: absolute;
@@ -22,7 +22,8 @@ div.app > div#target.terminal-renderer::after {
   left: 0px;
   width: 100%;
   height: 100%;
-  opacity: 0.15;
+  opacity: 0.1;
   pointer-events: none;
   transition: unset;
+  z-index: -1;
 }

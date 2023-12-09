@@ -5,6 +5,8 @@ import { UserCache, UserName } from "$ts/stores/user";
 import { Log } from "$ts/console";
 import { getServer } from "$ts/server/multi";
 import { formatBytes } from "$ts/bytes";
+import { getFSQuota } from "$ts/server/fs/quota";
+import { ConnectedServer } from "$ts/stores/server";
 
 export async function arcTermModeIntro(a: ArcTerm) {
   Log(`ArcTerm ${a.referenceId}`, "Viewing ArcTermMode intro");
@@ -15,21 +17,18 @@ export async function arcTermModeIntro(a: ArcTerm) {
 
   const server = getServer();
   const user = UserName.get();
-  const quota = /* await getFSQuota() */ {
-    used: 0,
-    max: 0,
-    free: 0,
-    username: "ArcOS",
-  };
+  const quota = await getFSQuota();
 
   const used = formatBytes(quota.used);
   const max = formatBytes(quota.max);
   const percentage = ((100 / quota.max) * quota.used).toFixed(2);
-  //const connect = await apiCall(get(ConnectedServer), "connect", {});
-  //const platform = connect.platform;
+
+  console.log(ConnectedServer.get());
+
+  const platform = ConnectedServer.get().meta.name;
 
   disclaimer(a);
-  auth(a, user, "ArcOS");
+  auth(a, user, platform);
   api(a, server);
   usage(a, used, max, percentage);
 }

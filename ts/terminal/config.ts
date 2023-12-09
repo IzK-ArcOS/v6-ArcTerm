@@ -1,10 +1,10 @@
-import { get } from "svelte/store";
+import { Log } from "$ts/console";
+import { tryJsonConvert } from "$ts/json";
+import { blobToText } from "$ts/server/fs/convert";
+import { readFile, writeFile } from "$ts/server/fs/file";
+import { UserDataStore } from "$ts/stores/user";
 import type { ArcTermEnv } from "./env";
 import type { ArcTerm } from "./main";
-import { Log } from "$ts/console";
-import { UserDataStore } from "$ts/stores/user";
-import { readFile, writeFile } from "$ts/server/fs/file";
-import { arrayToText } from "$ts/server/fs/convert";
 
 export class ArcTermConfig {
   env: ArcTermEnv;
@@ -51,26 +51,21 @@ export class ArcTermConfig {
   }
 
   public async loadConfigFile() {
+    if (!UserDataStore.get()) return;
+
     Log(
       `ArcTerm ${this.term.referenceId}`,
       `config.loadConfigFile: Getting ${this.configPath}`
     );
 
-    if (!UserDataStore.get()) return;
-
     const file = await readFile(this.configPath);
 
     if (!file) return this.writeConfig();
 
-    const d = arrayToText(file.data);
+    const d = await blobToText(file.data);
+    const json = tryJsonConvert<object>(d);
 
-    let json;
-
-    try {
-      json = JSON.parse(d);
-    } catch {
-      json = {};
-    }
+    if (!json) return this.writeConfig();
 
     this.loadConfig(json);
   }

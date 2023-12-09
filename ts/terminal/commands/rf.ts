@@ -1,4 +1,4 @@
-import { arrayToText } from "$ts/server/fs/convert";
+import { blobToText } from "$ts/server/fs/convert";
 import { readDirectory } from "$ts/server/fs/dir";
 import { readFile } from "$ts/server/fs/file";
 import { UserDirectory } from "$types/fs";
@@ -24,7 +24,7 @@ export const Rf: Command = {
         if (!partial.mime.includes("text/"))
           return term.std.Error("Not attempting to read non-text file.");
 
-        const d = arrayToText(file.data);
+        const d = await blobToText(file.data);
 
         term.std.writeLine(d);
 
