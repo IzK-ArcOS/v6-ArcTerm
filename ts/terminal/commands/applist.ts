@@ -1,24 +1,17 @@
-import { get } from "svelte/store";
-import type { App } from "../../applogic/interface";
-import { getOpenedStore, WindowStore } from "../../applogic/store";
-import { switchExists } from "../argv";
+import { appLibrary } from "$ts/stores/apps";
+import { App } from "$types/app";
 import type { Command } from "../interface";
 import type { ArcTerm } from "../main";
-import { isPopulatable } from "../../applogic/checks";
 
 export const AppList: Command = {
   keyword: "applist",
   exec(cmd, argv, term) {
-    const store = switchExists(argv, "open")
-      ? getOpenedStore()
-      : get(WindowStore);
-
-    const showHidden = switchExists(argv, "all");
+    const store = Object.values(appLibrary.get());
 
     header(term);
 
     for (let i = 0; i < store.length; i++) {
-      if (isPopulatable(store[i]) || showHidden) output(term, store[i]);
+      output(term, store[i]);
     }
   },
   help(term) {
@@ -29,10 +22,10 @@ export const AppList: Command = {
 };
 
 function output(term: ArcTerm, app: App) {
-  const id = app.id.padEnd(30, " ");
-  const name = app.info.name.padEnd(30, " ");
-  const version = app.info.version;
-  term.std.writeColor(`${name}[${id}]${version}`, "gray");
+  const aid = app.id.padEnd(30, " ");
+  const name = app.metadata.name.padEnd(30, " ");
+  const version = app.metadata.version;
+  term.std.writeColor(`${name}[${aid}]${version}`, "gray");
 }
 
 function header(term: ArcTerm) {

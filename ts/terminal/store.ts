@@ -1,4 +1,4 @@
-// import { AppList } from "./commands/applist";
+import { AppList } from "./commands/applist";
 import { ArcFetch } from "./commands/arcfetch";
 // import { ATConf } from "./commands/atconf";
 import { BgCommand } from "./commands/bg";
@@ -20,7 +20,7 @@ import { Help } from "./commands/help";
 import { History } from "./commands/history";
 import { If } from "./commands/if";
 import { InDesktop } from "./commands/indesktop";
-// import { Kill } from "./commands/kill";
+import { Kill } from "./commands/kill";
 import { LogDump } from "./commands/logdump";
 import { Logout } from "./commands/logout";
 import { Ls } from "./commands/ls";
@@ -113,9 +113,9 @@ export const gooseBumpsCommands: CommandStore = [
 ];
 
 export const desktopSpecific: CommandStore = [
-  // AppList,
+  AppList,
   // ATConf,
-  // Kill,
+  Kill,
   // oa,
   // Open,
   // Run,

@@ -1,24 +1,23 @@
+import { killProcess } from "$ts/apps/process";
+import { tryJsonConvert } from "$ts/json";
 import type { Command } from "../interface";
 
 export const Kill: Command = {
   keyword: "kill",
   exec(cmd, argv, term) {
-    const appId = argv[0];
+    const pid = tryJsonConvert<number>(argv[0]);
 
-    if (!appId) return term.std.Error("Missing application ID.");
+    if (!pid) return term.std.Error("Missing process ID.");
 
-    const window = getWindow(appId);
+    const killed = killProcess(pid);
 
-    if (!window) return term.std.Error(`${appId}: app not found.`);
+    if (!killed) return term.std.Error(`Process with PID ${pid} doesn't exist.`)
 
-    closeWindow(appId);
-
-    if (term && term.std) term.std.writeLine(`Closed ${window.info.name}`);
+    if (term && term.std) term.std.writeLine(`Closed ${pid}`);
   },
   help(term) {
-    term.std.writeColor("[NOTE]: Capitalization matters.", "yellow");
-    term.std.writeColor("Example: [kill] SettingsApp", "blue");
+    term.std.writeColor("Example: [kill] 389176", "blue");
   },
-  description: "Terminate a program",
-  syntax: `"<[appId]>"`,
+  description: "Terminate a process",
+  syntax: `"<[pid]>"`,
 };
