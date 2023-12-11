@@ -1,7 +1,6 @@
-import { get } from "svelte/store";
-import type { Command } from "../interface";
+import { getJsonHierarchy, setJsonHierarchy } from "$ts/hierarchy";
 import { UserDataStore } from "$ts/stores/user";
-import { getJsonHierarchy } from "$ts/hierarchy";
+import type { Command } from "../interface";
 
 const BANNED = ["acc.enabled", "acc.admin", "devmode", "valid", "statusCode"];
 
@@ -38,7 +37,7 @@ export const SUD: Command = {
 
     setJsonHierarchy(udata, hierarchy, newValue);
 
-    UserData.set(udata);
+    UserDataStore.set(udata);
 
     term.std.writeColor(
       `Wrote ["${newValue}"] to [UserData.${hierarchy}]`,

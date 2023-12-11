@@ -23,8 +23,6 @@ export async function arcTermModeIntro(a: ArcTerm) {
   const max = formatBytes(quota.max);
   const percentage = ((100 / quota.max) * quota.used).toFixed(2);
 
-  console.log(ConnectedServer.get());
-
   const platform = ConnectedServer.get().meta.name;
 
   disclaimer(a);
