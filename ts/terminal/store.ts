@@ -26,7 +26,7 @@ import { Logout } from "./commands/logout";
 import { Ls } from "./commands/ls";
 import { Mkdir } from "./commands/mkdir";
 // import { oa } from "./commands/oa";
-// import { Open } from "./commands/open";
+import { Open } from "./commands/open";
 // import { Poke } from "./commands/poke";
 import { Read } from "./commands/read";
 import { Reload } from "./commands/reload";
@@ -117,7 +117,7 @@ export const desktopSpecific: CommandStore = [
   // ATConf,
   Kill,
   // oa,
-  // Open,
+  Open,
   // Run,
   // Poke,
 ];

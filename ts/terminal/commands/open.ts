@@ -1,23 +1,22 @@
-import { isDisabled } from "../../applogic/checks";
-import { openWindow } from "../../applogic/events";
-import { getWindow } from "../../applogic/store";
+import { spawnProcess } from "$ts/apps/process";
+import { tryJsonConvert } from "$ts/json";
+import { appLibrary } from "$ts/stores/apps";
 import type { Command } from "../interface";
 
 export const Open: Command = {
   keyword: "open",
   exec(cmd, argv, term) {
-    const appId = argv[0];
+    const id = tryJsonConvert<string>(argv[0]);
 
-    const window = getWindow(appId);
+    if (!id) return term.std.Error("Missing process ID.");
 
-    if (isDisabled(appId))
-      return term.std.Warning(`Not opening disabled app [${appId}]`);
+    const library = appLibrary.get();
 
-    if (!window) return term.std.Error(`${appId}: app not found.`);
+    if (!library[id]) return term.std.Error(`${id}: app not found.`);
 
-    openWindow(appId, true);
+    spawnProcess(id);
 
-    term.std.writeColor(`Opened [${window.info.name}]`, "purple");
+    term.std.writeColor(`Opened [${library[id].metadata.name}]`, "purple");
   },
   help(term) {
     term.std.writeColor("[NOTE]: Capitalization matters.", "yellow");
