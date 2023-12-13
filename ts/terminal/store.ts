@@ -44,6 +44,7 @@ import { SleepCommand } from "./commands/sleep";
 // import { SoundBusCommand } from "./commands/soundbus";
 import { StateCommand } from "./commands/state";
 import { SUD } from "./commands/sud";
+import { TasksCommand } from "./commands/tasks";
 import { UDD } from "./commands/udd";
 import { UserAdd } from "./commands/useradd";
 import { Users } from "./commands/users";
@@ -118,6 +119,7 @@ export const desktopSpecific: CommandStore = [
   Kill,
   // oa,
   Open,
+  TasksCommand,
   // Run,
   // Poke,
 ];

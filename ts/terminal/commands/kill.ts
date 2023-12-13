@@ -11,13 +11,13 @@ export const Kill: Command = {
 
     const killed = killProcess(pid);
 
-    if (!killed) return term.std.Error(`Process with PID ${pid} doesn't exist.`)
+    if (!killed) return term.std.Error(`Process [${pid}] doesn't exist.`)
 
-    if (term && term.std) term.std.writeLine(`Closed ${pid}`);
+    if (term && term.std) term.std.Info(`Success: [${pid}] has been terminated.`);
   },
   help(term) {
     term.std.writeColor("Example: [kill] 389176", "blue");
   },
   description: "Terminate a process",
-  syntax: `"<[pid]>"`,
+  syntax: `<[pid]>`,
 };

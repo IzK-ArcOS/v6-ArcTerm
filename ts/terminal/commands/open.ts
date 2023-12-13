@@ -6,7 +6,7 @@ import type { Command } from "../interface";
 export const Open: Command = {
   keyword: "open",
   exec(cmd, argv, term) {
-    const id = tryJsonConvert<string>(argv[0]);
+    const id = argv[0];
 
     if (!id) return term.std.Error("Missing process ID.");
 
