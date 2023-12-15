@@ -7,7 +7,7 @@ export const Goose: Command = {
   keyword: "goose",
   async exec(c, argv, term) {
     if (argv[0] != "bumps") {
-      await Default.exec(c, argv, term);
+      await Default.exec(c, argv, term, {});
 
       return;
     }
@@ -69,7 +69,7 @@ async function gooses(term: ArcTerm) {
 
   const cmd =
     Object.values(options)[
-      await term.std.select(Object.keys(options), "orange")
+    await term.std.select(Object.keys(options), "orange")
     ];
 
   if (cmd == "$cancel") return;

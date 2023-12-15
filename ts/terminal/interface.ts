@@ -7,12 +7,25 @@ export interface Command {
   help?: HelpMethod;
   syntax?: string;
   hidden?: boolean;
+  flags?: Flag[];
 }
+
+export interface Flag {
+  keyword: string;
+  required?: boolean;
+  value?: {
+    name: string;
+    type: "string" | "number" | "boolean";
+  }
+}
+
+export type Arguments = Record<string, number | boolean | string>;
 
 export type CommandMethod = (
   cmd: string,
   argv: string[],
-  term: ArcTerm
+  term: ArcTerm,
+  flags: Arguments
 ) => false | Promise<false> | any;
 export type HelpMethod = (term: ArcTerm) => any;
 

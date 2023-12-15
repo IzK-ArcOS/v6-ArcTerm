@@ -1,3 +1,5 @@
+import { Arguments } from "./interface";
+
 export function getSwitches(argv: string[]) {
   let switches: { [key: string]: string } = {};
   let currentArg = "";
@@ -21,6 +23,26 @@ export function getSwitches(argv: string[]) {
   }
 
   return switches;
+}
+
+export function parseFlags(args: string): Arguments {
+  const regex = /--(?<name>[a-z]+)(?:=(?<value>.*?)(?: |$)|)/gm; //--name=?value
+  const matches: RegExpMatchArray[] = [];
+
+  let match: RegExpExecArray | null;
+
+  while ((match = regex.exec(args))) {
+    matches.push(match);
+  }
+
+  const result = {};
+  const arglist = matches.map((match) => { return { name: match.groups.name, value: match.groups.value } })
+
+  for (let i = 0; i < arglist.length; i++) {
+    result[arglist[i].name] = arglist[i].value;
+  }
+
+  return result
 }
 
 export function switchExists(argv: string[], key: string): boolean {

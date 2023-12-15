@@ -1,24 +1,30 @@
+import { isPopulatable } from "$ts/apps/utils";
 import { appLibrary } from "$ts/stores/apps";
 import { App } from "$types/app";
+import { switchExists } from "../argv";
 import type { Command } from "../interface";
 import type { ArcTerm } from "../main";
 
 export const AppList: Command = {
   keyword: "applist",
   exec(cmd, argv, term) {
+    const all = switchExists(argv, "all");
     const store = Object.values(appLibrary.get());
 
     header(term);
 
     for (let i = 0; i < store.length; i++) {
+      if (!isPopulatable(store[i]) && !all) continue;
+
       output(term, store[i]);
     }
   },
   help(term) {
-    term.std.writeColor("Example: [applist] --open", "blue");
+    term.std.writeLine("ArcOS applications are stored in the App Library. The `applist`\ncommand displays this library. Each library item has an ID\nalong with its App data.\n\nBy default, only non-hidden applications are displayed in this table.\nUse the `--all` option to override this condition.\n ")
+    term.std.writeColor("Example: [applist] --all", "blue");
   },
   description: "List all- or opened ArcOS apps.",
-  syntax: "([opened?])",
+  syntax: "(--[all?])",
 };
 
 function output(term: ArcTerm, app: App) {

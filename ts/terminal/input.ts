@@ -3,6 +3,7 @@ import type { ArcTermEnv } from "./env";
 import type { ArcTerm } from "./main";
 import { Log } from "$ts/console";
 import { sleep } from "$ts/util";
+import { parseFlags } from "./argv";
 
 export class ArcTermInput {
   lockInput = false;
@@ -131,6 +132,8 @@ export class ArcTermInput {
       if (cmd.trim() == "exit" && file) return false;
 
       if (cmd.startsWith("#") || !cmd) continue;
+
+      console.log(parseFlags(str));
 
       args.shift();
 

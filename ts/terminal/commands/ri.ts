@@ -38,7 +38,11 @@ export const Ri: Command = {
     );
   },
   description: "Display image from ArcFS or URL",
-  syntax: "(--[file]) <[path]> (--[url]) <[url]> (--[height]) <[height]>",
+  flags: [
+    { keyword: "file", value: { name: "path", type: "string" }, },
+    { keyword: "url", value: { name: "url", type: "string" } },
+    { keyword: "height", value: { name: "pixels", type: "number" } },
+  ]
 };
 
 async function displayFile(term: ArcTerm, fn: string, height: number) {

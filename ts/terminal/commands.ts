@@ -1,6 +1,7 @@
 import { Log } from "$ts/console";
+import { parseFlags } from "./argv";
 import { Default } from "./commands/default";
-import type { Command } from "./interface";
+import type { Command, Flag } from "./interface";
 import type { ArcTerm } from "./main";
 export class ArcTermCommandHandler {
   term: ArcTerm;
@@ -32,7 +33,7 @@ export class ArcTermCommandHandler {
     if (this.term.input && this.term.input.current)
       this.term.input.current.disabled = true;
 
-    const result = await command.exec(cmd, args, this.term);
+    const result = await command.exec(cmd, args, this.term, parseFlags(args.join(" ")));
 
     if (result == false) {
       return false;
@@ -58,5 +59,26 @@ export class ArcTermCommandHandler {
     }
 
     return Default;
+  }
+
+  public compileFlagStr(command: Command): string {
+    const flags = command.flags || [];
+
+    let result = `${command.keyword} `;
+
+    if (!flags.length) return result;
+
+    for (let i = 0; i < flags.length; i++) {
+      const flag = flags[i];
+      const prefix = "--";
+      const name = `[${flag.keyword}]`;
+      const needsValue = !!flag.value;
+      const q = needsValue && flag.value.type == "string" ? '"' : ""
+      const suffix = needsValue ? `=${q}[${flag.value.name}]${q}` : "";
+
+      result += `${prefix}${name}${suffix} `;
+    }
+
+    return result;
   }
 }
