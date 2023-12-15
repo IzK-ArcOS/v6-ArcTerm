@@ -27,7 +27,6 @@ import { Ls } from "./commands/ls";
 import { Mkdir } from "./commands/mkdir";
 // import { oa } from "./commands/oa";
 import { Open } from "./commands/open";
-// import { Poke } from "./commands/poke";
 import { Read } from "./commands/read";
 import { Reload } from "./commands/reload";
 import { RepInfo } from "./commands/repinfo";
@@ -121,5 +120,4 @@ export const desktopSpecific: CommandStore = [
   Open,
   TasksCommand,
   // Run,
-  // Poke,
 ];
