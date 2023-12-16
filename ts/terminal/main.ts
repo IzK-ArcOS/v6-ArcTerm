@@ -57,7 +57,7 @@ export class ArcTerm {
 
     Log(`ArcTerm ${this.referenceId}`, `Initializing new ArcTerm`);
 
-    if (!this.target) throw "Can't initialize ArcTerm without a valid target";
+    if (!this.target) throw new Error("Can't initialize ArcTerm without a valid target");
 
     this.target.innerText = `Starting ArcTerm v${ArcOSVersion}...`;
 

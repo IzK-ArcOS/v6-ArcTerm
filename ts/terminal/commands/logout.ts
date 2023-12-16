@@ -4,7 +4,7 @@ import type { Command } from "../interface";
 export const Logout: Command = {
   keyword: "logout",
   exec(cmd, argv, term) {
-    if (term.app) throw "Not Implemented: restarting from desktop"; // FIXME
+    if (term.app) throw new Error("Not Implemented: restarting from desktop"); // FIXME
 
     localStorage.removeItem("arcos-remembered-token");
     UserName.set(undefined);
