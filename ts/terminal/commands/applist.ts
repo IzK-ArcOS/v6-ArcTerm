@@ -9,14 +9,14 @@ export const AppList: Command = {
   keyword: "applist",
   exec(cmd, argv, term) {
     const all = switchExists(argv, "all");
-    const store = Object.values(appLibrary.get());
+    const store = appLibrary.get();
 
     header(term);
 
-    for (let i = 0; i < store.length; i++) {
-      if (!isPopulatable(store[i]) && !all) continue;
+    for (const [_, app] of store) {
+      if (!isPopulatable(app) && !all) continue;
 
-      output(term, store[i]);
+      output(term, app);
     }
   },
   help(term) {

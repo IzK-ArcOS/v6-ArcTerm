@@ -12,11 +12,11 @@ export const Open: Command = {
 
     const library = appLibrary.get();
 
-    if (!library[id]) return term.std.Error(`${id}: app not found.`);
+    if (!library.has(id)) return term.std.Error(`${id}: app not found.`);
 
     spawnProcess(id);
 
-    term.std.writeColor(`Opened [${library[id].metadata.name}]`, "purple");
+    term.std.writeColor(`Opened [${library.get(id).metadata.name}]`, "purple");
   },
   help(term) {
     term.std.writeColor("[NOTE]: Capitalization matters.", "yellow");
