@@ -1,5 +1,4 @@
-import { spawnProcess } from "$ts/apps/process";
-import { tryJsonConvert } from "$ts/json";
+import { spawnApp } from "$ts/apps/spawn";
 import { appLibrary } from "$ts/stores/apps";
 import type { Command } from "../interface";
 
@@ -14,7 +13,7 @@ export const Open: Command = {
 
     if (!library.has(id)) return term.std.Error(`${id}: app not found.`);
 
-    spawnProcess(id);
+    spawnApp(id);
 
     term.std.writeColor(`Opened [${library.get(id).metadata.name}]`, "purple");
   },

@@ -1,15 +1,15 @@
-import { killProcess } from "$ts/apps/process";
 import { tryJsonConvert } from "$ts/json";
+import { ProcessStack } from "$ts/stores/process";
 import type { Command } from "../interface";
 
 export const Kill: Command = {
   keyword: "kill",
-  exec(cmd, argv, term) {
+  async exec(cmd, argv, term) {
     const pid = tryJsonConvert<number>(argv[0]);
 
     if (!pid) return term.std.Error("Missing process ID.");
 
-    const killed = killProcess(pid);
+    const killed = await ProcessStack.kill(pid);
 
     if (!killed) return term.std.Error(`Process [${pid}] doesn't exist.`)
 

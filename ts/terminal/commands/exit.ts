@@ -1,4 +1,3 @@
-import { closeWindow } from "../../applogic/events";
 import type { Command } from "../interface";
 
 export const Exit: Command = {
@@ -8,8 +7,8 @@ export const Exit: Command = {
       return term.std.Error(
         "can't close ArcTerm: no associated app in constructor"
       );
-
-    closeWindow(term.app.id);
+    /* 
+        closeWindow(term.app.id); */
   },
   description: "Quit ArcTerm",
 };

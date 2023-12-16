@@ -1,25 +1,25 @@
-import { processes } from "$ts/stores/apps";
+import { ProcessStack } from "$ts/stores/process";
 import { Command } from "../interface";
 import { ArcTerm } from "../main";
 
 export const TasksCommand: Command = {
   keyword: "tasks",
   exec(cmd, argv, term) {
-    const procs = processes.get();
+    const procs = ProcessStack.processes.get();
 
     header(term)
 
     for (const [pid, proc] of procs) {
       if (proc == "disposed") continue;
 
-      term.std.writeColor(compile(`[${pid}]`, proc.metadata.name, proc.id), "blue")
+      term.std.writeColor(compile(`[${pid}]`, proc.name, proc.app ? proc.app.metadata.name : ""), "blue")
     }
   },
   description: "Get a list of running processes"
 }
 
 function header(term: ArcTerm) {
-  const head = compile("PID", "Name", "App ID")
+  const head = compile("PID", "Process", "App Name?")
 
   term.std.writeLine(head);
   term.std.writeSeparator(head.length + 5);
