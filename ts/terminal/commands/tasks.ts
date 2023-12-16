@@ -1,3 +1,4 @@
+import { Process } from "$ts/process";
 import { ProcessStack } from "$ts/stores/process";
 import { Command } from "../interface";
 import { ArcTerm } from "../main";
@@ -10,9 +11,11 @@ export const TasksCommand: Command = {
     header(term)
 
     for (const [pid, proc] of procs) {
-      if (proc == "disposed") continue;
+      if (proc._disposed) continue;
 
-      term.std.writeColor(compile(`[${pid}]`, proc.name, proc.app ? proc.app.metadata.name : ""), "blue")
+      const process = proc as Process;
+
+      term.std.writeColor(compile(`[${pid}]`, process.name, process.app ? process.app.metadata.name : ""), "blue")
     }
   },
   description: "Get a list of running processes"
