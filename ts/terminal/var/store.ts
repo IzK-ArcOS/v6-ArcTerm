@@ -68,5 +68,10 @@ export function getArcTermStore(term: ArcTerm): VariableStore {
       readOnly: true,
       canDelete: false,
     },
+    pid: {
+      get: () => `${term.pid}`,
+      readOnly: true,
+      canDelete: false
+    }
   };
 }

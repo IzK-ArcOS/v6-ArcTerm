@@ -13,7 +13,7 @@ export const Open: Command = {
 
     if (!library.has(id)) return term.std.Error(`${id}: app not found.`);
 
-    spawnApp(id);
+    spawnApp(id, term.pid);
 
     term.std.writeColor(`Opened [${library.get(id).metadata.name}]`, "purple");
   },

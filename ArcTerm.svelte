@@ -9,7 +9,7 @@
   let target: HTMLDivElement;
 
   onMount(async () => {
-    arcterm = new ArcTerm(target, arcCommands, null, arcTermModeIntro);
+    arcterm = new ArcTerm(target, arcCommands, null, null, arcTermModeIntro);
   });
 
   function focus() {

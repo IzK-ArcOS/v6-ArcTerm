@@ -41,6 +41,7 @@ export class ArcTerm {
     target: HTMLDivElement,
     store: CommandStore,
     app: App,
+    public pid?: number,
     callback?: (term: ArcTerm) => void
   ) {
     this.target = target;
