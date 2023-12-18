@@ -13,7 +13,7 @@ import { Echo } from "./commands/echo";
 import { End } from "./commands/end";
 import { Err } from "./commands/err";
 import { Exec } from "./commands/exec";
-// import { Exit } from "./commands/exit";
+import { Exit } from "./commands/exit";
 import { Goose } from "./commands/goose";
 import { Goto } from "./commands/goto";
 import { Help } from "./commands/help";
@@ -59,7 +59,7 @@ export const arcCommands: CommandStore = [
   Dir,
   Echo,
   Vars,
-  //Exit,
+  Exit,
   Help,
   History,
   Logout,
