@@ -133,8 +133,6 @@ export class ArcTermInput {
 
       if (cmd.startsWith("#") || !cmd) continue;
 
-      console.log(parseFlags(str));
-
       args.shift();
 
       const success = await this.term.commandHandler.evaluate(
