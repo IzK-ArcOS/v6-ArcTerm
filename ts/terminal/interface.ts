@@ -16,7 +16,7 @@ export interface Flag {
   value?: {
     name: string;
     type: "string" | "number" | "boolean";
-  }
+  };
 }
 
 export type Arguments = Record<string, number | boolean | string>;

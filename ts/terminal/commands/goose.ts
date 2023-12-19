@@ -69,7 +69,7 @@ async function gooses(term: ArcTerm) {
 
   const cmd =
     Object.values(options)[
-    await term.std.select(Object.keys(options), "orange")
+      await term.std.select(Object.keys(options), "orange")
     ];
 
   if (cmd == "$cancel") return;

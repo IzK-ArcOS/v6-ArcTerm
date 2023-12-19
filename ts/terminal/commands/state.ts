@@ -1,6 +1,5 @@
-import { get } from "svelte/store";
-import type { Command } from "../interface";
 import { PrimaryState } from "$ts/states";
+import type { Command } from "../interface";
 
 export const StateCommand: Command = {
   keyword: "state",

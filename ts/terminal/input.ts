@@ -1,9 +1,7 @@
-import { get } from "svelte/store";
-import type { ArcTermEnv } from "./env";
-import type { ArcTerm } from "./main";
 import { Log } from "$ts/console";
 import { sleep } from "$ts/util";
-import { parseFlags } from "./argv";
+import type { ArcTermEnv } from "./env";
+import type { ArcTerm } from "./main";
 
 export class ArcTermInput {
   lockInput = false;

@@ -1,11 +1,11 @@
+import { tryJsonConvert } from "$ts/json";
+import { getUsers } from "$ts/server/user/get";
+import { UserCache } from "$ts/stores/user";
+import { AllUsers } from "$types/user";
 import Fuse from "fuse.js";
 import { getSwitches } from "../argv";
 import type { Command } from "../interface";
 import type { ArcTerm } from "../main";
-import { tryJsonConvert } from "$ts/json";
-import { UserCache } from "$ts/stores/user";
-import { getUsers } from "$ts/server/user/get";
-import { AllUsers } from "$types/user";
 
 export const Users: Command = {
   keyword: "users",

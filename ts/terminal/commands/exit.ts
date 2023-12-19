@@ -9,7 +9,7 @@ export const Exit: Command = {
         "can't close ArcTerm: no associated PID in constructor"
       );
 
-    ProcessStack.kill(term.pid)
+    ProcessStack.kill(term.pid);
   },
   description: "Quit ArcTerm",
 };

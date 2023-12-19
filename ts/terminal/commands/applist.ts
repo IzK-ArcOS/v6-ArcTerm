@@ -20,7 +20,9 @@ export const AppList: Command = {
     }
   },
   help(term) {
-    term.std.writeLine("ArcOS applications are stored in the App Library. The `applist`\ncommand displays this library. Each library item has an ID\nalong with its App data.\n\nBy default, only non-hidden applications are displayed in this table.\nUse the `--all` option to override this condition.\n ")
+    term.std.writeLine(
+      "ArcOS applications are stored in the App Library. The `applist`\ncommand displays this library. Each library item has an ID\nalong with its App data.\n\nBy default, only non-hidden applications are displayed in this table.\nUse the `--all` option to override this condition.\n "
+    );
     term.std.writeColor("Example: [applist] --all", "blue");
   },
   description: "List all- or opened ArcOS apps.",

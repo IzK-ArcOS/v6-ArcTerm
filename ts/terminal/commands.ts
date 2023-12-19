@@ -1,7 +1,7 @@
 import { Log } from "$ts/console";
 import { parseFlags } from "./argv";
 import { Default } from "./commands/default";
-import type { Command, Flag } from "./interface";
+import type { Command } from "./interface";
 import type { ArcTerm } from "./main";
 export class ArcTermCommandHandler {
   term: ArcTerm;

@@ -1,8 +1,7 @@
-import { get } from "svelte/store";
+import { Log } from "$ts/console";
 import type { Color } from "./interface";
 import { ArcTermIntro } from "./intro";
 import type { ArcTerm } from "./main";
-import { Log } from "$ts/console";
 
 export class ArcTermUtil {
   term: ArcTerm;

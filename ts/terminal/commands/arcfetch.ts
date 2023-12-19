@@ -1,13 +1,12 @@
-import { get } from "svelte/store";
-import { Color, colors, Command } from "../interface";
-import type { ArcTerm } from "../main";
+import { formatBytes } from "$ts/bytes";
 import { getDeviceInfo } from "$ts/device";
+import { minArcAPI } from "$ts/env";
 import { isDesktop } from "$ts/metadata/desktop";
 import { getServer } from "$ts/server/multi";
-import { formatBytes } from "$ts/bytes";
-import { UserName } from "$ts/stores/user";
-import { minArcAPI } from "$ts/env";
 import { PrimaryState } from "$ts/states";
+import { UserName } from "$ts/stores/user";
+import { Color, colors, Command } from "../interface";
+import type { ArcTerm } from "../main";
 
 export const ArcFetch: Command = {
   keyword: "arcfetch",

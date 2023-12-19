@@ -1,10 +1,10 @@
+import { formatBytes } from "$ts/bytes";
+import { readDirectory } from "$ts/server/fs/dir";
+import { sortDirectories, sortFiles } from "$ts/server/fs/sort";
+import { UserDirectory } from "$types/fs";
 import dayjs from "dayjs";
 import type { Command } from "../interface";
 import type { ArcTerm } from "../main";
-import { readDirectory } from "$ts/server/fs/dir";
-import { UserDirectory } from "$types/fs";
-import { sortFiles, sortDirectories } from "$ts/server/fs/sort";
-import { formatBytes } from "$ts/bytes";
 
 export const Dir: Command = {
   keyword: "dir",

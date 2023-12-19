@@ -1,11 +1,11 @@
+import { Log } from "$ts/console";
+import { App } from "$types/app";
+import { LogLevel } from "$types/console";
 import { writable } from "svelte/store";
 import type { ArcTermEnv } from "./env";
 import type { Color } from "./interface";
 import type { ArcTerm } from "./main";
 import { ArcTermStdSelect } from "./std/select";
-import { App } from "$types/app";
-import { Log } from "$ts/console";
-import { LogLevel } from "$types/console";
 
 export class ArcTermStd {
   target: HTMLDivElement;

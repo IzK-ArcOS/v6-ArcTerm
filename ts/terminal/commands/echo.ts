@@ -15,7 +15,7 @@ export const Echo: Command = {
 
     term.std.Error("Unable to echo: syntax invalid!");
   },
-  help(term){
+  help(term) {
     term.std.writeColor("Example: [echo] I <3 ArcOS!", "blue");
   },
   description: "Echo a string.",

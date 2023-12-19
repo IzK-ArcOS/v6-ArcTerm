@@ -56,7 +56,10 @@ function specific(command: string, term: ArcTerm) {
     term.std.writeLine("\n");
   }
 
-  term.std.writeColor(`Usage: ${term.commandHandler.compileFlagStr(c)}`, "blue");
+  term.std.writeColor(
+    `Usage: ${term.commandHandler.compileFlagStr(c)}`,
+    "blue"
+  );
   term.std.writeLine("\n");
 
   if (c.help) return c.help(term);

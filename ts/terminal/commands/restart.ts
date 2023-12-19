@@ -1,4 +1,3 @@
-import { get } from "svelte/store";
 import { restart } from "../../desktop/power";
 import { CurrentState } from "../../state/main";
 import type { Command } from "../interface";

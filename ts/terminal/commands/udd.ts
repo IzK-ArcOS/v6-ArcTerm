@@ -1,7 +1,6 @@
-import { get } from "svelte/store";
-import type { Command } from "../interface";
-import { UserDataStore } from "$ts/stores/user";
 import { writeFile } from "$ts/server/fs/file";
+import { UserDataStore } from "$ts/stores/user";
+import type { Command } from "../interface";
 
 export const UDD: Command = {
   keyword: "udd",

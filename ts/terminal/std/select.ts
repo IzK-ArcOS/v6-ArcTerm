@@ -1,9 +1,9 @@
-import { get, writable } from "svelte/store";
-import type { ArcTermStd } from "../std";
-import type { Color } from "../interface";
 import { Log } from "$ts/console";
-import { LogLevel } from "$types/console";
 import { sleep } from "$ts/util";
+import { LogLevel } from "$types/console";
+import { get, writable } from "svelte/store";
+import type { Color } from "../interface";
+import type { ArcTermStd } from "../std";
 
 export class ArcTermStdSelect {
   private std: ArcTermStd;

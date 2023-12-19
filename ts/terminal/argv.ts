@@ -36,13 +36,15 @@ export function parseFlags(args: string): Arguments {
   }
 
   const result = {};
-  const arglist = matches.map((match) => { return { name: match.groups.name, value: match.groups.value } })
+  const arglist = matches.map((match) => {
+    return { name: match.groups.name, value: match.groups.value };
+  });
 
   for (let i = 0; i < arglist.length; i++) {
     result[arglist[i].name] = arglist[i].value;
   }
 
-  return result
+  return result;
 }
 
 export function switchExists(argv: string[], key: string): boolean {

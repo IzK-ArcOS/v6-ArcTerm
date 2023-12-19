@@ -1,12 +1,11 @@
-import { get } from "svelte/store";
+import { formatBytes } from "$ts/bytes";
+import { Log } from "$ts/console";
+import { getFSQuota } from "$ts/server/fs/quota";
+import { getServer } from "$ts/server/multi";
+import { ConnectedServer } from "$ts/stores/server";
+import { UserCache, UserName } from "$ts/stores/user";
 import type { ArcTerm } from "./main";
 import { authPrompt } from "./mode/auth";
-import { UserCache, UserName } from "$ts/stores/user";
-import { Log } from "$ts/console";
-import { getServer } from "$ts/server/multi";
-import { formatBytes } from "$ts/bytes";
-import { getFSQuota } from "$ts/server/fs/quota";
-import { ConnectedServer } from "$ts/stores/server";
 
 export async function arcTermModeIntro(a: ArcTerm) {
   Log(`ArcTerm ${a.referenceId}`, "Viewing ArcTermMode intro");

@@ -8,21 +8,28 @@ export const TasksCommand: Command = {
   exec(cmd, argv, term) {
     const procs = ProcessStack.processes.get();
 
-    header(term)
+    header(term);
 
     for (const [pid, proc] of procs) {
       if (proc._disposed) continue;
 
       const process = proc as Process;
 
-      term.std.writeColor(compile(`[${pid}]`, process.name, process.app ? process.app.metadata.name : ""), "blue")
+      term.std.writeColor(
+        compile(
+          `[${pid}]`,
+          process.name,
+          process.app ? process.app.metadata.name : ""
+        ),
+        "blue"
+      );
     }
   },
-  description: "Get a list of running processes"
-}
+  description: "Get a list of running processes",
+};
 
 function header(term: ArcTerm) {
-  const head = compile("PID", "Process", "App Name?")
+  const head = compile("PID", "Process", "App Name?");
 
   term.std.writeLine(head);
   term.std.writeSeparator(head.length + 5);

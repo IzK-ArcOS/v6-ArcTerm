@@ -1,7 +1,7 @@
-import { get } from "svelte/store";
-import type { Command } from "../interface";
 import { readDirectory } from "$ts/server/fs/dir";
 import { PartialArcFile, UserDirectory } from "$types/fs";
+import { get } from "svelte/store";
+import type { Command } from "../interface";
 
 export const Run: Command = {
   keyword: "run",
