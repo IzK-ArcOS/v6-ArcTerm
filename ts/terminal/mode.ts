@@ -24,6 +24,10 @@ export async function arcTermModeIntro(a: ArcTerm) {
 
   const platform = ConnectedServer.get().meta.name;
 
+  a.std.clear();
+
+  if (a.app) return;
+
   disclaimer(a);
   auth(a, user, platform);
   api(a, server);
@@ -31,8 +35,6 @@ export async function arcTermModeIntro(a: ArcTerm) {
 }
 
 function disclaimer(term: ArcTerm) {
-  term.std.clear();
-
   term.std.writeColor(
     `[█] You are currently in [ArcTerm mode].\n[█] Commands that require the ArcOS desktop have been disabled.\n\n`,
     "orange"
