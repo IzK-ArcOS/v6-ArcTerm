@@ -16,6 +16,7 @@ import { Exec } from "./commands/exec";
 import { Exit } from "./commands/exit";
 import { Goose } from "./commands/goose";
 import { Goto } from "./commands/goto";
+import { GUD } from "./commands/gud";
 import { Help } from "./commands/help";
 import { History } from "./commands/history";
 import { If } from "./commands/if";
@@ -89,6 +90,7 @@ export const arcCommands: CommandStore = [
   Goose,
   UserAdd,
   SUD,
+  GUD,
   SleepCommand,
   BgCommand,
 ];
