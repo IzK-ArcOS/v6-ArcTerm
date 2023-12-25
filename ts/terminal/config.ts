@@ -2,7 +2,7 @@ import { Log } from "$ts/console";
 import { tryJsonConvert } from "$ts/json";
 import { blobToText } from "$ts/server/fs/convert";
 import { readFile, writeFile } from "$ts/server/fs/file";
-import { UserDataStore } from "$ts/stores/user";
+import { UserDataStore, UserToken } from "$ts/stores/user";
 import type { ArcTermEnv } from "./env";
 import type { ArcTerm } from "./main";
 
@@ -70,11 +70,13 @@ export class ArcTermConfig {
     this.loadConfig(json);
   }
 
-  public async writeConfig() {
+  public async writeConfig(): Promise<boolean> {
     Log(
       `ArcTerm ${this.term.referenceId}`,
       `config.writeConfig: Writing ${this.configPath}`
     );
+
+    if (!UserToken.get()) return false;
 
     const data = {};
 
@@ -92,6 +94,6 @@ export class ArcTermConfig {
       type: "application/json",
     });
 
-    await writeFile(this.configPath, blob);
+    return await writeFile(this.configPath, blob);
   }
 }
