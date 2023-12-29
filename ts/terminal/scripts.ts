@@ -1,5 +1,5 @@
 import { Log } from "$ts/console";
-import { arrayToText } from "$ts/server/fs/convert";
+import { arrayToText, blobToText } from "$ts/server/fs/convert";
 import { readDirectory } from "$ts/server/fs/dir";
 import { readFile } from "$ts/server/fs/file";
 import { LogLevel } from "$types/console";
@@ -39,7 +39,7 @@ export class ArcTermScripts {
 
     if (!file) return false;
 
-    const d = arrayToText(file.data);
+    const d = await blobToText(file.data);
     const split = d.split("\n");
 
     return split[0].startsWith("#!arcterm");
@@ -60,7 +60,7 @@ export class ArcTermScripts {
         LogLevel.error
       );
 
-    const d = this.term.sect.parse(arrayToText(contents.data));
+    const d = this.term.sect.parse(await blobToText(contents.data));
     const parts = d.split("\n").filter((l) => !!l);
 
     await this.term.input.processCommands(parts, path);
