@@ -1,5 +1,5 @@
 import { Log } from "$ts/console";
-import { arrayToText, blobToText } from "$ts/server/fs/convert";
+import { blobToText } from "$ts/server/fs/convert";
 import { readDirectory } from "$ts/server/fs/dir";
 import { readFile } from "$ts/server/fs/file";
 import { LogLevel } from "$types/console";
