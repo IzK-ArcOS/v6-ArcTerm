@@ -6,6 +6,7 @@ import type { ArcTermEnv } from "./env";
 import type { Color } from "./interface";
 import type { ArcTerm } from "./main";
 import { ArcTermStdSelect } from "./std/select";
+import { sleep } from "$ts/util";
 
 export class ArcTermStd {
   target: HTMLDivElement;
@@ -39,6 +40,8 @@ export class ArcTermStd {
     el.innerText = str;
 
     target.appendChild(el);
+
+    this.focusTarget();
 
     return el;
   }
@@ -75,6 +78,8 @@ export class ArcTermStd {
 
     target.append(out);
 
+    this.focusTarget();
+
     return out;
   }
 
@@ -86,6 +91,8 @@ export class ArcTermStd {
     el.src = src;
 
     this.target.append(el);
+
+    this.focusTarget();
   }
 
   public update(el: HTMLDivElement, str: string) {
@@ -177,6 +184,10 @@ export class ArcTermStd {
     this.target.append(wrapper);
     this.term.input.current = input;
 
+    await sleep(10);
+
+    this.focusInput();
+
     input.addEventListener("keydown", (e) => {
       if (!e.key) return;
 
@@ -198,8 +209,33 @@ export class ArcTermStd {
     });
   }
 
-  public clear() {
+  public initTarget() {
     this.target.innerText = "";
+
+    const trigger = document.createElement("div");
+
+    trigger.className = "click-trigger";
+    this.target.addEventListener("click", () => this.focusInput())
+
+    this.target.append(trigger);
+  }
+
+  public focusInput() {
+    if (!this.term || !this.term.input || !this.term.input.current) return;
+
+    this.term.input.current.focus();
+
+    this.focusTarget();
+  }
+
+  public focusTarget() {
+    if (!this.target) return;
+
+    this.target.scrollTo(0, this.target.scrollHeight);
+  }
+
+  public clear() {
+    this.initTarget();
   }
 
   public async select(options: string[], color?: Color): Promise<number> {

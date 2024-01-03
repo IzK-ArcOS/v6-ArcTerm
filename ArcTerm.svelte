@@ -21,8 +21,6 @@
 
     target.scrollTo(0, target.scrollHeight);
   }
-
-  setInterval(focus, 10);
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->

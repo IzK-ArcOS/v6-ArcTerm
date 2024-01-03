@@ -9,6 +9,7 @@ div.terminal-renderer {
   color: var(--fg);
   font-size: 14px;
 }
+
 div.terminal-renderer,
 div.terminal-renderer * {
   cursor: var(--cur-beam) !important;
@@ -21,6 +22,7 @@ div.terminal-renderer * {
   border: none !important;
   font-family: "Source Code Pro", monospace;
   font-size: 14px;
+  pointer-events: none;
 }
 
 div.terminal-renderer div.userinput {
@@ -111,8 +113,4 @@ div.app.fullscreen.rotate {
   to {
     transform: rotate(360deg);
   }
-}
-
-div.app {
-  overflow: hidden;
 }
