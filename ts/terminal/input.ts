@@ -119,7 +119,7 @@ export class ArcTermInput {
   }
 
   public async processCommands(split: string[], file = "") {
-    await sleep(0);
+    await sleep();
 
     for (let i = 0; i < split.length; i++) {
       const str = this.term.vars.replace(split[i].trim());
@@ -144,7 +144,7 @@ export class ArcTermInput {
 
       this.lock();
 
-      await sleep(0);
+      await sleep();
     }
 
     this.unlock();
