@@ -31,8 +31,6 @@ export class ArcTermVariables {
   }
 
   get(key: string) {
-    Log(`ArcTerm ${this.term.referenceId}`, `var.get: getting "${key}"`);
-
     if (!this.store[key]) return key;
 
     return this.store[key].get();
@@ -96,7 +94,7 @@ export class ArcTermVariables {
   }
 
   private parseInlineNames(str: string): string[] {
-    const regex = /\$([a-zA-Z_][a-zA-Z0-9_]*)/g;
+    const regex = /\$([a-zA-Z_][a-zA-Z0-9_]*|\$)/g;
     const matches: string[] = [];
 
     let match: RegExpExecArray | null;
@@ -104,6 +102,8 @@ export class ArcTermVariables {
     while ((match = regex.exec(str))) {
       matches.push(match[1]);
     }
+
+    console.log(matches)
 
     return matches;
   }

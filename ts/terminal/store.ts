@@ -24,6 +24,7 @@ import { InDesktop } from "./commands/indesktop";
 import { Kill } from "./commands/kill";
 import { LogDump } from "./commands/logdump";
 import { Logout } from "./commands/logout";
+import { LogsCommand } from "./commands/logs";
 import { Ls } from "./commands/ls";
 import { Mkdir } from "./commands/mkdir";
 // import { oa } from "./commands/oa";
@@ -121,5 +122,6 @@ export const desktopSpecific: CommandStore = [
   // oa,
   Open,
   TasksCommand,
+  LogsCommand
   // Run,
 ];

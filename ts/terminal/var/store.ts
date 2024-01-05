@@ -73,5 +73,10 @@ export function getArcTermStore(term: ArcTerm): VariableStore {
       readOnly: true,
       canDelete: false,
     },
+    "$": {
+      get: () => `ArcTerm ${term.referenceId}`,
+      readOnly: true,
+      canDelete: false
+    }
   };
 }
