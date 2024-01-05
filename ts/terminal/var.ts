@@ -103,8 +103,6 @@ export class ArcTermVariables {
       matches.push(match[1]);
     }
 
-    console.log(matches)
-
     return matches;
   }
 }

@@ -12,8 +12,6 @@ export const Open: Command = {
 
     argv.shift();
 
-    console.log(argv)
-
     const args = tryJsonConvert<any[]>(argv.join(" "));
     const library = appLibrary.get();
 
