@@ -1,4 +1,4 @@
-import { ArcSoundBus } from "../../sound/main";
+import { ArcSoundBus } from "$ts/soundbus";
 import type { Command } from "../interface";
 import type { ArcTerm } from "../main";
 
