@@ -1,6 +1,7 @@
 import { formatBytes } from "$ts/bytes";
 import { getDeviceInfo } from "$ts/device";
-import { minArcAPI } from "$ts/env";
+import { ArcOSVersion, minArcAPI } from "$ts/env";
+import { ARCOS_BUILD, ARCOS_MODE } from "$ts/metadata";
 import { isDesktop } from "$ts/metadata/desktop";
 import { getServer } from "$ts/server/multi";
 import { PrimaryState } from "$ts/states";
@@ -24,19 +25,19 @@ export const ArcFetch: Command = {
 
 async function getItems(a: ArcTerm) {
   const info = getDeviceInfo();
-
   const desktop = isDesktop();
+  const desktopStr = desktop ? "Desktop" : "Browser"
+  const state = PrimaryState.current.get().name;
 
   return Object.entries({
-    Server: `${getServer()} @ rev ${minArcAPI}`,
+    OS: `ArcOS ${ArcOSVersion}-${ARCOS_MODE} (${ARCOS_BUILD})`,
+    Host: `${getServer()} @ rev ${minArcAPI}`,
     Username: UserName.get(),
-    Processor: `${info.cpu.cores} cores`,
+    Mode: `${desktopStr} (state ${state})`,
+    Terminal: a.referenceId,
+    CPU: `${info.cpu.cores} cores`,
     GPU: `${info.gpu.vendor} ${info.gpu.model}`,
     Memory: `~ ${formatBytes(info.mem.kb)}`,
-    Mode:
-      (desktop ? `Desktop` : `Browser`) +
-      ` (state ${PrimaryState.current.get().key})`,
-    Reference: a.referenceId,
   });
 }
 
@@ -52,13 +53,14 @@ async function graphic(term: ArcTerm) {
   const items = await getItems(term);
 
   const graphicParts = [
-    "        ",
-    "    _   ",
-    "   /_\\  ",
-    "  / _ \\ ",
-    " /_/ \\_\\",
-    "        ",
-    "        ",
+    "           ",
+    "     /\\    ",
+    "    /  \\   ",
+    "   / /\\ \\  ",
+    "  / ____ \\ ",
+    " /_/    \\_\\",
+    "           ",
+    "           "
   ];
 
   for (let i = 0; i < graphicParts.length; i++) {
