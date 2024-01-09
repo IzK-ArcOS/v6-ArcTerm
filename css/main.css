@@ -7,7 +7,7 @@ div.terminal-renderer {
   height: 100%;
   font-family: "Source Code Pro", monospace;
   color: var(--fg);
-  font-size: 14px;
+  font-size: var(--font-size);
 }
 
 div.terminal-renderer,
@@ -21,7 +21,7 @@ div.terminal-renderer * {
   background-color: transparent !important;
   border: none !important;
   font-family: "Source Code Pro", monospace;
-  font-size: 14px;
+  font-size: var(--font-size);
   pointer-events: none;
 }
 
