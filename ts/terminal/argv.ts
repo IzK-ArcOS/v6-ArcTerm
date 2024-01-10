@@ -6,15 +6,15 @@ export function getSwitches(argv: string[]) {
 
   const prefix = "--";
 
-  for (let i = 0; i < argv.length; i++) {
-    if (argv[i].startsWith(prefix)) {
-      const arg = argv[i].replace(prefix, "");
+  for (const arg of argv) {
+    if (arg.startsWith(prefix)) {
+      const str = arg.replace(prefix, "");
 
-      currentArg = arg == currentArg ? currentArg : arg;
+      currentArg = str == currentArg ? currentArg : str;
 
       if (!switches[currentArg]) switches[currentArg] = "";
     } else if (currentArg) {
-      switches[currentArg] += `${argv[i]} `;
+      switches[currentArg] += `${arg} `;
     }
   }
 
@@ -40,8 +40,8 @@ export function parseFlags(args: string): Arguments {
     return { name: match.groups.name, value: match.groups.value };
   });
 
-  for (let i = 0; i < arglist.length; i++) {
-    result[arglist[i].name] = arglist[i].value;
+  for (const arg of arglist) {
+    result[arg.name] = arg.value;
   }
 
   return result;

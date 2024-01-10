@@ -10,9 +10,7 @@ export const Run: Command = {
     const fn = argv.join(" ").trim();
     const dir = (await readDirectory(path)) as UserDirectory;
 
-    for (let i = 0; i < dir.files.length; i++) {
-      const file = dir.files[i];
-
+    for (const file of dir.files) {
       if (file.filename == fn) {
         term.std.writeLine(`Opening ${fn} (${file.size} Bytes)`);
 

@@ -30,23 +30,20 @@ export class ArcTermConfig {
   public getConfig() {
     const obj = {};
 
-    for (let i = 0; i < this.configKeys.length; i++) {
-      const k = this.configKeys[i];
-
-      obj[k] = this.env[k];
+    for (const key of this.configKeys) {
+      obj[key] = this.env[key];
     }
 
     return obj;
   }
 
   public loadConfig(json: object) {
-    for (let i = 0; i < this.configKeys.length; i++) {
-      const k = this.configKeys[i];
+    for (const key of this.configKeys) {
 
-      const exists = this.env[k] != null && json;
-      const isType = typeof this.env[k] == typeof json[k];
+      const exists = this.env[key] != null && json;
+      const isType = typeof this.env[key] == typeof json[key];
 
-      if (exists && isType) this.env[k] = json[k];
+      if (exists && isType) this.env[key] = json[key];
     }
   }
 
@@ -80,14 +77,12 @@ export class ArcTermConfig {
 
     const data = {};
 
-    for (let i = 0; i < this.configKeys.length; i++) {
-      const k = this.configKeys[i];
-
+    for (const key of this.configKeys) {
       if (
-        k != "gooseBumps" ||
-        (typeof this.env[k] === "boolean" && this.env[k] == true)
+        key != "gooseBumps" ||
+        (typeof this.env[key] === "boolean" && this.env[key] == true)
       )
-        data[k] = this.env[k];
+        data[key] = this.env[key];
     }
 
     const blob = new Blob([JSON.stringify(data, null, 2)], {

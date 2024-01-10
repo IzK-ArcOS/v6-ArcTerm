@@ -23,8 +23,8 @@ function all(dir: UserDirectory, term: ArcTerm) {
   const subdirs = sortDirectories(dir.directories);
   const files = sortFiles(dir.files);
 
-  for (let i = 0; i < subdirs.length; i++) {
-    const subdir = subdirs[i];
+  for (const dir of subdirs) {
+    const subdir = dir;
 
     term.std.writeColor(
       `-- --- ----, --:-- <directory> [${subdir.name}]/`,
@@ -32,9 +32,7 @@ function all(dir: UserDirectory, term: ArcTerm) {
     );
   }
 
-  for (let i = 0; i < files.length; i++) {
-    const file = files[i];
-
+  for (const file of files) {
     const date = dayjs(file.dateModified || 0)
       .format("DD MMM YYYY, HH:mm")
       .padEnd(19, " ");
@@ -62,18 +60,14 @@ async function specific(path: string, currentPath: string, term: ArcTerm) {
     return;
   }
 
-  for (let i = 0; i < subdirs.length; i++) {
-    const subdir = subdirs[i];
-
+  for (const dir of subdirs) {
     term.std.writeColor(
-      `-- --- ----, --:-- <directory> [${subdir.name}]/`,
+      `-- --- ----, --:-- <directory> [${dir.name}]/`,
       "blue"
     );
   }
 
-  for (let i = 0; i < files.length; i++) {
-    const file = files[i];
-
+  for (const file of files) {
     const date = dayjs(file.dateModified || 0)
       .format("DD MMM YYYY, HH:mm")
       .padEnd(19, " ");

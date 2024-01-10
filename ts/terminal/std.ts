@@ -57,23 +57,22 @@ export class ArcTermStd {
     inline = false,
     target = this.target
   ) {
-    const x = str.split(/(\[[^\]]*\])/);
-
+    const parts = str.split(/(\[[^\]]*\])/);
     const out = document.createElement("div");
 
     out.className = `part `;
 
     if (inline) out.className += " inline";
 
-    for (let i = 0; i < x.length; i++) {
-      const part = document.createElement("span");
-      const isPart = x[i].startsWith("[") && x[i].endsWith("]");
-      const content = x[i].replaceAll("[", "").replaceAll("]", "");
+    for (const part of parts) {
+      const element = document.createElement("span");
+      const isPart = part.startsWith("[") && part.endsWith("]");
+      const content = part.replaceAll("[", "").replaceAll("]", "");
 
-      part.className = `clr-${isPart ? pri : sec}`;
-      part.innerText = content;
+      element.className = `clr-${isPart ? pri : sec}`;
+      element.innerText = content;
 
-      out.append(part);
+      out.append(element);
     }
 
     target.append(out);

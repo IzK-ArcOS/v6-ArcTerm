@@ -118,11 +118,11 @@ export class ArcTermInput {
     this.current.value = latest;
   }
 
-  public async processCommands(split: string[], file = "") {
+  public async processCommands(lines: string[], file = "") {
     await sleep();
 
-    for (let i = 0; i < split.length; i++) {
-      const str = this.term.vars.replace(split[i].trim());
+    for (const line of lines) {
+      const str = this.term.vars.replace(line.trim());
       const args = str.split(" ");
       const cmd = args[0];
 

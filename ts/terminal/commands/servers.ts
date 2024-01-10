@@ -10,8 +10,7 @@ export const Servers: Command = {
     term.std.writeLine("\n# | Server");
     term.std.writeSeparator(20);
 
-    for (let i = 0; i < servers.length; i++) {
-      const server = servers[i];
+    for (const server of servers) {
       const ac = getAuthcode(server);
 
       term.std.writeColor(`${ac ? "[#]" : " "} | ${server}`, "orange");

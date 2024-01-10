@@ -56,8 +56,7 @@ function stop(cmd: string, argv: string[], term: ArcTerm) {
 function list(term: ArcTerm) {
   const sounds = ArcSoundBus.getStore();
 
-  for (let i = 0; i < sounds.length; i++) {
-    const sound = sounds[i];
+  for (const sound of sounds) {
     const id = sound[0].padEnd(32, " ");
     const source = sound[1];
 

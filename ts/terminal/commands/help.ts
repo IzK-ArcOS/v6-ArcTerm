@@ -33,11 +33,11 @@ function all(term: ArcTerm, short: boolean) {
       "aqua"
     );
 
-  for (let i = 0; i < cmd.length; i++) {
-    const a = cmd[i].keyword.toUpperCase().padEnd(15, " ");
-    const b = cmd[i].description;
+  for (const command of cmd) {
+    const a = command.keyword.toUpperCase().padEnd(15, " ");
+    const b = command.description;
 
-    term.std.writeColor(`[${a}]${b}`, cmd[i].hidden ? "purple" : "orange");
+    term.std.writeColor(`[${a}]${b}`, command.hidden ? "purple" : "orange");
   }
 }
 

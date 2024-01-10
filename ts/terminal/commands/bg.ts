@@ -6,10 +6,10 @@ export const BgCommand: Command = {
   exec(cmd, argv, term) {
     const backgrounds = Wallpapers;
 
-    const entries = Object.keys(backgrounds).sort((a, b) => (a < b ? -1 : 1));
+    const keys = Object.keys(backgrounds).sort((a, b) => (a < b ? -1 : 1));
 
-    for (let i = 0; i < entries.length; i++) {
-      const [key, value] = [entries[i], backgrounds[entries[i]]];
+    for (const key of keys) {
+      const value = backgrounds[key];
       const keyStr = key.padStart(6, " ");
       const nameStr = value.name.padEnd(30, " ");
 

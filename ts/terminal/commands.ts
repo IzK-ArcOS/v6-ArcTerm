@@ -48,14 +48,14 @@ export class ArcTermCommandHandler {
   }
 
   public getCommand(command: string, provider?: Command[]) {
-    const c = command.toLowerCase();
+    const commandLower = command.toLowerCase();
 
     const commands = provider ? provider : this.term.commands;
 
-    for (let i = 0; i < commands.length; i++) {
-      const k = commands[i].keyword.toLowerCase();
+    for (const command of commands) {
+      const lower = command.keyword.toLowerCase();
 
-      if (k == c) return commands[i];
+      if (lower == commandLower) return command;
     }
 
     return Default;
@@ -68,8 +68,7 @@ export class ArcTermCommandHandler {
 
     if (!flags.length) return result;
 
-    for (let i = 0; i < flags.length; i++) {
-      const flag = flags[i];
+    for (const flag of flags) {
       const prefix = "--";
       const name = `[${flag.keyword}]`;
       const needsValue = !!flag.value;

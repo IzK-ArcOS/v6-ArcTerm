@@ -46,10 +46,9 @@ export const Ri: Command = {
 
 async function displayFile(term: ArcTerm, fn: string, height: number) {
   const path = term.path as string;
-
   const dir = (await readDirectory(path)) as UserDirectory;
 
-  for (let i = 0; i < dir.files.length; i++) {
+  for (const partial of dir.files) {
     const partial = dir.files[i];
 
     if (partial.filename == fn) {

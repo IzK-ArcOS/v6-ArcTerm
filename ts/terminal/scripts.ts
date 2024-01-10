@@ -26,9 +26,9 @@ export class ArcTermScripts {
 
     const files = dir.files;
 
-    for (let i = 0; i < files.length; i++) {
-      const name = files[i].filename;
-      const path = files[i].scopedPath;
+    for (const file of files) {
+      const name = file.filename;
+      const path = file.scopedPath;
 
       if (name.startsWith(cmd) && (await this.isScriptFile(path))) return path;
     }

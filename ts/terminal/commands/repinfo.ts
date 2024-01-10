@@ -35,21 +35,18 @@ export const RepInfo: Command = {
 
     const entries = Object.entries(data);
 
-    for (let i = 0; i < entries.length; i++) {
-      const entry = entries[i];
-      const key = entry[0].padEnd(23, " ");
-      const value = entry[1];
+    for (const [key, value] of entries) {
+      const keyStr = key.padEnd(23, " ");
 
       if (value && typeof value === "object") {
-        term.std.writeColor(`[${key}]:`, "yellow");
+        term.std.writeColor(`[${keyStr}]:`, "yellow");
 
         const subEntries = Object.entries(JSON.parse(JSON.stringify(value)));
 
-        for (let j = 0; j < subEntries.length; j++) {
-          const key = subEntries[j][0].padEnd(18, " ");
-          const value = subEntries[j][1];
+        for (const [subKey, subValue] of subEntries) {
+          const key = subKey.padEnd(18, " ");
 
-          term.std.writeColor(` --> [${key}]: ${value}`, "yellow");
+          term.std.writeColor(` --> [${key}]: ${subValue}`, "yellow");
         }
 
         continue;

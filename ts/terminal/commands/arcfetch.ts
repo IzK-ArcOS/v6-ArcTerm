@@ -44,8 +44,8 @@ async function getItems(a: ArcTerm) {
 function colorBar(term: ArcTerm) {
   term.std.write("\n                            ");
 
-  for (let i = 0; i < colors.length; i++) {
-    term.std.writeColor("[██ ]", colors[i] as Color, "white", true);
+  for (const color of colors) {
+    term.std.writeColor("[██ ]", color as Color, "white", true);
   }
 }
 

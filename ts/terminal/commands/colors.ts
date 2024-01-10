@@ -18,8 +18,8 @@ export const Colors: Command = {
       "purple",
     ];
 
-    for (let i = 0; i < colors.length; i++) {
-      term.std.writeColor(`${colors[i].padEnd(10, " ")}: [${str}]`, colors[i]);
+    for (const color of colors) {
+      term.std.writeColor(`${color.padEnd(10, " ")}: [${str}]`, color);
     }
   },
   description: "Print out all ArcTerm colors",

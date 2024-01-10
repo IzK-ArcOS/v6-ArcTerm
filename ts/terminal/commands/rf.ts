@@ -13,9 +13,7 @@ export const Rf: Command = {
 
     if (!dir) return term.std.Error("Could not read the current directory!");
 
-    for (let i = 0; i < dir.files.length; i++) {
-      const partial = dir.files[i];
-
+    for (const partial of dir.files) {
       if (partial.filename == fn) {
         const file = await readFile(partial.scopedPath);
 

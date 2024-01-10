@@ -19,10 +19,9 @@ export class ArcTermVariables {
     const result: StaticVariableStore = {};
     const entries = Object.entries(this.store);
 
-    for (let i = 0; i < entries.length; i++) {
-      const key = entries[i][0];
+    for (const [key, variable] of entries) {
       const value = this.get(key);
-      const ro = entries[i][1].readOnly;
+      const ro = variable.readOnly;
 
       result[key] = { value, readOnly: ro };
     }
@@ -82,12 +81,11 @@ export class ArcTermVariables {
 
     if (!variables.length) return str;
 
-    for (let i = 0; i < variables.length; i++) {
-      const part = `$${variables[i]}`;
+    for (const variable of variables) {
+      const part = `$${variable}`;
+      const value = this.get(variable);
 
-      const value = this.get(variables[i]);
-
-      str = str.replace(part, value == variables[i] && part ? part : value);
+      str = str.replace(part, value == variable && part ? part : value);
     }
 
     return str;

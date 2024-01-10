@@ -26,10 +26,10 @@ async function allUsers(term: ArcTerm) {
   const entries = Object.entries(users);
   const names = Object.keys(users);
 
-  for (let i = 0; i < entries.length; i++) {
-    const role = entries[i][1].acc.admin ? "Administrator" : "Regular user";
-    const name = entries[i][0].padEnd(getMaxLength(names), " ");
-    term.std.writeColor(`[${name}]: ${role}`, "blue");
+  for (const [name, user] of entries) {
+    const role = user.acc.admin ? "Administrator" : "Regular user";
+    const nameStr = name.padEnd(getMaxLength(names), " ");
+    term.std.writeColor(`[${nameStr}]: ${role}`, "blue");
   }
 }
 
@@ -39,18 +39,19 @@ function searchFor(username: string, users: AllUsers, term: ArcTerm) {
     name: a[0],
   }));
 
-  const options = {
+  const options: Fuse.IFuseOptions<any> = {
     includeScore: true,
     keys: ["name"],
+    threshold: 0.3
   };
 
   const fuse = new Fuse(userObject, options);
   const result = fuse.search(username);
   const names = Object.keys(users);
 
-  for (let i = 0; i < result.length; i++) {
-    const role = result[i].item.acc.admin ? "Administrator" : "Regular user";
-    const name = result[i].item.name.padEnd(getMaxLength(names), " ");
+  for (const user of result) {
+    const role = user.item.acc.admin ? "Administrator" : "Regular user";
+    const name = user.item.name.padEnd(getMaxLength(names), " ");
 
     term.std.writeColor(`[${name}]: ${role}`, "blue");
   }
@@ -61,8 +62,8 @@ function searchFor(username: string, users: AllUsers, term: ArcTerm) {
 function getMaxLength(users: string[]) {
   let length = 0;
 
-  for (let i = 0; i < users.length; i++) {
-    if (users[i].length > length) length = users[i].length;
+  for (const user of users) {
+    if (user.length > length) length = user.length;
   }
 
   return length + 2;

@@ -10,8 +10,8 @@ export function ArcTermIntro(term: ArcTerm) {
     "[/_/ \\_\\]_| \\__||_|\\___|_| |_|_|_|",
   ];
 
-  for (let i = 0; i < x.length; i++) {
-    term.std.writeColor(x[i], "blue");
+  for (const line of x) {
+    term.std.writeColor(line, "blue");
   }
 
   term.std.writeLine("\n");
