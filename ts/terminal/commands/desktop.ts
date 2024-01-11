@@ -1,5 +1,4 @@
 import { PrimaryState } from "$ts/states";
-import { getSwitches } from "../argv";
 import type { Command } from "../interface";
 
 export const Desktop: Command = {

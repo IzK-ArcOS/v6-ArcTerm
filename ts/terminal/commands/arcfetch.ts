@@ -6,7 +6,7 @@ import { isDesktop } from "$ts/metadata/desktop";
 import { getServer } from "$ts/server/multi";
 import { PrimaryState } from "$ts/states";
 import { UserName } from "$ts/stores/user";
-import { Color, colors, Command } from "../interface";
+import { Color, Command, colors } from "../interface";
 import type { ArcTerm } from "../main";
 
 export const ArcFetch: Command = {

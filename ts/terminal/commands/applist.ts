@@ -1,7 +1,6 @@
 import { isPopulatable } from "$ts/apps/utils";
 import { appLibrary } from "$ts/stores/apps";
 import { App } from "$types/app";
-import { switchExists } from "../argv";
 import type { Command } from "../interface";
 import type { ArcTerm } from "../main";
 
