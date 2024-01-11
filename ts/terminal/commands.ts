@@ -70,7 +70,7 @@ export class ArcTermCommandHandler {
 
     for (const flag of flags) {
       const prefix = "--";
-      const name = `[${flag.keyword}]`;
+      const name = `[${flag.keyword}]${flag.required ? "" : "?"}`;
       const needsValue = !!flag.value;
       const q = needsValue && flag.value.type == "string" ? '"' : ""
       const suffix = needsValue ? `=${q}[${flag.value.name}]${q}` : "";

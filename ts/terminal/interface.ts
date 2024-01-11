@@ -17,9 +17,10 @@ export interface Flag {
     name: string;
     type: "string" | "number" | "boolean";
   };
+  description?: string;
 }
 
-export type Arguments = Record<string, number | boolean | string>;
+export type Arguments = Record<string, string>;
 
 export type CommandMethod = (
   cmd: string,

@@ -9,6 +9,7 @@ import { Colors } from "./commands/colors";
 import { Config } from "./commands/config";
 import { Desktop } from "./commands/desktop";
 import { Dir } from "./commands/dir";
+import { Dispatch } from "./commands/dispatch";
 import { Echo } from "./commands/echo";
 import { End } from "./commands/end";
 import { Err } from "./commands/err";
@@ -60,6 +61,7 @@ export const arcCommands: CommandStore = [
   Cd,
   Clear,
   Dir,
+  Dispatch,
   Echo,
   Vars,
   Exit,

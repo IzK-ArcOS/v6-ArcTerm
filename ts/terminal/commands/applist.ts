@@ -7,8 +7,8 @@ import type { ArcTerm } from "../main";
 
 export const AppList: Command = {
   keyword: "applist",
-  exec(cmd, argv, term) {
-    const all = switchExists(argv, "all");
+  exec(cmd, argv, term, flags) {
+    const all = flags.a || flags.all;
     const store = appLibrary.get();
 
     header(term);
@@ -21,12 +21,14 @@ export const AppList: Command = {
   },
   help(term) {
     term.std.writeLine(
-      "ArcOS applications are stored in the App Library. The `applist`\ncommand displays this library. Each library item has an ID\nalong with its App data.\n\nBy default, only non-hidden applications are displayed in this table.\nUse the `--all` option to override this condition.\n "
+      "ArcOS applications are stored in the App Library. The `applist`\ncommand displays this library. Each library item has an ID\nalong with its App data.\n\nBy default, only non-hidden applications are displayed in this table.\nUse the `--all` or `-a` option to override this condition.\n "
     );
     term.std.writeColor("Example: [applist] --all", "blue");
   },
   description: "List all- or opened ArcOS apps.",
-  syntax: "(--[all?])",
+  flags: [
+    { keyword: "a|all" }
+  ]
 };
 
 function output(term: ArcTerm, app: App) {

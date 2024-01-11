@@ -214,8 +214,8 @@ export class ArcTermStd {
     const trigger = document.createElement("div");
 
     trigger.className = "click-trigger";
-    this.target.addEventListener("click", () => this.focusInput())
 
+    this.target.addEventListener("click", () => this.focusInput())
     this.target.append(trigger);
   }
 

@@ -26,7 +26,7 @@ export function getSwitches(argv: string[]) {
 }
 
 export function parseFlags(args: string): Arguments {
-  const regex = /--(?<name>[a-z]+)(?:=(?<value>.*?)(?: |$)|)/gm; //--name=?value
+  const regex = /(?:--(?<nl>[a-z\-]+)(?:="(?<vl>.*?)"|(?:=(?<vs>.*?)(?: |$))|)|-(?<ns>[a-zA-Z]))/gm; //--name=?value
   const matches: RegExpMatchArray[] = [];
 
   let match: RegExpExecArray | null;
@@ -37,12 +37,17 @@ export function parseFlags(args: string): Arguments {
 
   const result = {};
   const arglist = matches.map((match) => {
-    return { name: match.groups.name, value: match.groups.value };
+    const name = match.groups.nl || match.groups.ns;
+    const value = match.groups.vl || match.groups.vs || true; // make it true if the flag has no value at all
+
+    return { name, value };
   });
 
   for (const arg of arglist) {
     result[arg.name] = arg.value;
   }
+
+  console.log(args, result)
 
   return result;
 }

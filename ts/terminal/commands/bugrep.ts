@@ -1,14 +1,13 @@
 import { sendReport } from "$ts/bugrep";
 import { ReportOptions } from "$types/bugrep";
-import { switchExists } from "../argv";
 import type { Command } from "../interface";
 
 export const BugRep: Command = {
   keyword: "bugrep",
-  async exec(cmd, argv, term) {
+  async exec(cmd, argv, term, flags) {
     const Regx = argv.join(" ").match(/"(.*?)"/);
-    const includeUserData = !switchExists(argv, "no-ud");
-    const includeApi = !switchExists(argv, "no-api");
+    const includeUserData = !flags["no-ud"];
+    const includeApi = !flags["no-api"];
 
     if (Regx && Regx.length > 1) {
       const text = term.vars.replace(Regx[1]);

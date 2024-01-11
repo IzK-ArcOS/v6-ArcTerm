@@ -5,7 +5,7 @@ import type { Command } from "../interface";
 
 export const Open: Command = {
   keyword: "open",
-  exec(cmd, argv, term) {
+  async exec(cmd, argv, term) {
     const id = argv[0];
 
     if (!id) return term.std.Error("Missing process ID.");
@@ -17,9 +17,9 @@ export const Open: Command = {
 
     if (!library.has(id)) return term.std.Error(`${id}: app not found.`);
 
-    spawnApp(id, term.pid, Array.isArray(args) ? args : []);
+    const pid = await spawnApp(id, 0, Array.isArray(args) ? args : []);
 
-    term.std.writeColor(`Opened [${library.get(id).metadata.name}]`, "purple");
+    term.std.Info(`Spawned [${library.get(id).metadata.name}] on PID [${pid}]`);
   },
   help(term) {
     term.std.writeColor("[NOTE]: Capitalization matters.", "yellow");
