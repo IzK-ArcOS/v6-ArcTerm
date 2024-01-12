@@ -7,9 +7,9 @@ export const Set: Command = {
     const Regx = argv.join(" ").match(/"(.*?)"/);
 
     if (!Regx || Regx.length < 2) {
-      const deleter = await term.vars.delete(key);
+      const deleted = await term.vars.delete(key);
 
-      if (!deleter)
+      if (!deleted)
         term.std.Error(
           "Can't delete variable: deletion isn't allowed or the variable is read-only."
         );
@@ -19,9 +19,9 @@ export const Set: Command = {
 
     const value = Regx[1];
 
-    const setter = await term.vars.set(key, value);
+    const isSet = await term.vars.set(key, value);
 
-    if (!setter)
+    if (!isSet)
       term.std.Error("Can't update variable: the variable is readonly.");
   },
   help(term) {

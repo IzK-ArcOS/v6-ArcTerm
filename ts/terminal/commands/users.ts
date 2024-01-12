@@ -3,14 +3,13 @@ import { getUsers } from "$ts/server/user/get";
 import { UserCache } from "$ts/stores/user";
 import { AllUsers } from "$types/user";
 import Fuse from "fuse.js";
-import { getSwitches } from "../argv";
 import type { Command } from "../interface";
 import type { ArcTerm } from "../main";
 
 export const Users: Command = {
   keyword: "users",
-  async exec(cmd, argv, term) {
-    const username = tryJsonConvert<string>(getSwitches(argv)["search"]);
+  async exec(cmd, argv, term, flags) {
+    const username = tryJsonConvert<string>(flags.search);
 
     UserCache.clear();
 
@@ -19,6 +18,16 @@ export const Users: Command = {
     return searchFor(username, await getUsers(), term);
   },
   description: "Display ArcAPI users",
+  flags: [
+    {
+      keyword: "search",
+      value: {
+        name: "user",
+        type: "string"
+      },
+      description: "A username to search for."
+    }
+  ]
 };
 
 async function allUsers(term: ArcTerm) {

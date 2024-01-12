@@ -1,4 +1,3 @@
-import { switchExists } from "../argv";
 import type { Command } from "../interface";
 import type { ArcTerm } from "../main";
 import { Default } from "./default";
