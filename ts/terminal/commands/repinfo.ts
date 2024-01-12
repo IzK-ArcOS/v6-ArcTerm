@@ -1,12 +1,13 @@
 import { createReport } from "$ts/bugrep";
 import { LogStore } from "$ts/console";
 import { writeFile } from "$ts/server/fs/file";
-import { switchExists } from "../argv";
 import type { Command } from "../interface";
 
 export const RepInfo: Command = {
   keyword: "repinfo",
-  async exec(cmd, argv, term) {
+  async exec(cmd, argv, term, flags) {
+    const doJson = !!flags.json;
+    const file = flags.file;
     const data = {
       ...createReport({
         body: "This is what a report sent to the Reports server may look like",
@@ -16,12 +17,13 @@ export const RepInfo: Command = {
       }),
     } as any;
 
-    if (switchExists(argv, "json")) {
+    if (doJson) {
       const json = JSON.stringify(data, null, 2);
+
       term.std.writeLine(json);
 
-      if (switchExists(argv, "file")) {
-        const filename = `${term.path}/repinfo_${new Date().getTime()}.json`;
+      if (file && typeof file == "string") {
+        const filename = `${term.path}/${file}`;
         const blob = new Blob([json], { type: "application/json" });
         await writeFile(filename, blob);
         term.std.Info(`Written RepInfo to [${filename}]`);
@@ -57,4 +59,17 @@ export const RepInfo: Command = {
   },
   description: "Display information in a bug report",
   hidden: true,
+  flags: [
+    {
+      keyword: "json",
+      description: "Display the report data as a JSON object"
+    }, {
+      keyword: "file",
+      value: {
+        name: "filename",
+        type: "string"
+      },
+      description: "An optional file name to save the report data to. Requires --json to be specified."
+    }
+  ]
 };

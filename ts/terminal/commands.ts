@@ -1,7 +1,7 @@
 import { Log } from "$ts/console";
 import { parseFlags } from "./argv";
 import { Default } from "./commands/default";
-import type { Command } from "./interface";
+import type { Arguments, Command } from "./interface";
 import type { ArcTerm } from "./main";
 export class ArcTermCommandHandler {
   term: ArcTerm;
@@ -21,10 +21,10 @@ export class ArcTermCommandHandler {
   ) {
     Log(`ArcTerm ${this.term.referenceId}`, `cmd.evaluate: ${cmd}`);
 
-    if (cmd.startsWith("#")) return;
+    const argStr = args.join(" ");
 
-    // Don't bother appending script lines to the history
-    if (!isScript) this.history.push(`${cmd} ${args.join(" ")}`.trim());
+    if (cmd.startsWith("#")) return;
+    if (!isScript) this.history.push(`${cmd} ${argStr}`.trim()); // Don't bother appending script lines to the history
 
     const command = this.getCommand(cmd, provider);
 
@@ -33,12 +33,19 @@ export class ArcTermCommandHandler {
     if (this.term.input && this.term.input.current)
       this.term.input.current.disabled = true;
 
-    const result = await command.exec(cmd, args, this.term, parseFlags(args.join(" ")));
+    if (!this.requiredFlagsSpecified(command, argStr)) {
+      this.term.std.Error(`${cmd}: missing required parameters. Type [help ${cmd}] for usage.`);
 
-    if (result == false) {
+      if (this.term.std.verbose && !isScript) this.term.std.writeLine("\n");
+
+      this.term.input.unlock();
+
       return false;
     }
 
+    const result = await command.exec(cmd, args, this.term, parseFlags(argStr));
+
+    if (result == false) return false;
     if (!this.term.std || !this.term.input) return true;
     if (this.term.std.verbose && !isScript) this.term.std.writeLine("\n");
 
@@ -78,6 +85,40 @@ export class ArcTermCommandHandler {
       result += `${prefix}${name}${suffix} `;
     }
 
+    return `${result} ${command.syntax || ""}`;
+  }
+
+  public compileHelpSwitches(command: Command): string {
+    const flags = command.flags || [];
+
+    let result = `\n`;
+
+    if (!flags.length) return result;
+
+    for (const flag of flags) {
+      const prefix = "--";
+      const name = `[${flag.keyword}]${flag.required ? "" : "?"}`.padEnd(20, " ");
+      const description = `${flag.description} ${flag.required ? "" : "(Optional)"}`;
+
+      result += `${prefix}${name}${description}\n`;
+    }
+
     return result;
+  }
+
+  public requiredFlagsSpecified(command: Command, args: string) {
+    if (!command.flags) return true;
+
+    const flags: Arguments = parseFlags(args);
+
+    for (const flag of command.flags) {
+      const value = flags[flag.keyword];
+      const required = flag.required;
+      const valueObject = flag.value;
+
+      if (required && (!value || typeof value != (valueObject ? "string" : "boolean"))) return false;
+    }
+
+    return true;
   }
 }

@@ -5,8 +5,8 @@ import { Default } from "./default";
 
 export const Help: Command = {
   keyword: "help",
-  exec(cmd, argv, term) {
-    if (switchExists(argv, "count"))
+  exec(cmd, argv, term, flags) {
+    if (flags.count)
       return term.std.writeColor(
         `ArcTerm has [${term.commands.length}] commands.`,
         "aqua"
@@ -14,13 +14,23 @@ export const Help: Command = {
 
     if (argv[0] && !argv[0].startsWith("--")) return specific(argv[0], term);
 
-    all(term, !switchExists(argv, "list"));
+    all(term, !flags.list);
   },
   help(term) {
     term.std.writeColor("Example: [help] help", "blue");
   },
   description: "Display a list of built-in commands",
   syntax: "([command?])",
+  flags: [
+    {
+      keyword: "count",
+      description: "Show the amount of ArcTerm commands."
+    },
+    {
+      keyword: "list",
+      description: "Show a list of ArcTerm commands with their descriptions. This flag doesn't work with --count."
+    }
+  ]
 };
 
 function all(term: ArcTerm, short: boolean) {
@@ -56,8 +66,11 @@ function specific(command: string, term: ArcTerm) {
     term.std.writeLine("\n");
   }
 
+  const flagStr = term.commandHandler.compileFlagStr(c);
+  const helpSwitches = term.commandHandler.compileHelpSwitches(c);
+
   term.std.writeColor(
-    `Usage: ${term.commandHandler.compileFlagStr(c)}`,
+    `Usage: ${flagStr}\n${helpSwitches}`,
     "blue"
   );
   term.std.writeLine("\n");

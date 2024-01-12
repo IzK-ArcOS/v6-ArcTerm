@@ -3,8 +3,8 @@ import type { ArcTerm } from "../main";
 
 export const History: Command = {
   keyword: "history",
-  exec(cmd, argv, term) {
-    if (argv.includes("clear")) return clear(term);
+  exec(cmd, argv, term, flags) {
+    if (flags.clear) return clear(term);
 
     const hist = term.commandHandler.history;
 
@@ -15,10 +15,13 @@ export const History: Command = {
     }
   },
   help(term) {
-    term.std.writeColor("Example: [history] <clear>", "blue");
+    term.std.writeColor("Example: [history] --clear", "blue");
   },
   description: "Show the command history",
-  syntax: "([clear?])",
+  flags: [{
+    keyword: "clear",
+    description: "Clear the history buffer"
+  }]
 };
 
 function clear(term: ArcTerm) {
