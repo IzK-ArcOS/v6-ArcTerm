@@ -1,5 +1,6 @@
 import { formatBytes } from "$ts/bytes";
 import { Log } from "$ts/console";
+import { StartCoreProcesses } from "$ts/process/startup";
 import { getFSQuota } from "$ts/server/fs/quota";
 import { getServer } from "$ts/server/multi";
 import { ConnectedServer } from "$ts/stores/server";
@@ -28,6 +29,7 @@ export async function arcTermModeIntro(a: ArcTerm) {
 
   if (a.app) return;
 
+  await StartCoreProcesses();
   disclaimer(a);
   auth(a, user, platform);
   api(a, server);

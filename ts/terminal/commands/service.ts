@@ -3,11 +3,12 @@ import { ProcessStack } from "$ts/stores/process";
 import dayjs from "dayjs";
 import type { Command } from "../interface";
 import type { ArcTerm } from "../main";
+import { ServiceStartResultCaptions } from "$ts/stores/service/captions";
 
 export const ServiceCommand: Command = {
   keyword: "service",
   description: "Manage services from ArcTerm",
-  async exec(cmd, argv, term) {
+  async exec(_, argv, term) {
     switch (argv[0]) {
       case "start":
         await start(argv, term);
@@ -48,13 +49,20 @@ async function stop(argv: string[], term: ArcTerm) {
 
 async function start(argv: string[], term: ArcTerm) {
   const service = argv[1];
-  const valid = await startService(service);
+  const result = await startService(service);
 
-  if (!valid)
-    term.std.Error(
-      `Couldn't start service [${service}]: it might already be running, or it doesn't exist.`
-    );
-  else term.std.writeColor(`Started service [${service}].`, "blue");
+  const resultCaption = ServiceStartResultCaptions[result];
+
+  if (result != "started") {
+    term.std.Error(`Couldn't start service [${service}]: ${resultCaption}`);
+
+    term.std.writeLine("\n");
+    term.std.writeColor(`[Code: ${result}]`, "gray")
+
+    return;
+  }
+
+  term.std.writeColor(`Started service [${service}].`, "blue");
 }
 
 async function restart(argv: string[], term: ArcTerm) {
@@ -80,15 +88,13 @@ function status(argv: string[], term: ArcTerm) {
   const statusText = pid ? "✔ Running" : "✖ Stopped";
   const pidString = pid ? `on PID ${pid} - handler ${ProcessStack.id}` : `- no PID`
   const state = pid ? "started" : "stopped"
-  const initialState = data.initialState || "stopped"
   const loadedAt = dayjs(data.loadedAt).format("MMM D, HH:mm:ss");
   const changedAt = dayjs(data.changedAt).format("MMM D, HH:mm:ss");
 
   term.std.writeColor(`[${data.name}] - ${data.description}`, "blue");
   term.std.writeLine("\n");
   term.std.writeColor(`Status:          [${statusText}] ${pidString}`, pid ? "green" : "red")
-  term.std.writeColor(`State:           [${state}] (initially '${initialState}') - Changed at ${changedAt}`, "purple");
-  term.std.writeColor(`Initial State:   [${initialState}]`, "purple");
+  term.std.writeColor(`State:           [${state}] - Changed at ${changedAt}`, "purple");
   term.std.writeColor(`Identifier:      [${data.id || service}] ${!data.id ? "(derived)" : ""}`, "purple");
   term.std.writeColor(`Loaded At:       [${loadedAt}]`, "purple");
 }

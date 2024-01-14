@@ -98,7 +98,8 @@ export const arcCommands: CommandStore = [
   GUD,
   SleepCommand,
   BgCommand,
-  ServiceCommand
+  ServiceCommand,
+  TasksCommand,
 ];
 
 /**
@@ -126,7 +127,6 @@ export const desktopSpecific: CommandStore = [
   Kill,
   // oa,
   Open,
-  TasksCommand,
   LogsCommand
   // Run,
 ];
