@@ -40,6 +40,7 @@ import { Ri } from "./commands/ri";
 import { Rm } from "./commands/rm";
 // import { Run } from "./commands/run";
 import { Servers } from "./commands/servers";
+import { ServiceCommand } from "./commands/service";
 import { Set } from "./commands/set";
 // import { Shutdown } from "./commands/shutdown";
 import { SleepCommand } from "./commands/sleep";
@@ -97,6 +98,7 @@ export const arcCommands: CommandStore = [
   GUD,
   SleepCommand,
   BgCommand,
+  ServiceCommand
 ];
 
 /**
