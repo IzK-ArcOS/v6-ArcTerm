@@ -30,6 +30,7 @@ import { Ls } from "./commands/ls";
 import { Mkdir } from "./commands/mkdir";
 // import { oa } from "./commands/oa";
 import { Open } from "./commands/open";
+import { Pause } from "./commands/pause";
 import { Read } from "./commands/read";
 import { Reload } from "./commands/reload";
 import { RepInfo } from "./commands/repinfo";
@@ -100,6 +101,7 @@ export const arcCommands: CommandStore = [
   BgCommand,
   ServiceCommand,
   TasksCommand,
+  Pause
 ];
 
 /**

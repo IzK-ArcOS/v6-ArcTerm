@@ -8,7 +8,7 @@ import { UserCache, UserName } from "$ts/stores/user";
 import type { ArcTerm } from "./main";
 import { authPrompt } from "./mode/auth";
 
-export async function arcTermModeIntro(a: ArcTerm) {
+export async function arcTermModeIntro(a: ArcTerm, cb?: () => any) {
   Log(`ArcTerm ${a.referenceId}`, "Viewing ArcTermMode intro");
 
   if (!(await authPrompt(a))) return;
@@ -26,6 +26,8 @@ export async function arcTermModeIntro(a: ArcTerm) {
   const platform = ConnectedServer.get().meta.name;
 
   a.std.clear();
+
+  if (cb) cb();
 
   if (a.app) return;
 

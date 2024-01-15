@@ -1,5 +1,6 @@
 import { Log } from "$ts/console";
 import { ArcOSVersion } from "$ts/env";
+import { ProcessStack } from "$ts/stores/process";
 import { sleep } from "$ts/util";
 import { App } from "$types/app";
 import { ArcTermCommandHandler } from "./commands";
@@ -71,22 +72,35 @@ export class ArcTerm {
     this.scripts = new ArcTermScripts(this);
     this.sect = new ArcTermSections(this);
 
-    setTimeout(async () => {
-      this.std = new ArcTermStd(this);
-      this.input = new ArcTermInput(this);
+    await sleep(1000);
+    this.std = new ArcTermStd(this);
+    this.input = new ArcTermInput(this);
+    this.input.lock();
 
-      this.input.lock();
+    if (this.onload) await this.onload(this);
 
-      if (this.onload) await this.onload(this);
+    await sleep(100);
 
-      await sleep(100);
+    if (!this.pid) return this.intro();
 
-      this.input.unlock();
-      this.util.intro();
-      this.util.flushAccent();
+    const proc = ProcessStack.getProcess(this.pid)
+    const args = proc.args;
 
-      if (this.env.gooseBumps) this.std.Warning("GooseBumps 👀\n\n");
-    }, 1000);
+    if (!args[0] || !Array.isArray(args[0])) return this.intro();
+
+    console.log(args[0])
+
+    this.std.clear();
+    await this.input.processCommands(args[0]);
+    this.input.unlock();
+  }
+
+  public intro() {
+    this.input.unlock();
+    this.util.intro();
+    this.util.flushAccent();
+
+    if (this.env.gooseBumps) this.std.Warning("GooseBumps 👀\n\n");
   }
 
   public dispose() {
