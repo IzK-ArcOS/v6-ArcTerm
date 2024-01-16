@@ -1,4 +1,6 @@
+import { GetUserElevation } from "$ts/elevation";
 import { tryJsonConvert } from "$ts/json";
+import { ElevationKillProcess } from "$ts/stores/elevation";
 import { ProcessStack } from "$ts/stores/process";
 import type { Command } from "../interface";
 
@@ -9,7 +11,15 @@ export const Kill: Command = {
 
     if (!pid) return term.std.Error("Missing process ID.");
 
-    const killed = await ProcessStack.kill(pid);
+    const process = ProcessStack.getProcess(pid)
+
+    if (!process) return term.std.Error(`Process [${pid}] doesn't exist.`)
+
+    const elevated = await GetUserElevation(ElevationKillProcess(process), ProcessStack);
+
+    if (!elevated) return term.std.Error(`Process [${pid}] couldn't be killed: no permission.`)
+
+    const killed = await ProcessStack.kill(pid, true);
 
     if (!killed) return term.std.Error(`Process [${pid}] doesn't exist.`);
 

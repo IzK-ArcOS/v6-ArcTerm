@@ -17,7 +17,14 @@ export const Open: Command = {
 
     if (!library.has(id)) return term.std.Error(`${id}: app not found.`);
 
+    const app = library.get(id)
     const pid = await spawnApp(id, 0, Array.isArray(args) ? args : []);
+
+    if (!pid) {
+      term.std.Error(`Failed to spawn ${id}: the spawn condition might have failed.`)
+      term.std.writeLine(`\nSpawn condition: ${app.spawnCondition}`)
+      return
+    }
 
     term.std.Info(`Spawned [${library.get(id).metadata.name}] on PID [${pid}]`);
   },
