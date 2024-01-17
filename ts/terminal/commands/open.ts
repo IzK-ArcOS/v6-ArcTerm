@@ -1,6 +1,8 @@
+import { isDisabled } from "$ts/apps/disable/utils";
 import { spawnApp } from "$ts/apps/spawn";
 import { tryJsonConvert } from "$ts/json";
 import { appLibrary } from "$ts/stores/apps";
+import { AppSpawnResultCaptions } from "$ts/stores/apps/spawn";
 import type { Command } from "../interface";
 
 export const Open: Command = {
@@ -17,13 +19,12 @@ export const Open: Command = {
 
     if (!library.has(id)) return term.std.Error(`${id}: app not found.`);
 
-    const app = library.get(id)
     const pid = await spawnApp(id, 0, Array.isArray(args) ? args : []);
 
-    if (!pid) {
-      term.std.Error(`Failed to spawn ${id}: the spawn condition might have failed.`)
-      term.std.writeLine(`\nSpawn condition: ${app.spawnCondition}`)
-      return
+    if (typeof pid !== "number") {
+      term.std.Error(`${pid}: ${AppSpawnResultCaptions[pid]}`);
+
+      return;
     }
 
     term.std.Info(`Spawned [${library.get(id).metadata.name}] on PID [${pid}]`);

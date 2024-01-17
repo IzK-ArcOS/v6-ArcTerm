@@ -3,7 +3,7 @@ import { ProcessStack } from "$ts/stores/process";
 import dayjs from "dayjs";
 import type { Command } from "../interface";
 import type { ArcTerm } from "../main";
-import { ServiceStartResultCaptions } from "$ts/stores/service/captions";
+import { ServiceChangeResultCaptions } from "$ts/stores/service/captions";
 
 export const ServiceCommand: Command = {
   keyword: "service",
@@ -37,11 +37,11 @@ export const ServiceCommand: Command = {
 
 async function stop(argv: string[], term: ArcTerm) {
   const service = argv[1];
-  const valid = await stopService(service);
+  const status = await stopService(service);
 
-  if (!valid)
+  if (status != "success")
     term.std.Error(
-      `Couldn't stop service [${service}]: it might not be running, or it doesn't exist.`
+      `Couldn't stop service [${service}]: ${ServiceChangeResultCaptions[status]}`
     );
   else term.std.writeColor(`Stopped service [${service}].`, "blue");
 }
@@ -51,9 +51,9 @@ async function start(argv: string[], term: ArcTerm) {
   const service = argv[1];
   const result = await startService(service);
 
-  const resultCaption = ServiceStartResultCaptions[result];
+  const resultCaption = ServiceChangeResultCaptions[result];
 
-  if (result != "started") {
+  if (result != "success") {
     term.std.Error(`Couldn't start service [${service}]: ${resultCaption}`);
 
     term.std.writeLine("\n");
@@ -67,11 +67,11 @@ async function start(argv: string[], term: ArcTerm) {
 
 async function restart(argv: string[], term: ArcTerm) {
   const service = argv[1];
-  const valid = await restartService(service);
+  const status = await restartService(service);
 
-  if (!valid)
+  if (status !== "success")
     term.std.Error(
-      `Couldn't restart service [${service}]: either the Stop or Start of the service failed, or it doesn't exist.`
+      `Couldn't restart service [${service}]: ${ServiceChangeResultCaptions[status]}`
     );
   else term.std.writeColor(`Restarted service [${service}].`, "blue");
 }
