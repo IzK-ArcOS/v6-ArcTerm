@@ -1,4 +1,7 @@
+import { GetUserElevation } from "$ts/elevation";
 import { getJsonHierarchy, setJsonHierarchy } from "$ts/hierarchy";
+import { ElevationChangeUserData } from "$ts/stores/elevation";
+import { ProcessStack } from "$ts/stores/process";
 import { UserDataStore } from "$ts/stores/user";
 import type { Command } from "../interface";
 
@@ -6,7 +9,7 @@ const BANNED = ["acc.enabled", "acc.admin", "devmode", "valid", "statusCode"];
 
 export const SUD: Command = {
   keyword: "sud",
-  exec(cmd, argv, term) {
+  async exec(cmd, argv, term) {
     if (!argv.length || argv.length < 2)
       return term.std.Error("Missing arguments");
 
@@ -18,8 +21,11 @@ export const SUD: Command = {
     if (BANNED.join("|").includes(hierarchy))
       return term.std.Error(`Not permitted to change data of [${hierarchy}]`);
 
-    const udata = UserDataStore.get();
+    const elevated = await GetUserElevation(ElevationChangeUserData(), ProcessStack)
 
+    if (!elevated) return term.std.Error(`Elevation is required to perform this action.`);
+
+    const udata = UserDataStore.get();
     const currentValue = getJsonHierarchy(udata, hierarchy);
 
     if (!currentValue && typeof currentValue === "undefined")

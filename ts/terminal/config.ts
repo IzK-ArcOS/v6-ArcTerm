@@ -15,7 +15,6 @@ export class ArcTermConfig {
 
     this.env = e;
     this.term = t;
-    this.loadConfigFile();
   }
 
   readonly configPath = "./arcterm.conf";
@@ -62,7 +61,7 @@ export class ArcTermConfig {
     const d = await blobToText(file.data);
     const json = tryJsonConvert<object>(d);
 
-    if (!json) return this.writeConfig();
+    if (typeof json !== "object") return this.writeConfig();
 
     this.loadConfig(json);
   }

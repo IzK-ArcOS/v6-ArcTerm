@@ -17,12 +17,6 @@ export async function arcTermModeIntro(a: ArcTerm, cb?: () => any) {
 
   const server = getServer();
   const user = UserName.get();
-  const quota = await getFSQuota();
-
-  const used = formatBytes(quota.used);
-  const max = formatBytes(quota.max);
-  const percentage = ((100 / quota.max) * quota.used).toFixed(2);
-
   const platform = ConnectedServer.get().meta.name;
 
   a.std.clear();
@@ -35,7 +29,7 @@ export async function arcTermModeIntro(a: ArcTerm, cb?: () => any) {
   disclaimer(a);
   auth(a, user, platform);
   api(a, server);
-  usage(a, used, max, percentage);
+  usage(a);
 }
 
 function disclaimer(term: ArcTerm) {
@@ -60,7 +54,12 @@ function api(term: ArcTerm, server: string) {
   term.std.writeColor(` [(${server})]`, "gray", "white", true);
 }
 
-function usage(term: ArcTerm, used: string, max: string, percent: string) {
+async function usage(term: ArcTerm) {
+  const quota = await getFSQuota();
+  const used = formatBytes(quota.used);
+  const max = formatBytes(quota.max);
+  const percent = ((100 / quota.max) * quota.used).toFixed(2);
+
   term.std.writeColor(
     `\n[ArcFS]: You are using [${used}] of [${max}] total (${percent}%)\n`,
     "yellow"

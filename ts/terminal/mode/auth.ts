@@ -20,12 +20,9 @@ export async function authPrompt(term: ArcTerm, usr = "", keep = false) {
 
   await doRememberedAuth();
 
-  await sleep(250);
+  await sleep(0);
 
-  if (get(UserName)) {
-    await term.env.config.loadConfigFile();
-    return true;
-  }
+  if (get(UserName)) return true;
 
   if (!keep) {
     term.std.clear();
@@ -43,8 +40,6 @@ export async function authPrompt(term: ArcTerm, usr = "", keep = false) {
 
     return await authPrompt(term, usr, true);
   }
-
-  await term.env.config.loadConfigFile();
 
   return true;
 }

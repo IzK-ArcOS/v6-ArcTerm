@@ -22,7 +22,5 @@ export function parseFlags(args: string): Arguments {
     result[arg.name] = arg.value;
   }
 
-  console.log(args, result)
-
   return result;
 }

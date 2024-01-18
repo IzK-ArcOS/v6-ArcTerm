@@ -36,7 +36,7 @@ export class ArcTermInput {
       if (!prompt) return;
 
       this.target.append(prompt);
-    });
+    }, 10);
   }
 
   public lock() {

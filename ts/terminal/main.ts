@@ -1,5 +1,4 @@
 import { Log } from "$ts/console";
-import { ArcOSVersion } from "$ts/env";
 import { ProcessStack } from "$ts/stores/process";
 import { sleep } from "$ts/util";
 import { App } from "$types/app";
@@ -62,7 +61,7 @@ export class ArcTerm {
     if (!this.target)
       throw new Error("Can't initialize ArcTerm without a valid target");
 
-    this.target.innerText = `Starting ArcTerm v${ArcOSVersion}...`;
+    this.target.innerText = "";
 
     this.target.removeAttribute("style");
     this.path = ".";
@@ -72,14 +71,16 @@ export class ArcTerm {
     this.scripts = new ArcTermScripts(this);
     this.sect = new ArcTermSections(this);
 
-    await sleep(1000);
+    await sleep(50);
+
     this.std = new ArcTermStd(this);
     this.input = new ArcTermInput(this);
+
     this.input.lock();
 
     if (this.onload) await this.onload(this);
 
-    await sleep(100);
+    await this.env.config.loadConfigFile();
 
     if (!this.pid) return this.intro();
 
@@ -88,17 +89,15 @@ export class ArcTerm {
 
     if (!args[0] || !Array.isArray(args[0])) return this.intro();
 
-    console.log(args[0])
-
     this.std.clear();
     await this.input.processCommands(args[0]);
     this.input.unlock();
   }
 
   public intro() {
+    this.util.flushAccent();
     this.input.unlock();
     this.util.intro();
-    this.util.flushAccent();
 
     if (this.env.gooseBumps) this.std.Warning("GooseBumps 👀\n\n");
   }
@@ -115,15 +114,14 @@ export class ArcTerm {
     this.input = null;
   }
 
-  public reload() {
+  public async reload() {
     Log(`ArcTerm ${this.referenceId}`, "Reloading");
 
     this.dispose(); // Dispose the current instance, locking ArcTerm
 
     // Re-initialize ArcTerm with the exact same initial parameters
     // after the next frame has advanced
-    setTimeout(async () => {
-      await this.initialize();
-    });
+    await sleep();
+    await this.initialize();
   }
 }
