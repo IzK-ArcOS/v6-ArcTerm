@@ -65,7 +65,6 @@ export const Dispatch: Command = {
         type: "number"
       },
       description: "Optional process PID to dispatch to",
-      required: true
     },
   ]
 }
