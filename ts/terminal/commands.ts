@@ -5,7 +5,6 @@ import type { Arguments, Command } from "./interface";
 import type { ArcTerm } from "./main";
 export class ArcTermCommandHandler {
   term: ArcTerm;
-  history: string[] = [];
 
   constructor(term: ArcTerm) {
     Log(`ArcTerm ${term.referenceId}`, `Creating new ArcTermCommandHandler`);
@@ -24,7 +23,6 @@ export class ArcTermCommandHandler {
     const argStr = args.join(" ");
 
     if (cmd.startsWith("#")) return;
-    if (!isScript) this.history.push(`${cmd} ${argStr}`.trim()); // Don't bother appending script lines to the history
 
     const command = this.getCommand(cmd, provider);
 

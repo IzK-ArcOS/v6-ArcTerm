@@ -35,7 +35,7 @@ import { Read } from "./commands/read";
 import { Reload } from "./commands/reload";
 import { RepInfo } from "./commands/repinfo";
 import { Reset } from "./commands/reset";
-// import { Restart } from "./commands/restart";
+import { Restart } from "./commands/restart";
 import { Rf } from "./commands/rf";
 import { Ri } from "./commands/ri";
 import { Rm } from "./commands/rm";
@@ -101,7 +101,8 @@ export const arcCommands: CommandStore = [
   BgCommand,
   ServiceCommand,
   TasksCommand,
-  Pause
+  Pause,
+  Restart
 ];
 
 /**

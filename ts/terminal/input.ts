@@ -97,25 +97,24 @@ export class ArcTermInput {
     const split = input.value.split("&&");
     const key = e.key.toLowerCase();
 
+    console.log(key);
+
     switch (key) {
       case "enter":
+        this.term.history.appendToHistory(input.value);
         this.processCommands(split);
         break;
-      case "f2":
-        this.restorePreviousCommand();
-        break;
+      case "arrowup":
+        input.value = this.term.history.changeIndexRelatively(-1);
+        await sleep(0)
+        input.setSelectionRange(input.value.length, input.value.length)
+        return;
+      case "arrowdown":
+        input.value = this.term.history.changeIndexRelatively(1);
+        await sleep(0)
+        input.setSelectionRange(input.value.length, input.value.length)
+        return;
     }
-  }
-
-  private restorePreviousCommand() {
-    Log(`ArcTerm ${this.term.referenceId}`, `input.restorePreviousCommand`);
-
-    const hist = this.term.commandHandler.history;
-    const latest = hist[hist.length - 1];
-
-    if (!this.current || !latest) return;
-
-    this.current.value = latest;
   }
 
   public async processCommands(lines: string[], file = "") {

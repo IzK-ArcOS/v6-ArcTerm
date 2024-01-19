@@ -1,17 +1,21 @@
+import { shutdown } from "$state/Desktop/ts/power";
 import { PrimaryState } from "$ts/states";
+import { sleep } from "$ts/util";
 import type { Command } from "../interface";
 
 export const Shutdown: Command = {
   keyword: "shutdown",
-  exec(cmd, argv, term) {
-    if (PrimaryState.current.get().key == "desktop") return shutdown();
+  async exec(cmd, argv, term) {
+    const state = PrimaryState.current.get().key;
+
+    if (state == "desktop") return shutdown();
 
     term.std.writeColor("[SHUTDOWN]: Terminating NOW.", "green");
 
-    setTimeout(() => {
-      applyState("turnedoff");
-    }, 1000);
+    await sleep(1000);
+
+    PrimaryState.navigate("turnedoff");
   },
 
-  description: "Turn off ArcOS",
+  description: "Log off and shut down ArcOS",
 };

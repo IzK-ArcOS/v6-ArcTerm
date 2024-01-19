@@ -11,13 +11,15 @@ export const If: Command = {
 
     if (!r || !r.groups) {
       term.std.Error("Invalid statement!");
-      return false;
+
+      return true;
     }
 
     const result = r.groups as IfGroups;
     const split = result.cmd.split(" ");
     const command = split[0];
-    split.shift();
+
+    split.shift(); // remove the `if` from the start
 
     async function doIt() {
       return await term.commandHandler.evaluate(command, split, true);

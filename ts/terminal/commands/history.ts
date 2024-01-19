@@ -6,7 +6,7 @@ export const History: Command = {
   exec(cmd, argv, term, flags) {
     if (flags.clear) return clear(term);
 
-    const hist = term.commandHandler.history;
+    const hist = term.history.store.get();
 
     for (let i = 0; i < hist.length; i++) {
       const index = `${i}`.padStart(3, "0");
@@ -25,12 +25,9 @@ export const History: Command = {
 };
 
 function clear(term: ArcTerm) {
-  const len = term.commandHandler.history.length;
+  const len = term.history.store.get().length;
 
-  term.commandHandler.history = [];
+  term.history.clear();
 
-  term.std.writeColor(
-    `[SUCCESS]: History cleared, ${len} items removed.`,
-    "green"
-  );
+  term.std.Info(`History cleared, ${len} items removed.`);
 }

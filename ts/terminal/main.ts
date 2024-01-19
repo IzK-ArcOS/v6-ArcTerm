@@ -4,6 +4,7 @@ import { sleep } from "$ts/util";
 import { App } from "$types/app";
 import { ArcTermCommandHandler } from "./commands";
 import { ArcTermEnv } from "./env";
+import { ArcTermHistory } from "./history";
 import { ArcTermInput } from "./input";
 import type { CommandStore } from "./interface";
 import { ArcTermScripts } from "./scripts";
@@ -33,6 +34,7 @@ export class ArcTerm {
   path: string;
   scripts: ArcTermScripts;
   sect: ArcTermSections;
+  history: ArcTermHistory;
   commandHandler: ArcTermCommandHandler;
   referenceId: string;
   onload: (term: ArcTerm) => void;
@@ -65,6 +67,7 @@ export class ArcTerm {
 
     this.target.removeAttribute("style");
     this.path = ".";
+    this.history = new ArcTermHistory(this);
     this.commandHandler = new ArcTermCommandHandler(this);
     this.env = new ArcTermEnv(this);
     this.vars = new ArcTermVariables(this);

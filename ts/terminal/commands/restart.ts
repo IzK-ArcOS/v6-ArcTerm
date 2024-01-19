@@ -1,11 +1,13 @@
-import { restart } from "../../desktop/power";
-import { CurrentState } from "../../state/main";
+import { restart } from "$state/Desktop/ts/power";
+import { PrimaryState } from "$ts/states";
 import type { Command } from "../interface";
 
 export const Restart: Command = {
   keyword: "restart",
   exec(cmd, argv, term) {
-    if (CurrentState.key == "desktop") return restart(false);
+    const state = PrimaryState.current.get().key;
+
+    if (state == "desktop") return restart();
 
     term.std.writeColor("[RESTART]: Terminating NOW.", "green");
 
