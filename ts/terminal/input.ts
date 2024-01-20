@@ -101,7 +101,7 @@ export class ArcTermInput {
 
     switch (key) {
       case "enter":
-        this.term.history.appendToHistory(input.value);
+        this.term.history.append(input.value);
         this.processCommands(split);
         break;
       case "arrowup":

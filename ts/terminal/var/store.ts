@@ -77,6 +77,11 @@ export function getArcTermStore(term: ArcTerm): VariableStore {
       get: () => `ArcTerm ${term.referenceId}`,
       readOnly: true,
       canDelete: false
+    },
+    rand: {
+      get: () => `${Math.floor(Math.random() * 1e6)}`,
+      readOnly: true,
+      canDelete: false
     }
   };
 }

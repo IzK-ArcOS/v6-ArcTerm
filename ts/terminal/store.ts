@@ -15,6 +15,7 @@ import { End } from "./commands/end";
 import { Err } from "./commands/err";
 import { Exec } from "./commands/exec";
 import { Exit } from "./commands/exit";
+import { ExploreCommand } from "./commands/explore";
 import { Goose } from "./commands/goose";
 import { Goto } from "./commands/goto";
 import { GUD } from "./commands/gud";
@@ -130,6 +131,7 @@ export const desktopSpecific: CommandStore = [
   Kill,
   // oa,
   Open,
-  LogsCommand
+  LogsCommand,
   // Run,
+  ExploreCommand,
 ];

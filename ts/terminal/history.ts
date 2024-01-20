@@ -24,7 +24,7 @@ export class ArcTermHistory {
     }
 
     if (this.index > store.length - 1 && mod > 0) {
-      this.index = store.length - 1;
+      this.index = store.length;
 
       return "";
     }
@@ -38,7 +38,9 @@ export class ArcTermHistory {
     return this.store[this.index] || "";
   }
 
-  public appendToHistory(command: string, index = this.index) {
+  public append(command: string, index = this.index) {
+    if (!command) return;
+
     const store = this.store.get();
 
     if (store[index] == command) return index;
@@ -47,7 +49,7 @@ export class ArcTermHistory {
 
     this.store.set(store);
 
-    this.index = this.index + 1 > store.length ? store.length - 1 : this.index + 1;
+    this.index = this.index + 1 > store.length ? store.length : this.index + 1;
 
     console.log(this.store.get());
 

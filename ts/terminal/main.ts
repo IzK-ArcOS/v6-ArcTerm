@@ -66,7 +66,7 @@ export class ArcTerm {
     this.target.innerText = "";
 
     this.target.removeAttribute("style");
-    this.path = ".";
+    this.path = "./";
     this.history = new ArcTermHistory(this);
     this.commandHandler = new ArcTermCommandHandler(this);
     this.env = new ArcTermEnv(this);
