@@ -30,7 +30,6 @@ import { Logout } from "./commands/logout";
 import { LogsCommand } from "./commands/logs";
 import { Ls } from "./commands/ls";
 import { Mkdir } from "./commands/mkdir";
-// import { oa } from "./commands/oa";
 import { Open } from "./commands/open";
 import { Pause } from "./commands/pause";
 import { QuotaCommand } from "./commands/quota";
@@ -46,10 +45,9 @@ import { Rm } from "./commands/rm";
 import { Servers } from "./commands/servers";
 import { ServiceCommand } from "./commands/service";
 import { Set } from "./commands/set";
-// import { Shutdown } from "./commands/shutdown";
+import { Shutdown } from "./commands/shutdown";
 import { SleepCommand } from "./commands/sleep";
 import { SoundBusCommand } from "./commands/soundbus";
-// import { SoundBusCommand } from "./commands/soundbus";
 import { StateCommand } from "./commands/state";
 import { SUD } from "./commands/sud";
 import { TasksCommand } from "./commands/tasks";
@@ -77,8 +75,8 @@ export const arcCommands: CommandStore = [
   Mkdir,
   Rm,
   Reload,
-  // Restart,
-  // Shutdown,
+  Restart,
+  Shutdown,
   InDesktop,
   Ver,
   Reset,
@@ -131,11 +129,10 @@ export const gooseBumpsCommands: CommandStore = [
 
 export const desktopSpecific: CommandStore = [
   AppList,
-  // ATConf,
+  // ATConf, // TODO: global file handling
   Kill,
-  // oa,
   Open,
   LogsCommand,
-  // Run,
+  // Run, // TODO: global file handling
   ExploreCommand,
 ];
