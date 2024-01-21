@@ -41,13 +41,10 @@ export class ArcTermHistory {
 
     const store = this.store.get();
 
-    if (store[index] == command) return index;
-
     store.splice(index + 1, 0, command);
 
     this.store.set(store);
-
-    this.index = this.index + 1 > store.length ? store.length : this.index + 1;
+    this.index = this.index + 1 >= store.length - 1 ? store.length : this.index + 1;
 
     return index;
   }
