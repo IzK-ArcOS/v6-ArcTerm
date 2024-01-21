@@ -33,6 +33,7 @@ import { Mkdir } from "./commands/mkdir";
 // import { oa } from "./commands/oa";
 import { Open } from "./commands/open";
 import { Pause } from "./commands/pause";
+import { QuotaCommand } from "./commands/quota";
 import { Read } from "./commands/read";
 import { Reload } from "./commands/reload";
 import { RepInfo } from "./commands/repinfo";
@@ -105,7 +106,8 @@ export const arcCommands: CommandStore = [
   TasksCommand,
   Pause,
   Restart,
-  Base64Command
+  Base64Command,
+  QuotaCommand
 ];
 
 /**

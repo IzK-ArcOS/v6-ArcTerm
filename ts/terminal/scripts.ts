@@ -3,10 +3,12 @@ import { blobToText } from "$ts/server/fs/convert";
 import { readDirectory } from "$ts/server/fs/dir";
 import { readFile } from "$ts/server/fs/file";
 import { LogLevel } from "$types/console";
+import { ArcFile } from "$types/fs";
 import type { ArcTerm } from "./main";
 
 export class ArcTermScripts {
   term: ArcTerm;
+  buffer: Record<string, ArcFile> = {};
 
   constructor(term: ArcTerm) {
     Log(`ArcTerm ${term.referenceId}`, `Creating new ArcTermScripts`);
@@ -39,6 +41,8 @@ export class ArcTermScripts {
 
     if (!file) return false;
 
+    this.buffer[path] = file;
+
     const d = await blobToText(file.data);
     const split = d.split("\n");
 
@@ -51,7 +55,7 @@ export class ArcTermScripts {
       `scripts.runScriptFile: running ${path}`
     );
 
-    const contents = await readFile(path);
+    const contents = this.buffer[path] || await readFile(path);
 
     if (!contents)
       return Log(
