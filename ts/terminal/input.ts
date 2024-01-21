@@ -97,8 +97,6 @@ export class ArcTermInput {
     const split = input.value.split("&&");
     const key = e.key.toLowerCase();
 
-    console.log(key);
-
     switch (key) {
       case "enter":
         this.term.history.append(input.value);

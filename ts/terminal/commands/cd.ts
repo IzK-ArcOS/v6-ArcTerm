@@ -6,7 +6,11 @@ import type { ArcTerm } from "../main";
 export const Cd: Command = {
   keyword: "cd",
   async exec(cmd, argv, term) {
-    const path = `${term.path}/${argv.join(" ")}`;
+    const cwd = term.path.endsWith("/") ? term.path.slice(0, -1) : term.path;
+    const newPath = argv.join(" ")
+    const path = `${cwd}/${newPath}`;
+
+    if (newPath == "/") return term.path = "./";
 
     const directory = await readDirectory(path);
 

@@ -35,13 +35,16 @@ function all(dir: UserDirectory, term: ArcTerm) {
 }
 
 async function specific(path: string, currentPath: string, term: ArcTerm) {
-  if (currentPath != ".") {
+  if (currentPath != "." && currentPath != "./") {
     path = currentPath + "/" + path;
   }
+
 
   const dir = (await readDirectory(path)) as UserDirectory;
   const subdirs = sortDirectories(dir.directories);
   const files = sortFiles(dir.files);
+
+  console.log(path, files)
 
   if (dir.scopedPath == undefined) {
     term.std.Error(`The directory doesn't exist in this path.`);
@@ -54,8 +57,6 @@ async function specific(path: string, currentPath: string, term: ArcTerm) {
 
   for (const file of files) {
     term.std.writeColor(`[${file.filename}]`, "aqua");
-
-    return;
   }
 
   if (subdirs.length == 0 && files.length == 0) {

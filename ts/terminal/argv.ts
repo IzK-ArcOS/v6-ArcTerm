@@ -1,5 +1,10 @@
 import { Arguments } from "./interface";
 
+/**
+ * Parses the ArcTerm flags from the ArcTerm input
+ * @param args The argument string to parse from
+ * @returns The parsed flags
+ */
 export function parseFlags(args: string): Arguments {
   const regex = /(?:--(?<nl>[a-z\-]+)(?:="(?<vl>.*?)"|(?:=(?<vs>.*?)(?: |$))|)|-(?<ns>[a-zA-Z]))/gm; //--name=?value
   const matches: RegExpMatchArray[] = [];

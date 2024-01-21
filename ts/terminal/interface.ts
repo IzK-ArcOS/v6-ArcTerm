@@ -15,7 +15,7 @@ export interface Flag {
   required?: boolean;
   value?: {
     name: string;
-    type: "string" | "number" | "boolean";
+    type: "string" | "number" | "boolean" | "other";
   };
   description?: string;
 }

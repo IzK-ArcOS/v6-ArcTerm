@@ -1,5 +1,6 @@
 import { AppList } from "./commands/applist";
 import { ArcFetch } from "./commands/arcfetch";
+import { Base64Command } from "./commands/b64";
 // import { ATConf } from "./commands/atconf";
 import { BgCommand } from "./commands/bg";
 import { BugRep } from "./commands/bugrep";
@@ -103,7 +104,8 @@ export const arcCommands: CommandStore = [
   ServiceCommand,
   TasksCommand,
   Pause,
-  Restart
+  Restart,
+  Base64Command
 ];
 
 /**

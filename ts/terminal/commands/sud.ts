@@ -45,10 +45,12 @@ export const SUD: Command = {
 
     UserDataStore.set(udata);
 
-    term.std.writeColor(
-      `Wrote ["${newValue}"] to [UserData.${hierarchy}]`,
-      "blue"
-    );
+    if (term.std.verbose)
+      term.std.writeColor(
+        `Wrote ["${newValue}"] to [UserData.${hierarchy}]`,
+        "blue"
+      );
+
   },
   description: "Set UserData parameters",
 };

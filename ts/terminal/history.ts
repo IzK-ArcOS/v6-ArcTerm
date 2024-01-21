@@ -29,8 +29,6 @@ export class ArcTermHistory {
       return "";
     }
 
-    console.log(mod, this.index, store[this.index])
-
     return store[this.index]
   }
 
@@ -50,8 +48,6 @@ export class ArcTermHistory {
     this.store.set(store);
 
     this.index = this.index + 1 > store.length ? store.length : this.index + 1;
-
-    console.log(this.store.get());
 
     return index;
   }

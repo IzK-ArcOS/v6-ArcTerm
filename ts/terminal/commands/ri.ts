@@ -76,6 +76,6 @@ async function displayFile(term: ArcTerm, fn: string, height: number) {
   }
 }
 
-export function displayUrl(term: ArcTerm, url: string, height: number) {
+function displayUrl(term: ArcTerm, url: string, height: number) {
   term.std.writeImage(url, height || DEFSIZE);
 }

@@ -1,5 +1,9 @@
 import type { ArcTerm } from "./main";
 
+/**
+ * Displays the ArcTerm intro ASCII-art
+ * @param term ArcTerm Class
+ */
 export function ArcTermIntro(term: ArcTerm) {
   if (!term.env.logo) return;
 

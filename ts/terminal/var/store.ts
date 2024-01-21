@@ -6,8 +6,14 @@ import { UserName } from "$ts/stores/user";
 import { Color, colors, VariableStore } from "../interface";
 import type { ArcTerm } from "../main";
 
+/**
+ * Gets the ArcTerm variable store based on the current ArcTerm Class instance
+ * @param term ArcTerm Class
+ * @returns The variable store
+ */
 export function getArcTermStore(term: ArcTerm): VariableStore {
   Log(`ArcTerm ${term.referenceId}`, "Creating new ArcTermVariableStore");
+
   return {
     prompt: {
       get: () => term.env.prompt,
