@@ -1,5 +1,6 @@
 import { AppList } from "./commands/applist";
 import { ArcFetch } from "./commands/arcfetch";
+import { ATConfCommand } from "./commands/atconf";
 import { Base64Command } from "./commands/b64";
 // import { ATConf } from "./commands/atconf";
 import { BgCommand } from "./commands/bg";
@@ -129,7 +130,7 @@ export const gooseBumpsCommands: CommandStore = [
 
 export const desktopSpecific: CommandStore = [
   AppList,
-  // ATConf, // TODO: global file handling
+  ATConfCommand,
   Kill,
   Open,
   LogsCommand,

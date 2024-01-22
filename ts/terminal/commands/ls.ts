@@ -44,8 +44,6 @@ async function specific(path: string, currentPath: string, term: ArcTerm) {
   const subdirs = sortDirectories(dir.directories);
   const files = sortFiles(dir.files);
 
-  console.log(path, files)
-
   if (dir.scopedPath == undefined) {
     term.std.Error(`The directory doesn't exist in this path.`);
     return;
