@@ -1,4 +1,3 @@
-import { sleep } from "$ts/util";
 import type { Command } from "../interface";
 
 export const Reload: Command = {

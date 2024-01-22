@@ -1,4 +1,3 @@
-import { isDisabled } from "$ts/apps/disable/utils";
 import { spawnApp } from "$ts/apps/spawn";
 import { tryJsonConvert } from "$ts/json";
 import { appLibrary } from "$ts/stores/apps";

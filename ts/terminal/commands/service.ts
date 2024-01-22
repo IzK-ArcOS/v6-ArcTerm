@@ -1,9 +1,9 @@
 import { getService, restartService, startService, stopService } from "$ts/service/interact";
 import { ProcessStack } from "$ts/stores/process";
+import { ServiceChangeResultCaptions } from "$ts/stores/service/captions";
 import dayjs from "dayjs";
 import type { Command } from "../interface";
 import type { ArcTerm } from "../main";
-import { ServiceChangeResultCaptions } from "$ts/stores/service/captions";
 
 export const ServiceCommand: Command = {
   keyword: "service",
