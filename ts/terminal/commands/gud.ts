@@ -10,7 +10,7 @@ export const GUD: Command = {
     const currentValue = hierarchy ? getJsonHierarchy(udata, hierarchy) : udata;
 
     // `-` means it's a flag
-    if (hierarchy.startsWith("-")) return term.std.Error("Hierarchy has to be the first argument!");
+    if (hierarchy && hierarchy.startsWith("-")) return term.std.Error("Hierarchy has to be the first argument!");
 
     if (!currentValue && typeof currentValue === "undefined" && hierarchy)
       return term.std.Error(`Can't find [UserData.${hierarchy}]!`);
