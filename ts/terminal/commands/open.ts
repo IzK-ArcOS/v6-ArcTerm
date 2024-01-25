@@ -27,6 +27,7 @@ export const Open: Command = {
     }
 
     term.std.Info(`Spawned [${library.get(id).metadata.name}] on PID [${pid}]`);
+    term.vars.set("openpid", `${pid}`); // make the pid accessible for scripts
   },
   help(term) {
     term.std.writeColor("[NOTE]: Capitalization matters.", "yellow");

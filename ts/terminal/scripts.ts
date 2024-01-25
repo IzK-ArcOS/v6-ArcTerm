@@ -29,10 +29,10 @@ export class ArcTermScripts {
     const files = dir.files;
 
     for (const file of files) {
-      const name = file.filename.split(".")[0];
+      const name = file.filename.toLowerCase();
       const path = file.scopedPath;
 
-      if (name.toLowerCase() == cmd.toLowerCase() && (await this.isScriptFile(path))) return path;
+      if (name == `${cmd}.arcterm` && (await this.isScriptFile(path))) return path;
     }
   }
 
