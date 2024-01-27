@@ -43,11 +43,10 @@ export class ArcTermCommandHandler {
 
     const result = await command.exec(cmd, args, this.term, parseFlags(argStr));
 
+    if (this.term.std.verbose && !isScript) this.term.std.writeLine("\n");
+    if (!isScript) this.term.input.unlock();
     if (result == false) return false;
     if (!this.term.std || !this.term.input) return true;
-    if (this.term.std.verbose && !isScript) this.term.std.writeLine("\n");
-
-    this.term.input.unlock();
 
     return command.keyword != "default";
   }
