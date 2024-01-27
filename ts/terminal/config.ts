@@ -59,7 +59,7 @@ export class ArcTermConfig {
     if (!file) return this.writeConfig();
 
     const d = await blobToText(file.data);
-    const json = tryJsonConvert<object>(d);
+    const json = tryJsonConvert<object>(d) as object;
 
     if (typeof json !== "object") return this.writeConfig();
 

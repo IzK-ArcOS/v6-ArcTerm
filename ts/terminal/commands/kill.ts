@@ -8,7 +8,7 @@ import type { Command } from "../interface";
 export const Kill: Command = {
   keyword: "kill",
   async exec(cmd, argv, term) {
-    const pid = tryJsonConvert<number>(argv[0]);
+    const pid = tryJsonConvert<number>(argv[0]) as number;
     const process = ProcessStack.getProcess(pid)
 
     if (!pid) return term.std.Error("Missing process ID.");

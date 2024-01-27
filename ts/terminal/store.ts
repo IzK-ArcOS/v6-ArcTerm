@@ -58,6 +58,7 @@ import { Vars } from "./commands/vars";
 import { Ver } from "./commands/ver";
 import { Verbose } from "./commands/verbose";
 import type { CommandStore } from "./interface";
+import { PokeCommand } from "./commands/poke";
 
 export const arcCommands: CommandStore = [
   ArcFetch,
@@ -135,4 +136,5 @@ export const desktopSpecific: CommandStore = [
   LogsCommand,
   Open,
   ExploreCommand,
+  PokeCommand
 ];
