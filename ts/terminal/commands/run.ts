@@ -1,45 +1,23 @@
-import { readDirectory } from "$ts/server/fs/dir";
-import { PartialArcFile, UserDirectory } from "$types/fs";
-import { get } from "svelte/store";
+import { getPartialFile } from "$ts/server/fs/file";
+import { OpenFile } from "$ts/server/fs/file/handler";
 import type { Command } from "../interface";
 
-export const Run: Command = {
-  keyword: "run",
+export const Open: Command = {
+  keyword: "open",
   async exec(cmd, argv, term) {
-    const path = term.path as string;
     const fn = argv.join(" ").trim();
-    const dir = (await readDirectory(path)) as UserDirectory;
+    const partial = await getPartialFile(`${term.path}/${fn}`)
 
-    for (const file of dir.files) {
-      if (file.filename == fn) {
-        term.std.writeLine(`Opening ${fn} (${file.size} Bytes)`);
+    if (!partial) return term.std.Error(`Can't find file [${fn}]!`);
 
-        o(file);
+    await OpenFile(partial);
 
-        return;
-      }
-    }
-
-    term.std.Error(`The file doesn't exist on ArcFS.`);
+    term.std.Info(`Opened [${fn}] (${partial.size} bytes)`)
   },
   help(term) {
     term.std.writeColor("[NOTE]: Capitalization matters.", "yellow");
-    term.std.writeColor("Example: [run] arcterm.conf", "blue");
+    term.std.writeColor("Example: [open] arcterm.conf", "blue");
   },
   description: "Run a file from your ArcFS account.",
   syntax: `"<[filename]>"`,
 };
-
-async function o(f: PartialArcFile) {
-  const scope = f.scopedPath;
-
-  /* if (scope.startsWith("./")) f.scopedPath = scope.replace("./", ""); */
-
-  const file = await openUserFile(f);
-
-  WindowStore.set(get(WindowStore));
-
-  if (file == true) return;
-
-  openWithDialog({ ...file, anymime: true });
-}

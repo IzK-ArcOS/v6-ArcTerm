@@ -1,8 +1,7 @@
 import { AppList } from "./commands/applist";
 import { ArcFetch } from "./commands/arcfetch";
-import { ATConfCommand } from "./commands/atconf";
 import { Base64Command } from "./commands/b64";
-// import { ATConf } from "./commands/atconf";
+import { ATConf } from "./commands/atconf";
 import { BgCommand } from "./commands/bg";
 import { BugRep } from "./commands/bugrep";
 import { Cd } from "./commands/cd";
@@ -31,7 +30,7 @@ import { Logout } from "./commands/logout";
 import { LogsCommand } from "./commands/logs";
 import { Ls } from "./commands/ls";
 import { Mkdir } from "./commands/mkdir";
-import { Open } from "./commands/open";
+import { Spawn } from "./commands/open";
 import { Pause } from "./commands/pause";
 import { QuotaCommand } from "./commands/quota";
 import { Read } from "./commands/read";
@@ -42,7 +41,7 @@ import { Restart } from "./commands/restart";
 import { Rf } from "./commands/rf";
 import { Ri } from "./commands/ri";
 import { Rm } from "./commands/rm";
-// import { Run } from "./commands/run";
+import { Open } from "./commands/run";
 import { Servers } from "./commands/servers";
 import { ServiceCommand } from "./commands/service";
 import { Set } from "./commands/set";
@@ -130,10 +129,10 @@ export const gooseBumpsCommands: CommandStore = [
 
 export const desktopSpecific: CommandStore = [
   AppList,
-  ATConfCommand,
+  ATConf,
   Kill,
-  Open,
+  Spawn,
   LogsCommand,
-  // Run, // TODO: global file handling
+  Open,
   ExploreCommand,
 ];

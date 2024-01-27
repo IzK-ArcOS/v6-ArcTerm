@@ -1,10 +1,13 @@
-import { spawnApp } from "$ts/apps";
+import { getPartialFile } from "$ts/server/fs/file";
+import { openFileWithApp } from "$ts/server/fs/open";
 import { Command } from "../interface";
 
-export const ATConfCommand: Command = {
+export const ATConf: Command = {
   keyword: "atconf",
-  exec() {
-    spawnApp("TextEditor", 0, ["./arcterm.conf"])
+  async exec() {
+    const partial = await getPartialFile("./arcterm.conf");
+
+    openFileWithApp("TextEditor", partial)
   },
   description: "Edit your ArcTerm configuration in the Text Editor",
 }

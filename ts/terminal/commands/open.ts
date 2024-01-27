@@ -4,8 +4,8 @@ import { appLibrary } from "$ts/stores/apps";
 import { AppSpawnResultCaptions } from "$ts/stores/apps/spawn";
 import type { Command } from "../interface";
 
-export const Open: Command = {
-  keyword: "open",
+export const Spawn: Command = {
+  keyword: "spawn",
   async exec(cmd, argv, term) {
     const id = argv[0];
 
@@ -31,7 +31,7 @@ export const Open: Command = {
   },
   help(term) {
     term.std.writeColor("[NOTE]: Capitalization matters.", "yellow");
-    term.std.writeColor("Example: [open] ArcTerm", "blue");
+    term.std.writeColor("Example: [spawn] ArcTerm", "blue");
   },
   description: "Open a window",
   syntax: `"<[appId]>" (...[arguments])`,
