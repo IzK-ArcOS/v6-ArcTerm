@@ -1,4 +1,4 @@
-import { focusedPid } from "$ts/stores/apps";
+import { focusedPid } from "$ts/stores/apps/focus";
 import { Command } from "../interface";
 
 export const Pause: Command = {
@@ -6,13 +6,17 @@ export const Pause: Command = {
   async exec(cmd, argv, term, flags) {
     if (!flags.silent) term.std.writeLine("Press any key to continue . . .");
 
-    await new Promise((r) => document.addEventListener("keydown", () => {
-      if (term.app ? focusedPid.get() == term.pid : true) r(null)
-    }));
+    await new Promise((r) =>
+      document.addEventListener("keydown", () => {
+        if (term.app ? focusedPid.get() == term.pid : true) r(null);
+      })
+    );
   },
   description: "Pause until a key is pressed",
-  flags: [{
-    keyword: "silent",
-    description: "Don't display the prompt"
-  }]
-}
+  flags: [
+    {
+      keyword: "silent",
+      description: "Don't display the prompt",
+    },
+  ],
+};
