@@ -22,10 +22,7 @@ export const Ri: Command = {
     term.std.Error("Missing parameters.");
   },
   help(term) {
-    term.std.writeColor(
-      `Example: [ri] --url="https://tinyurl.com/arcoslogo"`,
-      "blue"
-    );
+    term.std.writeColor(`Example: [ri] --url="https://tinyurl.com/arcoslogo"`, "blue");
   },
   description: "Display image from ArcFS or URL",
   flags: [
@@ -33,27 +30,29 @@ export const Ri: Command = {
       keyword: "file",
       value: {
         name: "path",
-        type: "string"
+        type: "string",
       },
-      description: "The ArcFS path to read the image from. Specify if you want to read from the filesystem."
+      description:
+        "The ArcFS path to read the image from. Specify if you want to read from the filesystem.",
     },
     {
       keyword: "url",
       value: {
         name: "url",
-        type: "string"
+        type: "string",
       },
-      description: "The URL to read the image from. Specify if you want to read from a web resource."
+      description:
+        "The URL to read the image from. Specify if you want to read from a web resource.",
     },
     {
       keyword: "height",
       value: {
         name: "pixels",
-        type: "number"
+        type: "number",
       },
-      description: "The height in pixels of the image to be displayed. Defaults to 20px."
+      description: "The height in pixels of the image to be displayed. Defaults to 20px.",
     },
-  ]
+  ],
 };
 
 async function displayFile(term: ArcTerm, fn: string, height: number) {

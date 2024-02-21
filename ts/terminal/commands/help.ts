@@ -6,10 +6,7 @@ export const Help: Command = {
   keyword: "help",
   exec(cmd, argv, term, flags) {
     if (flags.count)
-      return term.std.writeColor(
-        `ArcTerm has [${term.commands.length}] commands.`,
-        "aqua"
-      );
+      return term.std.writeColor(`ArcTerm has [${term.commands.length}] commands.`, "aqua");
 
     if (argv[0] && !argv[0].startsWith("--")) return specific(argv[0], term);
 
@@ -23,24 +20,21 @@ export const Help: Command = {
   flags: [
     {
       keyword: "count",
-      description: "Show the amount of ArcTerm commands."
+      description: "Show the amount of ArcTerm commands.",
     },
     {
       keyword: "list",
-      description: "Show a list of ArcTerm commands with their descriptions. This flag doesn't work with --count."
-    }
-  ]
+      description:
+        "Show a list of ArcTerm commands with their descriptions. This flag doesn't work with --count.",
+    },
+  ],
 };
 
 function all(term: ArcTerm, short: boolean) {
   const cmd = term.commands.sort((a, b) => {
     return b.keyword < a.keyword ? 1 : -1;
   });
-  if (short)
-    return term.std.writeColor(
-      `[${cmd.map((c) => c.keyword).join("  ")}]`,
-      "aqua"
-    );
+  if (short) return term.std.writeColor(`[${cmd.map((c) => c.keyword).join("  ")}]`, "aqua");
 
   for (const command of cmd) {
     const a = command.keyword.toUpperCase().padEnd(15, " ");
@@ -53,14 +47,10 @@ function all(term: ArcTerm, short: boolean) {
 function specific(command: string, term: ArcTerm) {
   const c = term.commandHandler.getCommand(command);
 
-  if (!c || c.keyword == Default.keyword)
-    return term.std.Error(`${command}: command not found.`);
+  if (!c || c.keyword == Default.keyword) return term.std.Error(`${command}: command not found.`);
 
   if (!c.help) {
-    term.std.writeColor(
-      `[${c.keyword.toUpperCase()}]: ${c.description}`,
-      "blue"
-    );
+    term.std.writeColor(`[${c.keyword.toUpperCase()}]: ${c.description}`, "blue");
 
     term.std.writeLine("\n");
   }
@@ -68,10 +58,7 @@ function specific(command: string, term: ArcTerm) {
   const flagStr = term.commandHandler.compileFlagStr(c);
   const helpSwitches = term.commandHandler.compileHelpSwitches(c);
 
-  term.std.writeColor(
-    `Usage: ${flagStr}\n${helpSwitches}`,
-    "blue"
-  );
+  term.std.writeColor(`Usage: ${flagStr}\n${helpSwitches}`, "blue");
   term.std.writeLine("\n");
 
   if (c.help) return c.help(term);

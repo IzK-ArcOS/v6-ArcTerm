@@ -9,14 +9,14 @@ export const Dispatch: Command = {
     const command = flags.cmd;
     const data = flags.data;
     const app = flags.app;
-    const pid = tryParseInt(flags.pid)
+    const pid = tryParseInt(flags.pid);
 
-    if (!command) return term.std.Error("Nothing to dispatch!")
+    if (!command) return term.std.Error("Nothing to dispatch!");
 
     if (!app && !pid) {
       GlobalDispatch.dispatch(command, data);
 
-      term.std.Info(`Dispatched [${command}] over GlobalDispatch.`)
+      term.std.Info(`Dispatched [${command}] over GlobalDispatch.`);
 
       return;
     }
@@ -24,11 +24,11 @@ export const Dispatch: Command = {
     if (app) {
       ProcessStack.dispatch.dispatchToApp(app, command, data);
 
-      term.std.Info(`Dispatched [${command}] to app [${app}] over ProcessDispatcher`)
+      term.std.Info(`Dispatched [${command}] to app [${app}] over ProcessDispatcher`);
     } else if (pid) {
       ProcessStack.dispatch.dispatchToPid(pid, command, data);
 
-      term.std.Info(`Dispatched [${command}] to process [${pid}] over ProcessDispatcher`)
+      term.std.Info(`Dispatched [${command}] to process [${pid}] over ProcessDispatcher`);
     }
   },
   description: "Dispatch a global command",
@@ -37,34 +37,34 @@ export const Dispatch: Command = {
       keyword: "cmd",
       value: {
         name: "command",
-        type: "string"
+        type: "string",
       },
       description: "The command to dispatch",
-      required: true
+      required: true,
     },
     {
       keyword: "data",
       value: {
         name: "string",
-        type: "string"
+        type: "string",
       },
-      description: "Data to send in as the first argument"
+      description: "Data to send in as the first argument",
     },
     {
       keyword: "app",
       value: {
         name: "id",
-        type: "string"
+        type: "string",
       },
-      description: "Optional app ID to dispatch to"
+      description: "Optional app ID to dispatch to",
     },
     {
       keyword: "pid",
       value: {
         name: "pid",
-        type: "number"
+        type: "number",
       },
       description: "Optional process PID to dispatch to",
     },
-  ]
-}
+  ],
+};

@@ -102,12 +102,7 @@ export class ArcTermStd {
     this.write(str, this.target);
   }
 
-  public updateColor(
-    el: HTMLDivElement,
-    str: string,
-    pri: Color,
-    sec: Color = "white"
-  ) {
+  public updateColor(el: HTMLDivElement, str: string, pri: Color, sec: Color = "white") {
     if (!el) return false;
 
     el.innerText = "";
@@ -160,11 +155,7 @@ export class ArcTermStd {
   ): Promise<string> {
     if (!this.target) return "asdf";
 
-    Log(
-      `ArcTerm ${this.term.referenceId}`,
-      `std.read: ${prefix}${suffix}`,
-      LogLevel.info
-    );
+    Log(`ArcTerm ${this.term.referenceId}`, `std.read: ${prefix}${suffix}`, LogLevel.info);
 
     const current = this.term.input.current;
     const commit = writable<boolean>(false);
@@ -215,7 +206,7 @@ export class ArcTermStd {
 
     trigger.className = "click-trigger";
 
-    this.target.addEventListener("click", () => this.focusInput())
+    this.target.addEventListener("click", () => this.focusInput());
     this.target.append(trigger);
   }
 

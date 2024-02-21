@@ -18,13 +18,7 @@ export class ArcTermConfig {
   }
 
   readonly configPath = "./arcterm.conf";
-  private readonly configKeys = [
-    "prompt",
-    "greeting",
-    "logo",
-    "promptColor",
-    "gooseBumps",
-  ];
+  private readonly configKeys = ["prompt", "greeting", "logo", "promptColor", "gooseBumps"];
 
   public getConfig() {
     const obj = {};
@@ -38,7 +32,6 @@ export class ArcTermConfig {
 
   public loadConfig(json: object) {
     for (const key of this.configKeys) {
-
       const exists = this.env[key] != null && json;
       const isType = typeof this.env[key] == typeof json[key];
 
@@ -49,10 +42,7 @@ export class ArcTermConfig {
   public async loadConfigFile() {
     if (!UserDataStore.get()) return;
 
-    Log(
-      `ArcTerm ${this.term.referenceId}`,
-      `config.loadConfigFile: Getting ${this.configPath}`
-    );
+    Log(`ArcTerm ${this.term.referenceId}`, `config.loadConfigFile: Getting ${this.configPath}`);
 
     const file = await readFile(this.configPath);
 
@@ -67,20 +57,14 @@ export class ArcTermConfig {
   }
 
   public async writeConfig(): Promise<boolean> {
-    Log(
-      `ArcTerm ${this.term.referenceId}`,
-      `config.writeConfig: Writing ${this.configPath}`
-    );
+    Log(`ArcTerm ${this.term.referenceId}`, `config.writeConfig: Writing ${this.configPath}`);
 
     if (!UserToken.get()) return false;
 
     const data = {};
 
     for (const key of this.configKeys) {
-      if (
-        key != "gooseBumps" ||
-        (typeof this.env[key] === "boolean" && this.env[key] == true)
-      )
+      if (key != "gooseBumps" || (typeof this.env[key] === "boolean" && this.env[key] == true))
         data[key] = this.env[key];
     }
 

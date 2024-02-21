@@ -26,10 +26,7 @@ function all(dir: UserDirectory, term: ArcTerm) {
   for (const dir of subdirs) {
     const subdir = dir;
 
-    term.std.writeColor(
-      `-- --- ----, --:-- <directory> [${subdir.name}]/`,
-      "blue"
-    );
+    term.std.writeColor(`-- --- ----, --:-- <directory> [${subdir.name}]/`, "blue");
   }
 
   for (const file of files) {
@@ -61,10 +58,7 @@ async function specific(path: string, currentPath: string, term: ArcTerm) {
   }
 
   for (const dir of subdirs) {
-    term.std.writeColor(
-      `-- --- ----, --:-- <directory> [${dir.name}]/`,
-      "blue"
-    );
+    term.std.writeColor(`-- --- ----, --:-- <directory> [${dir.name}]/`, "blue");
   }
 
   for (const file of files) {

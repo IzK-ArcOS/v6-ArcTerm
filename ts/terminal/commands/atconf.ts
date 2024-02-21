@@ -7,7 +7,7 @@ export const ATConf: Command = {
   async exec() {
     const partial = await getPartialFile("./arcterm.conf");
 
-    openFileWithApp("TextEditor", partial)
+    openFileWithApp("TextEditor", partial);
   },
   description: "Edit your ArcTerm configuration in the Text Editor",
-}
+};

@@ -9,10 +9,7 @@ export const StateCommand: Command = {
     if (!state) {
       const s = PrimaryState.current.get();
 
-      return term.std.writeColor(
-        `Current state: [${s.name}] (ArcOS.state.[${s.key}])`,
-        "purple"
-      );
+      return term.std.writeColor(`Current state: [${s.name}] (ArcOS.state.[${s.key}])`, "purple");
     }
 
     PrimaryState.navigate(state);

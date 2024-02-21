@@ -18,10 +18,12 @@ export const History: Command = {
     term.std.writeColor("Example: [history] --clear", "blue");
   },
   description: "Show the command history",
-  flags: [{
-    keyword: "clear",
-    description: "Clear the history buffer"
-  }]
+  flags: [
+    {
+      keyword: "clear",
+      description: "Clear the history buffer",
+    },
+  ],
 };
 
 function clear(term: ArcTerm) {

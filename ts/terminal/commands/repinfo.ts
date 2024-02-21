@@ -62,14 +62,16 @@ export const RepInfo: Command = {
   flags: [
     {
       keyword: "json",
-      description: "Display the report data as a JSON object"
-    }, {
+      description: "Display the report data as a JSON object",
+    },
+    {
       keyword: "file",
       value: {
         name: "filename",
-        type: "string"
+        type: "string",
       },
-      description: "An optional file name to save the report data to. Requires --json to be specified."
-    }
-  ]
+      description:
+        "An optional file name to save the report data to. Requires --json to be specified.",
+    },
+  ],
 };

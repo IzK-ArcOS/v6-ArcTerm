@@ -29,7 +29,7 @@ export class ArcTermHistory {
       return "";
     }
 
-    return store[this.index]
+    return store[this.index];
   }
 
   public getCurrentIndexItem(): string {

@@ -10,14 +10,16 @@ export const GUD: Command = {
     const currentValue = hierarchy ? getJsonHierarchy(udata, hierarchy) : udata;
 
     // `-` means it's a flag
-    if (hierarchy && hierarchy.startsWith("-")) return term.std.Error("Hierarchy has to be the first argument!");
+    if (hierarchy && hierarchy.startsWith("-"))
+      return term.std.Error("Hierarchy has to be the first argument!");
 
     if (!currentValue && typeof currentValue === "undefined" && hierarchy)
       return term.std.Error(`Can't find [UserData.${hierarchy}]!`);
 
-    if (flags.var && typeof flags.var === "boolean") return term.std.Error("Need a variable to write to!");
+    if (flags.var && typeof flags.var === "boolean")
+      return term.std.Error("Need a variable to write to!");
 
-    term.vars.set(flags.var, currentValue)
+    term.vars.set(flags.var, currentValue);
 
     term.std.writeLine(JSON.stringify(currentValue, null, 2));
   },
@@ -30,9 +32,9 @@ export const GUD: Command = {
       keyword: "var",
       value: {
         name: "variable",
-        type: "other"
+        type: "other",
       },
-      description: "Variable to write the result to"
-    }
-  ]
+      description: "Variable to write the result to",
+    },
+  ],
 };

@@ -40,12 +40,9 @@ async function stop(argv: string[], term: ArcTerm) {
   const status = await stopService(service);
 
   if (status != "success")
-    term.std.Error(
-      `Couldn't stop service [${service}]: ${ServiceChangeResultCaptions[status]}`
-    );
+    term.std.Error(`Couldn't stop service [${service}]: ${ServiceChangeResultCaptions[status]}`);
   else term.std.writeColor(`Stopped service [${service}].`, "blue");
 }
-
 
 async function start(argv: string[], term: ArcTerm) {
   const service = argv[1];
@@ -57,7 +54,7 @@ async function start(argv: string[], term: ArcTerm) {
     term.std.Error(`Couldn't start service [${service}]: ${resultCaption}`);
 
     term.std.writeLine("\n");
-    term.std.writeColor(`[Code: ${result}]`, "gray")
+    term.std.writeColor(`[Code: ${result}]`, "gray");
 
     return;
   }
@@ -70,9 +67,7 @@ async function restart(argv: string[], term: ArcTerm) {
   const status = await restartService(service);
 
   if (status !== "success")
-    term.std.Error(
-      `Couldn't restart service [${service}]: ${ServiceChangeResultCaptions[status]}`
-    );
+    term.std.Error(`Couldn't restart service [${service}]: ${ServiceChangeResultCaptions[status]}`);
   else term.std.writeColor(`Restarted service [${service}].`, "blue");
 }
 
@@ -86,15 +81,18 @@ function status(argv: string[], term: ArcTerm) {
 
   const pid = data.pid || 0;
   const statusText = pid ? "✔ Running" : "✖ Stopped";
-  const pidString = pid ? `on PID ${pid} - handler ${ProcessStack.id}` : `- no PID`
-  const state = pid ? "started" : "stopped"
+  const pidString = pid ? `on PID ${pid} - handler ${ProcessStack.id}` : `- no PID`;
+  const state = pid ? "started" : "stopped";
   const loadedAt = dayjs(data.loadedAt).format("MMM D, HH:mm:ss");
   const changedAt = dayjs(data.changedAt).format("MMM D, HH:mm:ss");
 
   term.std.writeColor(`[${data.name}] - ${data.description}`, "blue");
   term.std.writeLine("\n");
-  term.std.writeColor(`Status:          [${statusText}] ${pidString}`, pid ? "green" : "red")
+  term.std.writeColor(`Status:          [${statusText}] ${pidString}`, pid ? "green" : "red");
   term.std.writeColor(`State:           [${state}] - Changed at ${changedAt}`, "purple");
-  term.std.writeColor(`Identifier:      [${data.id || service}] ${!data.id ? "(derived)" : ""}`, "purple");
+  term.std.writeColor(
+    `Identifier:      [${data.id || service}] ${!data.id ? "(derived)" : ""}`,
+    "purple"
+  );
   term.std.writeColor(`Loaded At:       [${loadedAt}]`, "purple");
 }

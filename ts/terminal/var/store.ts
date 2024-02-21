@@ -45,8 +45,7 @@ export function getArcTermStore(term: ArcTerm): VariableStore {
       set: async (v) => {
         const dir = await readDirectory(v);
 
-        if (!dir)
-          return term.std.Error(`pwd: Directory doesn't exist, falling back.`);
+        if (!dir) return term.std.Error(`pwd: Directory doesn't exist, falling back.`);
 
         term.path = v;
       },
@@ -56,8 +55,7 @@ export function getArcTermStore(term: ArcTerm): VariableStore {
     color: {
       get: () => term.env.promptColor,
       set: async (v) => {
-        if (!colors.includes(v))
-          return term.std.Error("color is invalid, falling back.");
+        if (!colors.includes(v)) return term.std.Error("color is invalid, falling back.");
 
         term.env.promptColor = v as Color;
 
@@ -79,15 +77,15 @@ export function getArcTermStore(term: ArcTerm): VariableStore {
       readOnly: true,
       canDelete: false,
     },
-    "$": {
+    $: {
       get: () => `ArcTerm ${term.referenceId}`,
       readOnly: true,
-      canDelete: false
+      canDelete: false,
     },
     rand: {
       get: () => `${Math.floor(Math.random() * 1e6)}`,
       readOnly: true,
-      canDelete: false
-    }
+      canDelete: false,
+    },
   };
 }

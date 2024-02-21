@@ -16,11 +16,7 @@ export const TasksCommand: Command = {
       const process = proc as Process;
 
       term.std.writeColor(
-        compile(
-          `[${pid}]`,
-          process.name,
-          process.app ? process.app.metadata.name : ""
-        ),
+        compile(`[${pid}]`, process.name, process.app ? process.app.metadata.name : ""),
         "blue"
       );
     }

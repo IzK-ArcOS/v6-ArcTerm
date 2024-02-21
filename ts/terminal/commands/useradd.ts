@@ -15,8 +15,7 @@ export const UserAdd: Command = {
 
     term.std.writeLine(`\nContinue creating ${username}?\n`);
 
-    const confirmCreate =
-      (await term.std.select(["Confirm creation", "Stop!"])) == 0;
+    const confirmCreate = (await term.std.select(["Confirm creation", "Stop!"])) == 0;
 
     if (!confirmCreate) return term.std.Warning("Aborted.");
 

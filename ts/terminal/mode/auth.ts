@@ -66,8 +66,7 @@ async function serverConnect(term: ArcTerm) {
 
   term.std.writeLine(`Connecting to ${server}...`);
 
-  if (!(await testConnection(server, authCode)))
-    return await serverConnect(term);
+  if (!(await testConnection(server, authCode))) return await serverConnect(term);
 
   addServer(server);
   setAuthcode(server, authCode);

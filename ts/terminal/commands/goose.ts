@@ -51,9 +51,7 @@ function dummy(term: ArcTerm) {
 }
 
 async function gooses(term: ArcTerm) {
-  term.std.Warning(
-    "Super duper secret thingy approaching! Welcome to the GooseBumps."
-  );
+  term.std.Warning("Super duper secret thingy approaching! Welcome to the GooseBumps.");
   term.std.writeLine("\n");
 
   const options = {
@@ -67,10 +65,7 @@ async function gooses(term: ArcTerm) {
     "Crash ArcOS": "err",
   };
 
-  const cmd =
-    Object.values(options)[
-    await term.std.select(Object.keys(options), "orange")
-    ];
+  const cmd = Object.values(options)[await term.std.select(Object.keys(options), "orange")];
 
   if (cmd == "$cancel") return;
 

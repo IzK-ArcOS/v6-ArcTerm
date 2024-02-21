@@ -39,7 +39,6 @@ async function specific(path: string, currentPath: string, term: ArcTerm) {
     path = currentPath + "/" + path;
   }
 
-
   const dir = (await readDirectory(path)) as UserDirectory;
   const subdirs = sortDirectories(dir.directories);
   const files = sortFiles(dir.files);

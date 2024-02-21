@@ -7,8 +7,7 @@ export const SleepCommand: Command = {
     try {
       const duration = JSON.parse(argv[0]);
 
-      if (typeof duration !== "number")
-        return term.std.Error("Invalid duration.");
+      if (typeof duration !== "number") return term.std.Error("Invalid duration.");
 
       await sleep(duration as number);
     } catch {

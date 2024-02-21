@@ -6,13 +6,13 @@ export const Open: Command = {
   keyword: "open",
   async exec(cmd, argv, term) {
     const fn = argv.join(" ").trim();
-    const partial = await getPartialFile(`${term.path}/${fn}`)
+    const partial = await getPartialFile(`${term.path}/${fn}`);
 
     if (!partial) return term.std.Error(`Can't find file [${fn}]!`);
 
     await OpenFile(partial);
 
-    term.std.Info(`Opened [${fn}] (${partial.size} bytes)`)
+    term.std.Info(`Opened [${fn}] (${partial.size} bytes)`);
   },
   help(term) {
     term.std.writeColor("[NOTE]: Capitalization matters.", "yellow");

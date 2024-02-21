@@ -14,11 +14,7 @@ export class ArcTermStdSelect {
   private _color: Color;
 
   constructor(std: ArcTermStd, color?: Color) {
-    Log(
-      `ArcTerm ${std.term.referenceId}`,
-      `Creating new ArcTermStdSelect`,
-      LogLevel.info
-    );
+    Log(`ArcTerm ${std.term.referenceId}`, `Creating new ArcTermStdSelect`, LogLevel.info);
 
     this._color = color || "blue";
     this.std = std;
@@ -37,23 +33,14 @@ export class ArcTermStdSelect {
     for (let i = 0; i < this._elements.length; i++) {
       const element = this._elements[i];
 
-      this.std.updateColor(
-        element,
-        this.getStr(i, this._options[i]),
-        this._color,
-        "gray"
-      );
+      this.std.updateColor(element, this.getStr(i, this._options[i]), this._color, "gray");
     }
   }
 
   private keyDown(e: KeyboardEvent): void {
     const app = this.std.term.app;
 
-    if (
-      !e.key ||
-      get(this._sent) /* FIXME || (app && get(focusedWindowId) !== app.id) */
-    )
-      return;
+    if (!e.key || get(this._sent) /* FIXME || (app && get(focusedWindowId) !== app.id) */) return;
 
     const key = e.key.toLowerCase();
     const min = 0;

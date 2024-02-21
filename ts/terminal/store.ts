@@ -1,7 +1,7 @@
 import { AppList } from "./commands/applist";
 import { ArcFetch } from "./commands/arcfetch";
-import { Base64Command } from "./commands/b64";
 import { ATConf } from "./commands/atconf";
+import { Base64Command } from "./commands/b64";
 import { BgCommand } from "./commands/bg";
 import { BugRep } from "./commands/bugrep";
 import { Cd } from "./commands/cd";
@@ -32,6 +32,7 @@ import { Ls } from "./commands/ls";
 import { Mkdir } from "./commands/mkdir";
 import { Spawn } from "./commands/open";
 import { Pause } from "./commands/pause";
+import { PokeCommand } from "./commands/poke";
 import { QuotaCommand } from "./commands/quota";
 import { Read } from "./commands/read";
 import { Reload } from "./commands/reload";
@@ -58,7 +59,6 @@ import { Vars } from "./commands/vars";
 import { Ver } from "./commands/ver";
 import { Verbose } from "./commands/verbose";
 import type { CommandStore } from "./interface";
-import { PokeCommand } from "./commands/poke";
 
 export const arcCommands: CommandStore = [
   ArcFetch,
@@ -106,7 +106,7 @@ export const arcCommands: CommandStore = [
   Pause,
   Restart,
   Base64Command,
-  QuotaCommand
+  QuotaCommand,
 ];
 
 /**
@@ -136,5 +136,5 @@ export const desktopSpecific: CommandStore = [
   LogsCommand,
   Open,
   ExploreCommand,
-  PokeCommand
+  PokeCommand,
 ];

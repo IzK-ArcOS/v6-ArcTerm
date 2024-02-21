@@ -60,8 +60,7 @@ export class ArcTerm {
 
     Log(`ArcTerm ${this.referenceId}`, `Initializing new ArcTerm`);
 
-    if (!this.target)
-      throw new Error("Can't initialize ArcTerm without a valid target");
+    if (!this.target) throw new Error("Can't initialize ArcTerm without a valid target");
 
     this.target.innerText = "";
 
@@ -87,7 +86,7 @@ export class ArcTerm {
 
     if (!this.pid) return this.intro();
 
-    const proc = ProcessStack.getProcess(this.pid)
+    const proc = ProcessStack.getProcess(this.pid);
     const args = proc.args;
 
     if (!args[0] || !Array.isArray(args[0])) return this.intro();

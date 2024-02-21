@@ -23,11 +23,11 @@ export const Users: Command = {
       keyword: "search",
       value: {
         name: "user",
-        type: "string"
+        type: "string",
       },
-      description: "A username to search for."
-    }
-  ]
+      description: "A username to search for.",
+    },
+  ],
 };
 
 async function allUsers(term: ArcTerm) {
@@ -51,7 +51,7 @@ function searchFor(username: string, users: AllUsers, term: ArcTerm) {
   const options: Fuse.IFuseOptions<any> = {
     includeScore: true,
     keys: ["name"],
-    threshold: 0.3
+    threshold: 0.3,
   };
 
   const fuse = new Fuse(userObject, options);

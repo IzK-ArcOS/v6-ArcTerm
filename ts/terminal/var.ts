@@ -36,10 +36,7 @@ export class ArcTermVariables {
   }
 
   async set(key: string, value: string) {
-    Log(
-      `ArcTerm ${this.term.referenceId}`,
-      `var.set: setting "${key}" to "${value}"`
-    );
+    Log(`ArcTerm ${this.term.referenceId}`, `var.set: setting "${key}" to "${value}"`);
 
     if (!this.store[key]) {
       const variable: Variable = {

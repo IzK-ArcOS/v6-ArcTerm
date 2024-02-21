@@ -10,8 +10,7 @@ const BANNED = ["acc.enabled", "acc.admin", "devmode", "valid", "statusCode"];
 export const SUD: Command = {
   keyword: "sud",
   async exec(cmd, argv, term) {
-    if (!argv.length || argv.length < 2)
-      return term.std.Error("Missing arguments");
+    if (!argv.length || argv.length < 2) return term.std.Error("Missing arguments");
 
     const hierarchy = argv[0];
 
@@ -21,7 +20,7 @@ export const SUD: Command = {
     if (BANNED.join("|").includes(hierarchy))
       return term.std.Error(`Not permitted to change data of [${hierarchy}]`);
 
-    const elevated = await GetUserElevation(ElevationChangeUserData(), ProcessStack)
+    const elevated = await GetUserElevation(ElevationChangeUserData(), ProcessStack);
 
     if (!elevated) return term.std.Error(`Elevation is required to perform this action.`);
 
@@ -46,11 +45,7 @@ export const SUD: Command = {
     UserDataStore.set(udata);
 
     if (term.std.verbose)
-      term.std.writeColor(
-        `Wrote ["${newValue}"] to [UserData.${hierarchy}]`,
-        "blue"
-      );
-
+      term.std.writeColor(`Wrote ["${newValue}"] to [UserData.${hierarchy}]`, "blue");
   },
   description: "Set UserData parameters",
 };

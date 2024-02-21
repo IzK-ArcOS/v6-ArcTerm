@@ -8,7 +8,7 @@ export const QuotaCommand: Command = {
   async exec(cmd, argv, term) {
     const BAR_LENGTH = 50;
     const quota = await getFSQuota();
-    const perc = 100 / quota.max * quota.used;
+    const perc = (100 / quota.max) * quota.used;
     const filled = perc / 2;
     const filler = "#".repeat(filled).padEnd(BAR_LENGTH, " ");
     const used = formatBytes(quota.used);
@@ -17,7 +17,7 @@ export const QuotaCommand: Command = {
 
     term.std.writeLine("\n");
     term.std.writeColor(`([${filler}])`, "blue");
-    term.std.writeColor(sub, "gray")
+    term.std.writeColor(sub, "gray");
   },
-  description: "Display your ArcFS Quota"
-}
+  description: "Display your ArcFS Quota",
+};

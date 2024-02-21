@@ -12,12 +12,7 @@ export class ArcTermCommandHandler {
     this.term = term;
   }
 
-  public async evaluate(
-    cmd: string,
-    args?: string[],
-    isScript = false,
-    provider?: Command[]
-  ) {
+  public async evaluate(cmd: string, args?: string[], isScript = false, provider?: Command[]) {
     Log(`ArcTerm ${this.term.referenceId}`, `cmd.evaluate: ${cmd}`);
 
     const argStr = args.join(" ");
@@ -28,8 +23,7 @@ export class ArcTermCommandHandler {
 
     if (isScript && command.keyword == "default") return false;
 
-    if (this.term.input && this.term.input.current)
-      this.term.input.current.disabled = true;
+    if (this.term.input && this.term.input.current) this.term.input.current.disabled = true;
 
     if (!this.requiredFlagsSpecified(command, argStr)) {
       this.term.std.Error(`${cmd}: missing required parameters. Type [help ${cmd}] for usage.`);
@@ -76,7 +70,7 @@ export class ArcTermCommandHandler {
       const prefix = "--";
       const name = `[${flag.keyword}]${flag.required ? "" : "?"}`;
       const needsValue = !!flag.value;
-      const q = needsValue && flag.value.type == "string" ? '"' : ""
+      const q = needsValue && flag.value.type == "string" ? '"' : "";
       const suffix = needsValue ? `=${q}[${flag.value.name}]${q}` : "";
 
       result += `${prefix}${name}${suffix} `;
@@ -113,7 +107,8 @@ export class ArcTermCommandHandler {
       const required = flag.required;
       const valueObject = flag.value;
 
-      if (required && (!value || typeof value != (valueObject ? "string" : "boolean"))) return false;
+      if (required && (!value || typeof value != (valueObject ? "string" : "boolean")))
+        return false;
     }
 
     return true;

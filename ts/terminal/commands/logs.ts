@@ -10,5 +10,5 @@ export const LogsCommand: Command = {
     spawnApp("LoggerApp", term.pid, ["all", source]);
 
     term.std.Info(`Opened [LoggerApp] at source [${source}]`);
-  }
-}
+  },
+};

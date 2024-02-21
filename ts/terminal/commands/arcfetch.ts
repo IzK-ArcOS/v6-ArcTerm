@@ -26,7 +26,7 @@ export const ArcFetch: Command = {
 async function getItems(a: ArcTerm) {
   const info = getDeviceInfo();
   const desktop = isDesktop();
-  const desktopStr = desktop ? "Desktop" : "Browser"
+  const desktopStr = desktop ? "Desktop" : "Browser";
   const state = PrimaryState.current.get().name;
 
   return Object.entries({
@@ -60,7 +60,7 @@ async function graphic(term: ArcTerm) {
     "  / ____ \\ ",
     " /_/    \\_\\",
     "           ",
-    "           "
+    "           ",
   ];
 
   for (let i = 0; i < graphicParts.length; i++) {

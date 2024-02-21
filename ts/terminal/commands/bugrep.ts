@@ -12,10 +12,7 @@ export const BugRep: Command = {
     if (Regx && Regx.length > 1) {
       const text = term.vars.replace(Regx[1]);
 
-      term.std.writeColor(
-        "[BugRep]: Creating bug report...\n\n[ReportOptions]\n",
-        "yellow"
-      );
+      term.std.writeColor("[BugRep]: Creating bug report...\n\n[ReportOptions]\n", "yellow");
 
       const opt: ReportOptions = {
         includeApi,

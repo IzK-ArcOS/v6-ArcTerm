@@ -3,8 +3,7 @@ import type { Color, Command } from "../interface";
 export const Colors: Command = {
   keyword: "colors",
   exec(cmd, argv, term) {
-    const str =
-      argv.join(" ").trim() || "The quick brown fox jumps over the lazy dog.";
+    const str = argv.join(" ").trim() || "The quick brown fox jumps over the lazy dog.";
 
     const colors: Color[] = [
       "gray",

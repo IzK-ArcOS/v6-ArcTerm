@@ -42,12 +42,7 @@ function disclaimer(term: ArcTerm) {
 }
 
 function auth(term: ArcTerm, user: string, platform: string) {
-  term.std.writeColor(
-    `\nAuthenticated as [${user}] at [${platform}]`,
-    "aqua",
-    "white",
-    true
-  );
+  term.std.writeColor(`\nAuthenticated as [${user}] at [${platform}]`, "aqua", "white", true);
 }
 
 function api(term: ArcTerm, server: string) {

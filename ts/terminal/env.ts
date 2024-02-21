@@ -13,11 +13,7 @@ export class ArcTermEnv {
   gooseBumps: boolean = false;
 
   constructor(term: ArcTerm) {
-    Log(
-      `ArcTerm ${term.referenceId}`,
-      `Creating new ArcTermEnv`,
-      LogLevel.info
-    );
+    Log(`ArcTerm ${term.referenceId}`, `Creating new ArcTermEnv`, LogLevel.info);
 
     this.config = new ArcTermConfig(this, term);
   }

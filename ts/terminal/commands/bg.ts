@@ -13,10 +13,7 @@ export const BgCommand: Command = {
       const keyStr = key.padStart(6, " ");
       const nameStr = value.name.padEnd(30, " ");
 
-      term.std.writeColor(
-        `${keyStr}: [${nameStr}] by ${value.author}`,
-        "purple"
-      );
+      term.std.writeColor(`${keyStr}: [${nameStr}] by ${value.author}`, "purple");
     }
   },
   description: "List ArcOS Backgrounds",

@@ -50,12 +50,9 @@ export class ArcTermScripts {
   }
 
   public async runScriptFile(path: string) {
-    Log(
-      `ArcTerm ${this.term.referenceId}`,
-      `scripts.runScriptFile: running ${path}`
-    );
+    Log(`ArcTerm ${this.term.referenceId}`, `scripts.runScriptFile: running ${path}`);
 
-    const contents = this.buffer[path] || await readFile(path);
+    const contents = this.buffer[path] || (await readFile(path));
 
     if (!contents)
       return Log(

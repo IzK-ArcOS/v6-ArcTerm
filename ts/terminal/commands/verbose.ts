@@ -17,5 +17,5 @@ export const Verbose: Command = {
   flags: [
     { keyword: "on", description: "Specify to turn on verbosity." },
     { keyword: "off", description: "Specify to turn off verbosity." },
-  ]
+  ],
 };

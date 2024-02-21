@@ -34,10 +34,7 @@ function play(cmd: string, argv: string[], term: ArcTerm) {
 
   const valid = ArcSoundBus.playSound(sound);
 
-  if (!valid)
-    term.std.Error(
-      `Can't play sound [${sound}]: the sound could not be found.`
-    );
+  if (!valid) term.std.Error(`Can't play sound [${sound}]: the sound could not be found.`);
   else term.std.writeColor(`Playing sound [${sound}]`, "blue");
 }
 
@@ -46,10 +43,7 @@ function stop(cmd: string, argv: string[], term: ArcTerm) {
 
   const valid = ArcSoundBus.stopSound(sound);
 
-  if (!valid)
-    term.std.Error(
-      `Can't stop sound [${sound}]: the requested sound is not playing.`
-    );
+  if (!valid) term.std.Error(`Can't stop sound [${sound}]: the requested sound is not playing.`);
   else term.std.writeColor(`Stopping sound [${sound}]`, "blue");
 }
 

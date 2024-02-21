@@ -25,9 +25,7 @@ export const AppList: Command = {
     term.std.writeColor("Example: [applist] --all", "blue");
   },
   description: "List all- or opened ArcOS apps.",
-  flags: [
-    { keyword: "a|all" }
-  ]
+  flags: [{ keyword: "a|all" }],
 };
 
 function output(term: ArcTerm, app: App) {

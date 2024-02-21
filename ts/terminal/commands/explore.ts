@@ -6,5 +6,5 @@ export const ExploreCommand: Command = {
   description: "Open current directory in the File Manager",
   exec(cmd, argv, term) {
     spawnApp("FileManager", 0, [term.path]);
-  }
-}
+  },
+};

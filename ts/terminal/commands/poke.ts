@@ -9,7 +9,7 @@ export const PokeCommand: Command = {
   exec(cmd, argv, term, flags) {
     const { address, pid: pidStr, data } = flags;
 
-    const pid = tryParseInt(pidStr)
+    const pid = tryParseInt(pidStr);
     const proc = ProcessStack.getProcess(+pid);
 
     if (!proc || !proc.app) return term.std.Error(`Unknown or non-app process [${pid}].`);
@@ -21,7 +21,7 @@ export const PokeCommand: Command = {
 
       proc.mutator.set(mutator);
     } else {
-      term.std.writeLine(JSON.stringify(getJsonHierarchy(mutator, address), null, 2))
+      term.std.writeLine(JSON.stringify(getJsonHierarchy(mutator, address), null, 2));
     }
   },
   flags: [
@@ -31,8 +31,8 @@ export const PokeCommand: Command = {
       required: true,
       value: {
         type: "string",
-        name: "hierarchy"
-      }
+        name: "hierarchy",
+      },
     },
     {
       keyword: "pid",
@@ -40,17 +40,17 @@ export const PokeCommand: Command = {
       required: true,
       value: {
         type: "number",
-        name: "id"
-      }
+        name: "id",
+      },
     },
     {
       keyword: "data",
       description: "Data to write to the address",
       value: {
         type: "other",
-        name: "setter"
-      }
+        name: "setter",
+      },
     },
   ],
-  description: "Get or set the app data of a process"
-}
+  description: "Get or set the app data of a process",
+};

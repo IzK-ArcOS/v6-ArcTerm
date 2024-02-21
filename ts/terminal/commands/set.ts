@@ -21,8 +21,7 @@ export const Set: Command = {
 
     const isSet = await term.vars.set(key, value);
 
-    if (!isSet)
-      term.std.Error("Can't update variable: the variable is readonly.");
+    if (!isSet) term.std.Error("Can't update variable: the variable is readonly.");
   },
   help(term) {
     term.std.writeColor('Example: [set] color "green"', "blue");
