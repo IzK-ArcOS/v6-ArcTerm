@@ -1,6 +1,7 @@
 import { tryParseInt } from "$ts/int";
 import { GlobalDispatch } from "$ts/process/dispatch/global";
 import { ProcessStack } from "$ts/stores/process";
+import { DispatchCaptions } from "$ts/stores/process/dispatch";
 import { Command } from "../interface";
 
 export const Dispatch: Command = {
@@ -10,6 +11,18 @@ export const Dispatch: Command = {
     const data = flags.data;
     const app = flags.app;
     const pid = tryParseInt(flags.pid);
+    const list = flags.list;
+
+    if (list) {
+      term.std.writeLine("Global dispatches known to ArcOS:");
+
+      for (const key in DispatchCaptions) {
+        const keyStr = key.padEnd(25, " ");
+        term.std.writeColor(`[${keyStr}] ${DispatchCaptions[key]}`, "blue");
+      }
+
+      return;
+    }
 
     if (!command) return term.std.Error("Nothing to dispatch!");
 
@@ -40,7 +53,6 @@ export const Dispatch: Command = {
         type: "string",
       },
       description: "The command to dispatch",
-      required: true,
     },
     {
       keyword: "data",
@@ -65,6 +77,10 @@ export const Dispatch: Command = {
         type: "number",
       },
       description: "Optional process PID to dispatch to",
+    },
+    {
+      keyword: "list",
+      description: "Display a list of available Global Dispatches",
     },
   ],
 };
