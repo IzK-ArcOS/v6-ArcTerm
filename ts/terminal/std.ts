@@ -46,6 +46,22 @@ export class ArcTermStd {
     return el;
   }
 
+  public writeHTML(str: string, inline = false, target = this.target) {
+    const el = document.createElement("div");
+
+    el.className = "part";
+
+    if (inline) el.className += " inline";
+
+    el.innerHTML = str;
+
+    target.appendChild(el);
+
+    this.focusTarget();
+
+    return el;
+  }
+
   public writeSeparator(length: number) {
     this.writeLine(``.padEnd(length, "-"));
   }
@@ -151,7 +167,8 @@ export class ArcTermStd {
     suffix: string,
     max: number,
     pswd = false,
-    value = ""
+    value = "",
+    target: HTMLDivElement = this.target
   ): Promise<string> {
     if (!this.target) return "asdf";
 
@@ -171,7 +188,7 @@ export class ArcTermStd {
     wrapper.className = "userinput";
     wrapper.append(prefix, input, suffix);
 
-    this.target.append(wrapper);
+    target.append(wrapper);
     this.term.input.current = input;
 
     await sleep(10);
@@ -228,8 +245,8 @@ export class ArcTermStd {
     this.initTarget();
   }
 
-  public async select(options: string[], color?: Color): Promise<number> {
-    const select = new ArcTermStdSelect(this, color);
+  public async select(options: string[], color?: Color, target = this.target): Promise<number> {
+    const select = new ArcTermStdSelect(this, color, target);
 
     return await select.create(options);
   }

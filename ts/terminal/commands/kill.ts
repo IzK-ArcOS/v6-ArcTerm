@@ -3,6 +3,7 @@ import { tryJsonConvert } from "$ts/json";
 import { ElevationKillProcess } from "$ts/stores/elevation";
 import { ProcessStack } from "$ts/stores/process";
 import { ProcessKillResultCaptions } from "$ts/stores/process/captions";
+import { ArcTermElevate } from "../elevation";
 import type { Command } from "../interface";
 
 export const Kill: Command = {
@@ -19,7 +20,7 @@ export const Kill: Command = {
           : ProcessKillResultCaptions.err_noExist
       );
 
-    const elevated = await GetUserElevation(ElevationKillProcess(process), ProcessStack);
+    const elevated = await ArcTermElevate(ElevationKillProcess(process), term);
     const status = await ProcessStack.kill(pid, elevated);
 
     if (status !== "success") return term.std.Error(ProcessKillResultCaptions[status]);

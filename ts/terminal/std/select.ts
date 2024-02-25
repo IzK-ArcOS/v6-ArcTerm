@@ -13,7 +13,7 @@ export class ArcTermStdSelect {
   private _elements: HTMLDivElement[] = [];
   private _color: Color;
 
-  constructor(std: ArcTermStd, color?: Color) {
+  constructor(std: ArcTermStd, color?: Color, private target = std.target) {
     Log(`ArcTerm ${std.term.referenceId}`, `Creating new ArcTermStdSelect`, LogLevel.info);
 
     this._color = color || "blue";
@@ -80,7 +80,7 @@ export class ArcTermStdSelect {
 
     for (let i = 0; i < options.length; i++) {
       const str = this.getStr(i, this._options[i]);
-      const element = this.std.writeColor(str, this._color, "gray");
+      const element = this.std.writeColor(str, this._color, "gray", false, this.target);
 
       this._elements.push(element);
     }

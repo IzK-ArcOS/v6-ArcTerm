@@ -102,10 +102,17 @@ div.terminal-renderer .clr-gray {
   color: var(--clr-gray-fg);
 }
 
-div.app.fullscreen.rotate {
-  animation: rotation 600s infinite linear;
-  position: fixed;
+div.terminal-renderer b {
+  font-weight: 900 !important;
 }
+
+div.terminal-renderer div.box {
+  padding: 0.5em !important;
+  margin: calc(0.5em - 1px) 0 !important;
+  border: currentColor 1px solid !important;
+  width: fit-content;
+}
+
 @keyframes rotation {
   from {
     transform: rotate(0deg);

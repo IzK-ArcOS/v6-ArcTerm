@@ -4,6 +4,8 @@ import { ServiceChangeResultCaptions } from "$ts/stores/service/captions";
 import dayjs from "dayjs";
 import type { Command } from "../interface";
 import type { ArcTerm } from "../main";
+import { ElevationChangeServiceState } from "$ts/stores/elevation";
+import { ArcTermElevate } from "../elevation";
 
 export const ServiceCommand: Command = {
   keyword: "service",
@@ -37,7 +39,11 @@ export const ServiceCommand: Command = {
 
 async function stop(argv: string[], term: ArcTerm) {
   const service = argv[1];
-  const status = await stopService(service);
+  const elevated = await ArcTermElevate(ElevationChangeServiceState(getService(service)), term);
+
+  if (!elevated) return;
+
+  const status = await stopService(service, true);
 
   if (status != "success")
     term.std.Error(`Couldn't stop service [${service}]: ${ServiceChangeResultCaptions[status]}`);
@@ -46,7 +52,11 @@ async function stop(argv: string[], term: ArcTerm) {
 
 async function start(argv: string[], term: ArcTerm) {
   const service = argv[1];
-  const result = await startService(service);
+  const elevated = await ArcTermElevate(ElevationChangeServiceState(getService(service)), term);
+
+  if (!elevated) return;
+
+  const result = await startService(service, true);
 
   const resultCaption = ServiceChangeResultCaptions[result];
 
@@ -64,7 +74,11 @@ async function start(argv: string[], term: ArcTerm) {
 
 async function restart(argv: string[], term: ArcTerm) {
   const service = argv[1];
-  const status = await restartService(service);
+  const elevated = await ArcTermElevate(ElevationChangeServiceState(getService(service)), term);
+
+  if (!elevated) return;
+
+  const status = await restartService(service, true);
 
   if (status !== "success")
     term.std.Error(`Couldn't restart service [${service}]: ${ServiceChangeResultCaptions[status]}`);

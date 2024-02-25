@@ -1,8 +1,7 @@
-import { GetUserElevation } from "$ts/elevation";
 import { getJsonHierarchy, setJsonHierarchy } from "$ts/hierarchy";
 import { ElevationChangeUserData } from "$ts/stores/elevation";
-import { ProcessStack } from "$ts/stores/process";
 import { UserDataStore } from "$ts/stores/user";
+import { ArcTermElevate } from "../elevation";
 import type { Command } from "../interface";
 
 const BANNED = ["acc.enabled", "acc.admin", "devmode", "valid", "statusCode"];
@@ -20,7 +19,7 @@ export const SUD: Command = {
     if (BANNED.join("|").includes(hierarchy))
       return term.std.Error(`Not permitted to change data of [${hierarchy}]`);
 
-    const elevated = await GetUserElevation(ElevationChangeUserData(), ProcessStack);
+    const elevated = await ArcTermElevate(ElevationChangeUserData(), term);
 
     if (!elevated) return term.std.Error(`Elevation is required to perform this action.`);
 
