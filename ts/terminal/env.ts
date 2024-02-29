@@ -11,6 +11,7 @@ export class ArcTermEnv {
   greeting = `ArcTerm & ArcOS v$version\n\nLicensed under GPLv3. Created by the ArcOS team.`;
   logo: boolean = true;
   gooseBumps: boolean = false;
+  textOnlyElevate: boolean = false;
 
   constructor(term: ArcTerm) {
     Log(`ArcTerm ${term.referenceId}`, `Creating new ArcTermEnv`, LogLevel.info);

@@ -62,7 +62,7 @@ export async function ArcTermElevate(data: ElevationData, term: ArcTerm) {
 
   const current = PrimaryState.current.get().key;
 
-  if (current !== "desktop") return await _text();
+  if (term.env.textOnlyElevate || current !== "desktop") return await _text();
 
   return await GetUserElevation(data, ProcessStack);
 }
