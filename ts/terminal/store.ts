@@ -17,6 +17,7 @@ import { Err } from "./commands/err";
 import { Exec } from "./commands/exec";
 import { Exit } from "./commands/exit";
 import { ExploreCommand } from "./commands/explore";
+import { FindCommand } from "./commands/find";
 import { Goose } from "./commands/goose";
 import { Goto } from "./commands/goto";
 import { GUD } from "./commands/gud";
@@ -137,4 +138,5 @@ export const desktopSpecific: CommandStore = [
   Open,
   ExploreCommand,
   PokeCommand,
+  FindCommand,
 ];
