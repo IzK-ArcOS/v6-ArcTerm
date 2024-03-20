@@ -105,7 +105,6 @@ export const arcCommands: CommandStore = [
   ServiceCommand,
   TasksCommand,
   Pause,
-  Restart,
   Base64Command,
   QuotaCommand,
 ];
