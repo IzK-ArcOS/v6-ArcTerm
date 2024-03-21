@@ -1,4 +1,3 @@
-import { GetUserElevation } from "$ts/elevation";
 import { tryJsonConvert } from "$ts/json";
 import { ElevationKillProcess } from "$ts/stores/elevation";
 import { ProcessStack } from "$ts/stores/process";

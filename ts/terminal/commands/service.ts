@@ -1,11 +1,11 @@
 import { getService, restartService, startService, stopService } from "$ts/service/interact";
+import { ElevationChangeServiceState } from "$ts/stores/elevation";
 import { ProcessStack } from "$ts/stores/process";
 import { ServiceChangeResultCaptions } from "$ts/stores/service/captions";
 import dayjs from "dayjs";
+import { ArcTermElevate } from "../elevation";
 import type { Command } from "../interface";
 import type { ArcTerm } from "../main";
-import { ElevationChangeServiceState } from "$ts/stores/elevation";
-import { ArcTermElevate } from "../elevation";
 
 export const ServiceCommand: Command = {
   keyword: "service",
