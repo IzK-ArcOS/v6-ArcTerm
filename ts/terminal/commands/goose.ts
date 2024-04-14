@@ -18,6 +18,7 @@ export const Goose: Command = {
     return await gooses(term);
   },
   description: "GooseBumps 👀",
+  hidden: true,
 };
 
 function dummy(term: ArcTerm) {
