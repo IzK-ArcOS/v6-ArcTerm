@@ -49,6 +49,13 @@ async function specific(path: string, currentPath: string, term: ArcTerm) {
   }
 
   const dir = (await readDirectory(path)) as UserDirectory;
+
+  if (!dir) {
+    // 3aia2qa64vn56k2
+    term.std.Error(`The directory doesn't exist in this path.`);
+    return;
+  }
+
   const subdirs = sortDirectories(dir.directories);
   const files = sortFiles(dir.files);
 
