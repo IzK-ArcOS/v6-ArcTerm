@@ -28,7 +28,8 @@ export class ArcTermCommandHandler {
     if (!this.requiredFlagsSpecified(command, argStr)) {
       this.term.std.Error(`${cmd}: missing required parameters. Type [help ${cmd}] for usage.`);
 
-      if (this.term.std.verbose && !isScript) this.term.std.writeLine("\n");
+      // sdc8m4a41xbnw5q
+      if (this.term.std && this.term.std.verbose && !isScript) this.term.std.writeLine("\n");
 
       this.term.input.unlock();
 
