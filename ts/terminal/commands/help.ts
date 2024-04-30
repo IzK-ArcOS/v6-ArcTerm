@@ -58,8 +58,8 @@ function specific(command: string, term: ArcTerm) {
   const flagStr = term.commandHandler.compileFlagStr(c);
   const helpSwitches = term.commandHandler.compileHelpSwitches(c);
 
-  term.std.writeColor(`Usage: ${flagStr}\n${helpSwitches}`, "blue");
-  term.std.writeLine("\n");
+  term.std.writeColor(`Usage: ${flagStr}${helpSwitches ? "\n" + helpSwitches : ""}`, "blue");
+  term.std.writeLine(helpSwitches ? "\n" : "");
 
   if (c.help) return c.help(term);
 }

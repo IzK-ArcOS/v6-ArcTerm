@@ -67,7 +67,7 @@ export class ArcTermCommandHandler {
 
     let result = `${command.keyword} `;
 
-    if (!flags.length) return result;
+    if (!flags.length) return `${result}${command.syntax || ""}`;
 
     for (const flag of flags) {
       const prefix = "--";
@@ -79,7 +79,7 @@ export class ArcTermCommandHandler {
       result += `${prefix}${name}${suffix} `;
     }
 
-    return `${result} ${command.syntax || ""}`;
+    return `${result}${command.syntax || ""}`;
   }
 
   public compileHelpSwitches(command: Command): string {
@@ -87,7 +87,7 @@ export class ArcTermCommandHandler {
 
     let result = `\n`;
 
-    if (!flags.length) return result;
+    if (!flags.length) return "";
 
     for (const flag of flags) {
       const prefix = "--";

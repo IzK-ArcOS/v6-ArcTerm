@@ -1,4 +1,10 @@
-import { getService, restartService, startService, stopService } from "$ts/service/interact";
+import {
+  getAllServices,
+  getService,
+  restartService,
+  startService,
+  stopService,
+} from "$ts/service/interact";
 import { ElevationChangeServiceState } from "$ts/stores/elevation";
 import { ProcessStack } from "$ts/stores/process";
 import { ServiceChangeResultCaptions } from "$ts/stores/service/captions";
@@ -6,6 +12,7 @@ import dayjs from "dayjs";
 import { ArcTermElevate } from "../elevation";
 import type { Command } from "../interface";
 import type { ArcTerm } from "../main";
+import { Longest } from "$ts/util";
 
 export const ServiceCommand: Command = {
   keyword: "service",
@@ -24,17 +31,26 @@ export const ServiceCommand: Command = {
       case "status":
         await status(argv, term);
         break;
+      case "list":
+        await list(term);
+        break;
       default:
         term.std.Error("Missing or invalid subcommand.");
     }
   },
   help(term) {
-    term.std.writeColor("[play] - Plays the specified sound.", "aqua");
-    term.std.writeColor("[stop] - Stops the current playing sound.", "aqua");
-    term.std.writeColor("[list] - Lists playable sounds.\n\n", "aqua");
-    term.std.writeColor("Example: [soundbus] play ...", "blue");
+    term.std.writeLine("\n");
+    term.std.writeColor("[start]   - Starts a service.", "aqua");
+    term.std.writeColor("[stop]    - Stops a service.", "aqua");
+    term.std.writeColor("[restart] - Restarts a service.", "aqua");
+    term.std.writeColor("[status]  - Displays status information of a service.", "aqua");
+    term.std.writeColor(
+      "[list]    - Lists all ArcOS services along with their status.\n\n",
+      "aqua"
+    );
+    term.std.writeColor("Example: [SERVICE] status NotificationService", "blue");
   },
-  syntax: "SOUNDBUS <[subcommand]> <...[arguments]>",
+  syntax: "<[start]|[stop]|[restart]|[status]|[list]> <...[arguments]>",
 };
 
 async function stop(argv: string[], term: ArcTerm) {
@@ -109,4 +125,18 @@ function status(argv: string[], term: ArcTerm) {
     "purple"
   );
   term.std.writeColor(`Loaded At:       [${loadedAt}]`, "purple");
+}
+
+function list(term: ArcTerm) {
+  const services = [...getAllServices()];
+  const serviceNames = services.map(([k]) => k);
+  const padding = Longest(...serviceNames) + 10;
+
+  for (const [id, service] of services) {
+    const name = id.padEnd(padding);
+    const pid = service.pid || 0;
+    const statusText = pid ? "✔ Running" : "✖ Stopped";
+
+    term.std.writeColor(`${name}[${statusText}] - ${pid || "No PID"}`, pid ? "green" : "red");
+  }
 }

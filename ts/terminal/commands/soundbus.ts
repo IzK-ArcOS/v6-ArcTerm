@@ -26,7 +26,7 @@ export const SoundBusCommand: Command = {
     term.std.writeColor("[list] - Lists playable sounds.\n\n", "aqua");
     term.std.writeColor("Example: [soundbus] play ...", "blue");
   },
-  syntax: "SOUNDBUS <[subcommand]> <...[arguments]>",
+  syntax: "<[subcommand]> <...[arguments]>",
 };
 
 function play(cmd: string, argv: string[], term: ArcTerm) {

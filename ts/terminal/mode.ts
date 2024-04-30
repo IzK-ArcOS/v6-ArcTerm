@@ -29,7 +29,7 @@ export async function arcTermModeIntro(a: ArcTerm, cb?: () => any) {
   disclaimer(a);
   auth(a, user, platform);
   api(a, server);
-  usage(a);
+  await usage(a);
 }
 
 function disclaimer(term: ArcTerm) {
