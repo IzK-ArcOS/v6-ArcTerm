@@ -8,11 +8,11 @@ import {
 import { ElevationChangeServiceState } from "$ts/stores/elevation";
 import { ProcessStack } from "$ts/stores/process";
 import { ServiceChangeResultCaptions } from "$ts/stores/service/captions";
+import { Longest } from "$ts/util";
 import dayjs from "dayjs";
 import { ArcTermElevate } from "../elevation";
 import type { Command } from "../interface";
 import type { ArcTerm } from "../main";
-import { Longest } from "$ts/util";
 
 export const ServiceCommand: Command = {
   keyword: "service",
