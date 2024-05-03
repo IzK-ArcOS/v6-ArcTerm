@@ -43,6 +43,19 @@ export type Color =
   | "white"
   | "gray";
 
+export const ColorTranslations = {
+  r: "red",
+  g: "green",
+  o: "orange",
+  y: "yellow",
+  b: "blue",
+  p: "purple",
+  a: "aqua",
+  w: "white",
+  G: "gray",
+  "*": "RESET",
+};
+
 export const colors = "red,orange,yellow,green,aqua,blue,purple".split(",");
 
 export interface Variable {

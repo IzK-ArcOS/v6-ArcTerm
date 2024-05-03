@@ -60,6 +60,8 @@ import { Ver } from "./commands/ver";
 import { Verbose } from "./commands/verbose";
 import type { CommandStore } from "./interface";
 
+export const COLOR_CHAR = "§";
+
 export const arcCommands: CommandStore = [
   ArcFetch,
   Cd,

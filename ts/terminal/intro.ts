@@ -1,4 +1,5 @@
 import type { ArcTerm } from "./main";
+import { COLOR_CHAR } from "./store";
 
 /**
  * Displays the ArcTerm intro ASCII-art
@@ -19,4 +20,6 @@ export function ArcTermIntro(term: ArcTerm) {
   }
 
   term.std.writeLine("\n");
+
+  term.std.newWriteColor(`§rhello§g world§y this§* is`);
 }

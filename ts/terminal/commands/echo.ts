@@ -8,7 +8,7 @@ export const Echo: Command = {
     if (Regx && Regx.length > 1) {
       const text = term.vars.replace(Regx[1]);
 
-      term.std.writeLine(text);
+      term.std.newWriteColor(text);
 
       return;
     }

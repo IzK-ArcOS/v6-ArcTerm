@@ -4,9 +4,10 @@ import { App } from "$types/app";
 import { LogLevel } from "$types/console";
 import { writable } from "svelte/store";
 import type { ArcTermEnv } from "./env";
-import type { Color } from "./interface";
+import { ColorTranslations, type Color } from "./interface";
 import type { ArcTerm } from "./main";
 import { ArcTermStdSelect } from "./std/select";
+import { COLOR_CHAR } from "./store";
 
 export class ArcTermStd {
   target: HTMLDivElement;
@@ -96,6 +97,29 @@ export class ArcTermStd {
     this.focusTarget();
 
     return out;
+  }
+
+  public newWriteColor(str: string, inline = false, target = this.target) {
+    let currentColor: Color = "white";
+
+    for (let i = 0; i < str.length; i++) {
+      if (str[i] == COLOR_CHAR) {
+        if (!str[i + 1]) continue;
+
+        const color = ColorTranslations[str[i + 1]];
+
+        if (!color) continue;
+
+        currentColor = color == "RESET" ? "white" : color;
+
+        i++;
+        continue;
+      }
+
+      this.writeColor(`[${str[i]}]`, currentColor, "white", true);
+    }
+
+    if (!inline) this.writeLine("\n");
   }
 
   public writeImage(src: string, height: number) {
