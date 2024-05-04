@@ -20,8 +20,8 @@ export async function ArcTermElevate(data: ElevationData, term: ArcTerm) {
     term.std.writeLine("\n");
     term.std.writeHTML(`🔒 <b>${data.what}</b>`, false, div);
     term.std.writeLine("\n", false, div);
-    term.std.writeColor(`  [${data.title}]`, "white", "white", false, div);
-    term.std.writeColor(`  [${data.description}]`, "gray", "white", false, div);
+    term.std.newWriteColor(`§r  ${data.title}`, false, div);
+    term.std.newWriteColor(`§G  ${data.description}`, false, div);
     term.std.writeLine("\n", false, div);
     term.std.writeLine(
       !userdata.sh.elevationDisabled
