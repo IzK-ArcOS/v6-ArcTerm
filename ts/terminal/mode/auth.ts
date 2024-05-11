@@ -26,10 +26,18 @@ export async function authPrompt(term: ArcTerm, usr = "", keep = false) {
 
   if (!keep) {
     term.std.clear();
-    term.std.writeLine(`ArcTerm ${ArcOSVersion} ${ARCOS_MODE} ${api} atm1\n\n`);
+    term.std.writeLine(
+      `ArcTerm ${ArcOSVersion} ${ARCOS_MODE} ${api} - type "logout" to switch server\n\n`
+    );
   }
 
   const { username, password } = await authPromptFields(term, api, usr);
+
+  if (username == "logout") {
+    localStorage.clear();
+
+    return await authPrompt(term, usr);
+  }
 
   await Authenticate(username, password);
 
@@ -51,6 +59,8 @@ async function authPromptFields(term: ArcTerm, api: string, usr: string) {
     term.std.writeLine("\nLogin incorrect");
     return await authPromptFields(term, api, usr);
   }
+
+  if (username == "logout") return { username, password: "" };
 
   const password = await term.std.read("Password: ", "", 100, true);
 
