@@ -117,10 +117,10 @@ export class ArcTermStd {
         continue;
       }
 
-      this.writeColor(`[${str[i]}]`, currentColor, "white", true);
+      this.writeColor(`[${str[i]}]`, currentColor, "white", true, target);
     }
 
-    if (!inline) this.writeLine("\n");
+    if (!inline) this.writeLine("", false, target);
   }
 
   public writeImage(src: string, height: number) {
