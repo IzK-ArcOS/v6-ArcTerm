@@ -1,4 +1,5 @@
 import { tryParseInt } from "$ts/int";
+import { tryJsonConvert } from "$ts/json";
 import { GlobalDispatch } from "$ts/process/dispatch/global";
 import { ProcessStack } from "$ts/stores/process";
 import { DispatchCaptions } from "$ts/stores/process/dispatch";
@@ -8,7 +9,7 @@ export const Dispatch: Command = {
   keyword: "dispatch",
   exec(cmd, argv, term, flags) {
     const command = flags.cmd;
-    const data = flags.data;
+    const data = tryJsonConvert(flags.data);
     const app = flags.app;
     const pid = tryParseInt(flags.pid);
     const list = flags.list;
