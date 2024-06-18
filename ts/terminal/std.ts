@@ -74,7 +74,6 @@ export class ArcTermStd {
     inline = false,
     target = this.target
   ) {
-    if (str.length > 3) console.log(`${pri},${sec}->${str}`);
     const parts = str.split(/(\[[^\]]*\])/);
     const out = document.createElement("div");
 

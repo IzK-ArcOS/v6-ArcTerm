@@ -7,10 +7,12 @@ import { ElevationData } from "$types/elevation";
 import { ArcTerm } from "./main";
 
 export async function ArcTermElevate(data: ElevationData, term: ArcTerm) {
-  async function _text() {
-    const userdata = UserDataStore.get();
-    const username = UserName.get();
+  const userdata = UserDataStore.get();
+  const username = UserName.get();
 
+  if (userdata.sh.bypassElevation) return true;
+
+  async function _text() {
     const div = document.createElement("div");
 
     div.className = "part box";

@@ -8,13 +8,15 @@ export const Cd: Command = {
   async exec(cmd, argv, term) {
     const cwd = term.path.endsWith("/") ? term.path.slice(0, -1) : term.path;
     const newPath = argv.join(" ");
-    const path = `${cwd}/${newPath}`;
+    let path = `${cwd}/${newPath}`;
+
+    if (path.length > 2 && path.startsWith("./")) path = path.replace("./", "");
 
     if (newPath == "/") return (term.path = "./");
 
     const directory = await readDirectory(path);
 
-    if (!directory) {
+    if (!directory || !directory.scopedPath) {
       return err(term, path);
     }
 
