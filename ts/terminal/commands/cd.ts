@@ -1,4 +1,4 @@
-import { readDirectory } from "$ts/server/fs/dir";
+import { getParentDirectory, readDirectory } from "$ts/server/fs/dir";
 import { UserDirectory } from "$types/fs";
 import type { Command } from "../interface";
 import type { ArcTerm } from "../main";
@@ -8,7 +8,9 @@ export const Cd: Command = {
   async exec(cmd, argv, term) {
     const cwd = term.path.endsWith("/") ? term.path.slice(0, -1) : term.path;
     const newPath = argv.join(" ");
+
     let path = `${cwd}/${newPath}`;
+    if (newPath == "..") path = getParentDirectory(cwd);
 
     if (path.length > 2 && path.startsWith("./")) path = path.replace("./", "");
 
