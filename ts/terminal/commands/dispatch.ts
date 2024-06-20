@@ -2,7 +2,11 @@ import { tryParseInt } from "$ts/int";
 import { tryJsonConvert } from "$ts/json";
 import { GlobalDispatch } from "$ts/process/dispatch/global";
 import { ProcessStack } from "$ts/stores/process";
-import { DispatchCaptions } from "$ts/stores/process/dispatch";
+import {
+  DispatchCaptions,
+  GlobalDispatchResultCaptions,
+  SystemOnlyDispatches,
+} from "$ts/stores/process/dispatch";
 import { Command } from "../interface";
 
 export const Dispatch: Command = {
@@ -19,7 +23,11 @@ export const Dispatch: Command = {
 
       for (const key in DispatchCaptions) {
         const keyStr = key.padEnd(25, " ");
-        term.std.writeColor(`[${keyStr}] ${DispatchCaptions[key]}`, "blue");
+
+        term.std.writeColor(
+          `${SystemOnlyDispatches.includes(key) ? "#" : " "} [${keyStr}] ${DispatchCaptions[key]}`,
+          "blue"
+        );
       }
 
       return;
@@ -28,7 +36,13 @@ export const Dispatch: Command = {
     if (!command) return term.std.Error("Nothing to dispatch!");
 
     if (!app && !pid) {
-      GlobalDispatch.dispatch(command, data);
+      const result = GlobalDispatch.dispatch(command, data, false);
+
+      if (result !== "success") {
+        term.std.Error(GlobalDispatchResultCaptions[result]);
+
+        return;
+      }
 
       term.std.Info(`Dispatched [${command}] over GlobalDispatch.`);
 
@@ -36,11 +50,11 @@ export const Dispatch: Command = {
     }
 
     if (app) {
-      ProcessStack.dispatch.dispatchToApp(app, command, data);
+      ProcessStack.dispatch.dispatchToApp(app, command, data, false);
 
       term.std.Info(`Dispatched [${command}] to app [${app}] over ProcessDispatcher`);
     } else if (pid) {
-      ProcessStack.dispatch.dispatchToPid(pid, command, data);
+      ProcessStack.dispatch.dispatchToPid(pid, command, data, false);
 
       term.std.Info(`Dispatched [${command}] to process [${pid}] over ProcessDispatcher`);
     }
