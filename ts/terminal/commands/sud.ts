@@ -9,7 +9,7 @@ const BANNED = ["acc.enabled", "acc.admin", "devmode", "valid", "statusCode"];
 export const SUD: Command = {
   keyword: "sud",
   async exec(cmd, argv, term) {
-    if (!argv.length || argv.length < 2) return term.std.Error("Missing arguments");
+    if (!argv.length || argv.length < 1) return term.std.Error("Missing arguments");
 
     const hierarchy = argv[0];
 
@@ -31,7 +31,7 @@ export const SUD: Command = {
 
     argv.shift(); // Remove the hierarchy from the arguments
 
-    let newValue = argv.join(" ").trim();
+    let newValue = argv.join(" ").trim() || undefined;
 
     try {
       newValue = JSON.parse(newValue);
