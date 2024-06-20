@@ -45,7 +45,7 @@ export const SUD: Command = {
 
     if (term.std.verbose)
       term.std.writeColor(
-        `Wrote [${newValue.toString().length} bytes] to [UserData.${hierarchy}]`,
+        `Wrote [${newValue ? newValue.toString().length : 0} bytes] to [UserData.${hierarchy}]`,
         "blue"
       );
   },
