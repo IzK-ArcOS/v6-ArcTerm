@@ -4,7 +4,19 @@ import { UserDataStore } from "$ts/stores/user";
 import { ArcTermElevate } from "../elevation";
 import type { Command } from "../interface";
 
-const BANNED = ["acc.enabled", "acc.admin", "devmode", "valid", "statusCode"];
+const BANNED = [
+  "acc.enabled",
+  "acc.admin",
+  "devmode",
+  "valid",
+  "statusCode",
+  "sh",
+  "sh.desktop",
+  "appdata",
+  "sh.taskbar",
+  "sh.window",
+  "sh.start",
+];
 
 export const SUD: Command = {
   keyword: "sud",
